@@ -81,6 +81,7 @@
                 android:layout_width="136dp"
                 android:layout_height="match_parent"
                 android:width="50px"
+                android:onClick="goToSignUp"
                 android:background="@drawable/rounded_button"
                 android:text="Sign Up" />
 
@@ -88,10 +89,12 @@
                 android:id="@+id/signin"
                 android:layout_width="142dp"
                 android:layout_height="match_parent"
-
+                android:onClick="goToHome"
                 android:layout_marginLeft="30px"
                 android:background="@drawable/rounded_button"
                 android:text="Sign In" />
         </LinearLayout>
 
     </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

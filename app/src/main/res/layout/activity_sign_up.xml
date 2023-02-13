@@ -12,7 +12,7 @@
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="-1dp">
+        app:layout_constraintStart_toStartOf="parent">
 
         <TextView
             android:id="@+id/textView"
@@ -55,7 +55,6 @@
             android:inputType="textPersonName"
             android:paddingLeft="30px"
             android:text="Password:"
-
             android:textColor="@color/black"
             android:textSize="21sp" />
 
@@ -64,9 +63,9 @@
             android:layout_width="match_parent"
             android:layout_height="90px"
             android:layout_marginHorizontal="30px"
+            android:layout_marginBottom="30px"
             android:background="@drawable/rounded_edittext"
             android:ems="10"
-            android:layout_marginBottom="30px"
 
             android:inputType="textPassword" />
 
@@ -82,8 +81,10 @@
                 android:layout_height="match_parent"
                 android:width="50px"
                 android:background="@drawable/rounded_button"
+                android:onClick="goToHome"
                 android:text="Submit" />
 
         </LinearLayout>
-
     </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
