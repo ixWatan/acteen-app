@@ -12,17 +12,19 @@
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="-1dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent">
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:paddingBottom="120px"
+            android:paddingBottom="100px"
             android:text="Sign In"
             android:textColor="@color/black"
-            android:textSize="29sp"
+            android:textSize="35sp"
             android:textStyle="bold" />
 
         <TextView
@@ -32,28 +34,28 @@
             android:layout_marginBottom="30px"
             android:ems="10"
             android:inputType="textPersonName"
-            android:paddingLeft="30px"
+            android:paddingLeft="80px"
             android:text="Email:"
             android:textColor="@color/black"
             android:textSize="21sp" />
 
         <EditText
-            android:id="@+id/editTextTextEmailAddress2"
+            android:id="@+id/signin_email"
             android:layout_width="match_parent"
             android:layout_height="90px"
-            android:layout_marginHorizontal="30px"
+            android:layout_marginHorizontal="80px"
             android:background="@drawable/rounded_edittext"
             android:ems="10"
             android:inputType="textEmailAddress" />
 
         <TextView
-            android:id="@+id/editTextTextPersonName3"
+            android:id="@+id/signin_pass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="30px"
             android:ems="10"
             android:inputType="textPersonName"
-            android:paddingLeft="30px"
+            android:paddingLeft="80px"
             android:text="Password:"
 
             android:textColor="@color/black"
@@ -63,10 +65,10 @@
             android:id="@+id/editTextTextPassword"
             android:layout_width="match_parent"
             android:layout_height="90px"
-            android:layout_marginHorizontal="30px"
+            android:layout_marginHorizontal="80px"
+            android:layout_marginBottom="30px"
             android:background="@drawable/rounded_edittext"
             android:ems="10"
-            android:layout_marginBottom="30px"
 
             android:inputType="textPassword" />
 
@@ -81,17 +83,17 @@
                 android:layout_width="136dp"
                 android:layout_height="match_parent"
                 android:width="50px"
-                android:onClick="goToSignUp"
                 android:background="@drawable/rounded_button"
+                android:onClick="goToSignUp"
                 android:text="Sign Up" />
 
             <Button
                 android:id="@+id/signin"
                 android:layout_width="142dp"
                 android:layout_height="match_parent"
-                android:onClick="goToHome"
                 android:layout_marginLeft="30px"
                 android:background="@drawable/rounded_button"
+                android:onClick="goToHome"
                 android:text="Sign In" />
         </LinearLayout>
 
