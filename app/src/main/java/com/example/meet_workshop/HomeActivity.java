@@ -22,6 +22,7 @@ import java.util.ArrayList;
 public class HomeActivity extends AppCompatActivity {
 
     private ListView listView;
+    private FirebaseAuth mAuth;
     private ArrayList<User> users;
     private ArrayAdapter<User> arrayAdapter;
     private FirebaseDatabase database;
@@ -31,7 +32,11 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        database = FirebaseDatabase.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+
+
+
+        database = FirebaseDatabase.getInstance("https://meet-workshop-default-rtdb.europe-west1.firebasedatabase.app/");
         database.getReference("Users").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

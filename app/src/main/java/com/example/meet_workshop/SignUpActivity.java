@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,20 +25,27 @@ public class SignUpActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
 
+    EditText email;
+    EditText password;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+        mAuth = FirebaseAuth.getInstance();
+        email = (EditText)findViewById(R.id.signup_email);
+        password  = (EditText)findViewById(R.id.signup_pass);
     }
 
     public void goToHome(View view) {
+        create_user(email.getText().toString(), password.getText().toString());
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
     }
 
     public void create_user(String email, String password) {
-        mDatabase = FirebaseDatabase.getInstance().getReference("Users");
+        mDatabase = FirebaseDatabase.getInstance("https://meet-workshop-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Users");
 
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -47,11 +55,9 @@ public class SignUpActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            String uid = user.getUid();
+                            String uid = user.getUid().toString();
                             mDatabase.child(uid).child("email").setValue(email);
                             mDatabase.child(uid).child("password").setValue(password);
-                            Intent i = new Intent(SignUpActivity.this, HomeActivity.class);
-                            startActivity(i);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
