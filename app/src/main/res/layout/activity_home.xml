@@ -18,7 +18,8 @@
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Welcome To Our Nevo"
+            android:paddingTop="100px"
+            android:text="Welcome To Acteen"
             android:textAlignment="center"
             android:textColor="#000000"
             android:textSize="30sp" />
