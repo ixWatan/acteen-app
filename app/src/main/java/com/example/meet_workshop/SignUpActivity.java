@@ -1,7 +1,5 @@
 package com.example.meet_workshop;
 
-import static android.content.ContentValues.TAG;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -22,50 +20,62 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class SignUpActivity extends AppCompatActivity {
 
+    private static final String TAG = "SignUpActivity";
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
 
     EditText email;
     EditText password;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         mAuth = FirebaseAuth.getInstance();
-        email = (EditText)findViewById(R.id.signup_email);
-        password  = (EditText)findViewById(R.id.signup_pass);
+        email = findViewById(R.id.signup_email);
+        password  = findViewById(R.id.signup_pass);
     }
 
     public void goToHome(View view) {
-        create_user(email.getText().toString(), password.getText().toString());
-        Intent intent = new Intent(this, HomeActivity.class);
-        startActivity(intent);
+        String emailStr = email.getText().toString();
+        String passwordStr = password.getText().toString();
+        if (emailStr.isEmpty() || passwordStr.isEmpty()) {
+            Toast.makeText(this, "Please enter both email and password", Toast.LENGTH_SHORT).show();
+        } else {
+            create_user(emailStr, passwordStr);
+        }
     }
 
     public void create_user(String email, String password) {
-        mDatabase = FirebaseDatabase.getInstance("https://<YOUR-FIREBASE-REALTIME-DATABASE-URL>").getReference("Users");
-
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            String uid = user.getUid().toString();
+                            String uid = user.getUid();
+                            mDatabase = FirebaseDatabase.getInstance().getReference("Users");
                             mDatabase.child(uid).child("email").setValue(email);
-                            mDatabase.child(uid).child("password").setValue(password);
+                            mDatabase.child(uid).child("password").setValue(password)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                Intent intent = new Intent(SignUpActivity.this, HomeActivity.class);
+                                                startActivity(intent);
+                                                finish();
+                                            } else {
+                                                Log.w(TAG, "setPassword:failure", task.getException());
+                                                Toast.makeText(SignUpActivity.this, "Failed to set password.", Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                    });
+
                         } else {
-                            // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
                             Toast.makeText(SignUpActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
-                            Log.e(TAG, "createUserWithEmail:exception", task.getException());
                         }
                     }
                 });
     }
-
 }
