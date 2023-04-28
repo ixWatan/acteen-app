@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "357735170574",
+    "firebase_url": "https://meet-workshop-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "meet-workshop",
+    "storage_bucket": "meet-workshop.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:357735170574:android:8ac7109e2b0f35b24f325f",
+        "android_client_info": {
+          "package_name": "com.example.meet_workshop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "357735170574-kb51lppsv586ho3ls60u14fmgjfjui91.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9tCnaMN99cE6KJBBVPvFH5b3Hrhb0rYU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "357735170574-kb51lppsv586ho3ls60u14fmgjfjui91.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
