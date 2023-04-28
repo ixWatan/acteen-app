@@ -76,7 +76,7 @@
             android:ems="10"
             android:inputType="textPersonName"
             android:paddingLeft="30px"
-            android:text="Password:"
+            android:text="Age:"
             android:textColor="@color/black"
             android:textSize="21sp" />
 
@@ -99,7 +99,7 @@
             android:ems="10"
             android:inputType="textPersonName"
             android:paddingLeft="30px"
-            android:text="Password:"
+            android:text="Name:"
             android:textColor="@color/black"
             android:textSize="21sp" />
 
@@ -121,7 +121,7 @@
             android:ems="10"
             android:inputType="textPersonName"
             android:paddingLeft="30px"
-            android:text="Password:"
+            android:text="City:"
             android:textColor="@color/black"
             android:textSize="21sp" />
 
@@ -143,7 +143,7 @@
             android:ems="10"
             android:inputType="textPersonName"
             android:paddingLeft="30px"
-            android:text="Password:"
+            android:text="Region:"
             android:textColor="@color/black"
             android:textSize="21sp" />
 
