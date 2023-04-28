@@ -35,6 +35,10 @@ public class MainActivity extends AppCompatActivity {
         password  = (EditText)findViewById(R.id.signin_pass);
     }
 
+    public void goToActivityIntrests(View view) {
+        Intent intent = new Intent(this, ActivityIntrests.class);
+        startActivity(intent);
+    }
     public void goToHome(View view) {
         signing_user(email.getText().toString(), password.getText().toString());
         Intent intent = new Intent(this, HomeActivity.class);

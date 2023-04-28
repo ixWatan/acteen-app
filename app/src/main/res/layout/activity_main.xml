@@ -95,6 +95,15 @@
                 android:background="@drawable/rounded_button"
                 android:onClick="goToHome"
                 android:text="Sign In" />
+
+            <Button
+                android:id="@+id/intrests"
+                android:layout_width="136dp"
+                android:layout_height="match_parent"
+                android:width="50px"
+                android:background="@drawable/rounded_button"
+                android:onClick="goToActivityIntrests"
+                android:text="intrests" />
         </LinearLayout>
 
     </LinearLayout>
