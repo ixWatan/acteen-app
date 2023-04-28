@@ -45,7 +45,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     public void create_user(String email, String password) {
-        mDatabase = FirebaseDatabase.getInstance("https://meet-workshop-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Users");
+        mDatabase = FirebaseDatabase.getInstance("https://<YOUR-FIREBASE-REALTIME-DATABASE-URL>").getReference("Users");
 
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -62,11 +62,10 @@ public class SignUpActivity extends AppCompatActivity {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
                             Toast.makeText(SignUpActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
-
+                            Log.e(TAG, "createUserWithEmail:exception", task.getException());
                         }
                     }
-
-
                 });
     }
+
 }
