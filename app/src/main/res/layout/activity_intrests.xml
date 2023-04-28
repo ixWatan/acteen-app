@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ActivityIntrests">
 
     <LinearLayout
         android:layout_width="412dp"
@@ -25,67 +25,24 @@
             android:textSize="29sp"
             android:textStyle="bold" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:gravity="center"
-            android:layout_height="wrap_content" >
 
             <Button
-                android:id="@+id/button1"
+                android:id="@+id/my_button"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_width="400px"
-
-                android:text="Button" />
-
-            <Button
-                android:id="@+id/button2"
-                android:layout_marginLeft="90px"
-                android:layout_width="400px"
-                android:layout_height="150px"
-                android:text="Button" />
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:gravity="center"
-            android:layout_height="wrap_content" >
+                android:gravity="right"
+                android:background="@color/button_background_color"
+                android:text="Press me"
+                android:textColor="@color/black" />
 
             <Button
-                android:id="@+id/button1"
+                android:id="@+id/my_button1"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_width="400px"
-
-                android:text="Button" />
-
-            <Button
-                android:id="@+id/button2"
-                android:layout_marginLeft="90px"
-                android:layout_width="400px"
-                android:layout_height="150px"
-                android:text="Button" />
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:gravity="center"
-            android:layout_height="wrap_content" >
-
-            <Button
-                android:id="@+id/button1"
-                android:layout_height="wrap_content"
-                android:layout_width="400px"
-
-                android:text="Button" />
-
-            <Button
-                android:id="@+id/button2"
-                android:layout_marginLeft="90px"
-                android:layout_width="400px"
-                android:layout_height="150px"
-                android:text="Button" />
-
-        </LinearLayout>
-
+                android:gravity="left"
+                android:background="@color/dark_red"
+                android:text="Press me"
+                android:textColor="@color/black" />
 
     </LinearLayout>
 
