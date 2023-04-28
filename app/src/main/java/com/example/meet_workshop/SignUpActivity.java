@@ -26,6 +26,10 @@ public class SignUpActivity extends AppCompatActivity {
 
     EditText email;
     EditText password;
+    EditText age;
+    EditText name;
+    EditText city;
+    EditText region;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,19 +38,28 @@ public class SignUpActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         email = findViewById(R.id.signup_email);
         password  = findViewById(R.id.signup_pass);
+        age = findViewById(R.id.signup_age);
+        name = findViewById(R.id.signup_name);
+        city = findViewById(R.id.signup_city);
+        region = findViewById(R.id.signup_region);
     }
 
     public void goToHome(View view) {
         String emailStr = email.getText().toString();
         String passwordStr = password.getText().toString();
-        if (emailStr.isEmpty() || passwordStr.isEmpty()) {
-            Toast.makeText(this, "Please enter both email and password", Toast.LENGTH_SHORT).show();
+        String ageStr = age.getText().toString();
+        String nameStr = name.getText().toString();
+        String cityStr = city.getText().toString();
+        String regionStr = region.getText().toString();
+
+        if (emailStr.isEmpty() || passwordStr.isEmpty() || ageStr.isEmpty() || nameStr.isEmpty() || cityStr.isEmpty() || regionStr.isEmpty()) {
+            Toast.makeText(this, "Please enter email, password, name, city, age and region", Toast.LENGTH_SHORT).show();
         } else {
-            create_user(emailStr, passwordStr);
+            create_user(emailStr, passwordStr, ageStr, nameStr, cityStr, regionStr);
         }
     }
 
-    public void create_user(String email, String password) {
+    public void create_user(String email, String password, String age, String name, String city, String region) {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -56,7 +69,11 @@ public class SignUpActivity extends AppCompatActivity {
                             String uid = user.getUid();
                             mDatabase = FirebaseDatabase.getInstance().getReference("Users");
                             mDatabase.child(uid).child("email").setValue(email);
-                            mDatabase.child(uid).child("password").setValue(password)
+                            mDatabase.child(uid).child("password").setValue(password);
+                            mDatabase.child(uid).child("age").setValue(age);
+                            mDatabase.child(uid).child("city").setValue(city);
+                            mDatabase.child(uid).child("name").setValue(name);
+                            mDatabase.child(uid).child("region").setValue(region)
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
@@ -65,8 +82,8 @@ public class SignUpActivity extends AppCompatActivity {
                                                 startActivity(intent);
                                                 finish();
                                             } else {
-                                                Log.w(TAG, "setPassword:failure", task.getException());
-                                                Toast.makeText(SignUpActivity.this, "Failed to set password.", Toast.LENGTH_SHORT).show();
+                                                Log.w(TAG, "setValue:failure", task.getException());
+                                                Toast.makeText(SignUpActivity.this, "Failed to set user data.", Toast.LENGTH_SHORT).show();
                                             }
                                         }
                                     });
@@ -79,3 +96,4 @@ public class SignUpActivity extends AppCompatActivity {
                 });
     }
 }
+

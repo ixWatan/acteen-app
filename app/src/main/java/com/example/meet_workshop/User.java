@@ -7,15 +7,45 @@ public class User {
     private String name;
     private String email;
     private String password;
+    private String city;
+    private String region;
+    private String age;
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
+    }
 
     public User() {
 
     }
 
-    public User(String name, String email, String password) {
+    public User(String name, String email, String password, String city, String region, String age) {
         this.name = name;
-        this.password = password;
         this.email = email;
+        this.password = password;
+        this.city = city;
+        this.region = region;
+        this.age = age;
     }
 
     public String getName() {
@@ -48,6 +78,9 @@ public class User {
                 "name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", age='" + age + '\'' +
+                ", city='" + city + '\'' +
+                ", region='" + region + '\'' +
                 '}';
     }
 }
