@@ -12,6 +12,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -55,6 +56,8 @@ public class SignUpActivity extends AppCompatActivity {
         } else {
             create_user(emailStr, passwordStr, ageStr, nameStr, cityStr, regionStr);
             Toast.makeText(this,"You're in",Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, ActivityInterests.class);
+            startActivity(intent);
         }
     }
 
@@ -77,6 +80,15 @@ public class SignUpActivity extends AppCompatActivity {
                                 .set(userData)
                                 .addOnCompleteListener(task1 -> {
                                     if (task1.isSuccessful()) {
+                                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                                .setDisplayName(name)
+                                                .build();
+                                        user.updateProfile(profileUpdates)
+                                                .addOnCompleteListener(task2 -> {
+                                                    if (task2.isSuccessful()) {
+                                                        Log.d(TAG, "User profile updated.");
+                                                    }
+                                                });
                                         Intent intent = new Intent(SignUpActivity.this, HomeActivity.class);
                                         startActivity(intent);
                                         finish();
@@ -92,6 +104,7 @@ public class SignUpActivity extends AppCompatActivity {
                     }
                 });
     }
+
 }
 
 

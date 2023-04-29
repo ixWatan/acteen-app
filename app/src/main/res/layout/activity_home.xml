@@ -14,23 +14,32 @@
         tools:layout_editor_absoluteX="-16dp"
         tools:layout_editor_absoluteY="79dp">
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="100px"
-            android:text="Welcome To Acteen"
-            android:textAlignment="center"
-            android:textColor="#000000"
-            android:textSize="30sp" />
 
-        <ListView
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/activity_home"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/list"/>
+            android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/user_name_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:layout_centerHorizontal="true"/>
+
+            <ListView
+                android:id="@+id/list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/user_name_textview"/>
+
+
+
+        </RelativeLayout>
 
     </LinearLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
