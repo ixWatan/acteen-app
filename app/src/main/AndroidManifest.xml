@@ -15,7 +15,7 @@
             android:name=".NewProfile"
             android:exported="false" />
         <activity
-            android:name=".ActivityIntrests"
+            android:name=".ActivityInterests"
             android:exported="false" />
         <activity
             android:name=".HomeActivity"

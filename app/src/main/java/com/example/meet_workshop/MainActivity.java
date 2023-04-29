@@ -4,12 +4,13 @@ import static android.content.ContentValues.TAG;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.DocumentSnapshot;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -18,7 +19,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,18 +33,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mAuth = FirebaseAuth.getInstance();
-        email = (EditText)findViewById(R.id.signin_email);
-        password  = (EditText)findViewById(R.id.signin_pass);
+        email = (EditText) findViewById(R.id.signin_email);
+        password = (EditText) findViewById(R.id.signin_pass);
     }
 
-    public void goToActivityIntrests(View view) {
-        Intent intent = new Intent(this, ActivityIntrests.class);
+    public void goToActivityInterests(View view) {
+        Intent intent = new Intent(this, ActivityInterests.class);
         startActivity(intent);
     }
+
     public void goToHome(View view) {
-        signing_user(email.getText().toString(), password.getText().toString());
-        Intent intent = new Intent(this, HomeActivity.class);
-        startActivity(intent);
+        loginUser(email.getText().toString(), password.getText().toString());
     }
 
     public void goToSignUp(View view) {
@@ -50,25 +51,51 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void signing_user(String email, String password) {
+    private void loginUser(String email, String password) {
+        if (email.isEmpty() || password.isEmpty()) {
+            Toast.makeText(MainActivity.this, "Email and password cannot be empty.", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signUserWithEmail:failure", task.getException());
-                            Toast.makeText(MainActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
-
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        // Sign in success
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        if (user != null) {
+                            FirebaseFirestore db = FirebaseFirestore.getInstance();
+                            db.collection("users")
+                                    .document(user.getUid())
+                                    .get()
+                                    .addOnCompleteListener(task1 -> {
+                                        if (task1.isSuccessful()) {
+                                            DocumentSnapshot document = task1.getResult();
+                                            if (document != null && document.exists()) {
+                                                String storedEmail = document.getString("email");
+                                                if (email.equalsIgnoreCase(storedEmail)) {
+                                                    // User's email is in the system
+                                                    // Proceed to the next activity
+                                                    Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                                                    startActivity(intent);
+                                                } else {
+                                                    // User's email is not in the system
+                                                    Toast.makeText(MainActivity.this,
+                                                            "Your email is not registered.",
+                                                            Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+                                        } else {
+                                            Log.d(TAG, "Failed to get user document.", task1.getException());
+                                        }
+                                    });
                         }
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        Log.w(TAG, "signInWithEmail:failure", task.getException());
+                        Toast.makeText(MainActivity.this, "Authentication failed.",
+                                Toast.LENGTH_SHORT).show();
                     }
-
-
                 });
     }
+
 }

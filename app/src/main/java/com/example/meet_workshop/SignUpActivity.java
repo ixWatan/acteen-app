@@ -2,27 +2,25 @@ package com.example.meet_workshop;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class SignUpActivity extends AppCompatActivity {
 
     private static final String TAG = "SignUpActivity";
     private FirebaseAuth mAuth;
-    private DatabaseReference mDatabase;
 
     EditText email;
     EditText password;
@@ -56,44 +54,44 @@ public class SignUpActivity extends AppCompatActivity {
             Toast.makeText(this, "Please enter email, password, name, city, age and region", Toast.LENGTH_SHORT).show();
         } else {
             create_user(emailStr, passwordStr, ageStr, nameStr, cityStr, regionStr);
+            Toast.makeText(this,"You're in",Toast.LENGTH_SHORT).show();
         }
     }
 
     public void create_user(String email, String password, String age, String name, String city, String region) {
         mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            String uid = user.getUid();
-                            mDatabase = FirebaseDatabase.getInstance().getReference("Users");
-                            mDatabase.child(uid).child("email").setValue(email);
-                            mDatabase.child(uid).child("password").setValue(password);
-                            mDatabase.child(uid).child("age").setValue(age);
-                            mDatabase.child(uid).child("city").setValue(city);
-                            mDatabase.child(uid).child("name").setValue(name);
-                            mDatabase.child(uid).child("region").setValue(region)
-                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if (task.isSuccessful()) {
-                                                Intent intent = new Intent(SignUpActivity.this, HomeActivity.class);
-                                                startActivity(intent);
-                                                finish();
-                                            } else {
-                                                Log.w(TAG, "setValue:failure", task.getException());
-                                                Toast.makeText(SignUpActivity.this, "Failed to set user data.", Toast.LENGTH_SHORT).show();
-                                            }
-                                        }
-                                    });
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        String uid = user.getUid();
+                        FirebaseFirestore db = FirebaseFirestore.getInstance();
+                        Map<String, Object> userData = new HashMap<>();
+                        userData.put("email", email);
+                        userData.put("password", password);
+                        userData.put("age", age);
+                        userData.put("city", city);
+                        userData.put("name", name);
+                        userData.put("region", region);
 
-                        } else {
-                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(SignUpActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
-                        }
+                        db.collection("users").document(uid)
+                                .set(userData)
+                                .addOnCompleteListener(task1 -> {
+                                    if (task1.isSuccessful()) {
+                                        Intent intent = new Intent(SignUpActivity.this, HomeActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    } else {
+                                        Log.w(TAG, "set:failure", task1.getException());
+                                        Toast.makeText(SignUpActivity.this, "Failed to set user data.", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+
+                    } else {
+                        Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                        Toast.makeText(SignUpActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
 }
+
 

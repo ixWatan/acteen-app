@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ActivityIntrests">
+    tools:context=".ActivityInterests">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -29,66 +29,66 @@
             android:textSize="29sp"
             android:textStyle="bold" />
 
+        <!-- Other LinearLayouts are the same -->
+        <!-- Only the Button elements are modified -->
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/my_button"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:backgroundTint="@color/gray"
-            android:onClick="onClick"
-            android:text="Click me" />
-
-        <Button
-            android:id="@+id/my_button1"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginLeft="150px"
-            android:backgroundTint="@color/gray"
-            android:onClick="onClick1"
-            android:text="Click me" />
-    </LinearLayout>
-        <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:paddingTop="60px"
-        >
-
-        <Button
-            android:id="@+id/my_button2"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:backgroundTint="@color/gray"
-            android:onClick="onClick2"
-            android:text="Click me" />
-
-        <Button
-            android:id="@+id/my_button3"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginLeft="150px"
-            android:backgroundTint="@color/gray"
-            android:onClick="onClick3"
-            android:text="Click me" />
-    </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingTop="60px"
-            >
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/my_button"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="@color/gray"
+                android:onClick="onButtonClick"
+                android:text="Click me" />
+
+            <Button
+                android:id="@+id/my_button1"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="150px"
+                android:backgroundTint="@color/gray"
+                android:onClick="onButtonClick"
+                android:text="Click me" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/my_button2"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="@color/gray"
+                android:onClick="onButtonClick"
+                android:text="Click me" />
+
+            <Button
+                android:id="@+id/my_button3"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="150px"
+                android:backgroundTint="@color/gray"
+                android:onClick="onButtonClick"
+                android:text="Click me" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/my_button4"
@@ -96,7 +96,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:backgroundTint="@color/gray"
-                android:onClick="onClick4"
+                android:onClick="onButtonClick"
                 android:text="Click me" />
 
             <Button
@@ -106,16 +106,15 @@
                 android:layout_weight="1"
                 android:layout_marginLeft="150px"
                 android:backgroundTint="@color/gray"
-                android:onClick="onClick5"
+                android:onClick="onButtonClick"
                 android:text="Click me" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingTop="60px"
-            >
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/my_button6"
@@ -123,7 +122,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:backgroundTint="@color/gray"
-                android:onClick="onClick6"
+                android:onClick="onButtonClick"
                 android:text="Click me" />
 
             <Button
@@ -133,16 +132,15 @@
                 android:layout_weight="1"
                 android:layout_marginLeft="150px"
                 android:backgroundTint="@color/gray"
-                android:onClick="onClick7"
+                android:onClick="onButtonClick"
                 android:text="Click me" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingTop="60px"
-            >
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/my_button8"
@@ -150,7 +148,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:backgroundTint="@color/gray"
-                android:onClick="onClick8"
+                android:onClick="onButtonClick"
                 android:text="Click me" />
 
             <Button
@@ -160,16 +158,15 @@
                 android:layout_weight="1"
                 android:layout_marginLeft="150px"
                 android:backgroundTint="@color/gray"
-                android:onClick="onClick9"
+                android:onClick="onButtonClick"
                 android:text="Click me" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingTop="60px"
-            >
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/my_button10"
@@ -177,7 +174,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:backgroundTint="@color/gray"
-                android:onClick="onClick10"
+                android:onClick="onButtonClick"
                 android:text="Click me" />
 
             <Button
@@ -187,16 +184,15 @@
                 android:layout_weight="1"
                 android:layout_marginLeft="150px"
                 android:backgroundTint="@color/gray"
-                android:onClick="onClick11"
+                android:onClick="onButtonClick"
                 android:text="Click me" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingTop="60px"
-            >
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/my_button12"
@@ -204,7 +200,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:backgroundTint="@color/gray"
-                android:onClick="onClick12"
+                android:onClick="onButtonClick"
                 android:text="Click me" />
 
             <Button
@@ -214,16 +210,15 @@
                 android:layout_weight="1"
                 android:layout_marginLeft="150px"
                 android:backgroundTint="@color/gray"
-                android:onClick="onClick13"
+                android:onClick="onButtonClick"
                 android:text="Click me" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingTop="60px"
-            >
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/my_button14"
@@ -231,7 +226,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:backgroundTint="@color/gray"
-                android:onClick="onClick14"
+                android:onClick="onButtonClick"
                 android:text="Click me" />
 
             <Button
@@ -241,10 +236,13 @@
                 android:layout_weight="1"
                 android:layout_marginLeft="150px"
                 android:backgroundTint="@color/gray"
-                android:onClick="onClick15"
+                android:onClick="onButtonClick"
                 android:text="Click me" />
         </LinearLayout>
-    </LinearLayout>
 
+        <!-- Repeat the same pattern for the other LinearLayouts -->
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
+
 
