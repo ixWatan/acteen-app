@@ -3,31 +3,17 @@ package com.example.meet_workshop;
 public class InterestData {
 
 
-    private String name;
+    private String string;
 
-    private boolean selected;
-    public InterestData(String name) {
-        this.name = name;
+    public String getSting() {
+        return string;
     }
 
-    public InterestData(boolean selected) {
-        this.selected = selected;
+    public void setSting(String sting) {
+        this.string = string;
     }
 
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public boolean isSelected() {
-        return selected;
-    }
-
-    public void setSelected(boolean selected) {
-        this.selected = selected;
+    public InterestData(String string) {
+        this.string = string;
     }
 }

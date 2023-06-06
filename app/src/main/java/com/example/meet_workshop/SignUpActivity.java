@@ -1,5 +1,4 @@
 package com.example.meet_workshop;
-
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,7 +8,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
-
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.firestore.FirebaseFirestore;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -48,9 +51,6 @@ public class SignUpActivity extends AppCompatActivity {
             Toast.makeText(this, "Please enter email, password, name, city, age and region", Toast.LENGTH_SHORT).show();
         } else {
             create_user(emailStr, passwordStr, ageStr, nameStr, cityStr, regionStr);
-            Toast.makeText(this,"You're in",Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this, ActivityInterests.class);
-            startActivity(intent);
         }
     }
 
@@ -58,7 +58,43 @@ public class SignUpActivity extends AppCompatActivity {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
-                        // ... existing successful sign up code ...
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        String uid = user.getUid();
+                        FirebaseFirestore db = FirebaseFirestore.getInstance();
+                        Map<String, Object> userData = new HashMap<>();
+                        userData.put("email", email);
+                        userData.put("password", password);
+                        userData.put("age", age);
+                        userData.put("city", city);
+                        userData.put("name", name);
+                        userData.put("region", region);
+
+                        db.collection("users").document(uid)
+                                .set(userData)
+                                .addOnCompleteListener(task1 -> {
+                                    if (task1.isSuccessful()) {
+                                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                                .setDisplayName(name)
+                                                .build();
+                                        user.updateProfile(profileUpdates)
+                                                .addOnCompleteListener(task2 -> {
+                                                    if (task2.isSuccessful()) {
+                                                        Log.d(TAG, "User profile updated.");
+                                                    }
+                                                });
+
+                                        // Navigate to the interests page after successfully creating the user.
+                                        Toast.makeText(this,"You're in",Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(SignUpActivity.this, ActivityInterests.class);
+                                        startActivity(intent);
+                                        finish();
+
+                                    } else {
+                                        Log.w(TAG, "set:failure", task1.getException());
+                                        Toast.makeText(SignUpActivity.this, "Failed to set user data.", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+
                     } else {
                         // Check the type of exception
                         if (task.getException() instanceof FirebaseAuthUserCollisionException) {

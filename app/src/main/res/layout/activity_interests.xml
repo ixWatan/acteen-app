@@ -45,7 +45,7 @@
                 android:layout_weight="1"
                 android:backgroundTint="@color/gray"
                 android:onClick="onButtonClick"
-                android:text="Click me" />
+                android:text="Comedy" />
 
             <Button
                 android:id="@+id/my_button1"
@@ -55,7 +55,7 @@
                 android:layout_marginLeft="150px"
                 android:backgroundTint="@color/gray"
                 android:onClick="onButtonClick"
-                android:text="Click me" />
+                android:text="Daily Day Life" />
         </LinearLayout>
 
         <LinearLayout
@@ -240,7 +240,12 @@
                 android:text="Click me" />
         </LinearLayout>
 
-        <!-- Repeat the same pattern for the other LinearLayouts -->
+        <Button
+            android:id="@+id/submit_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Submit"
+            android:onClick="onSubmitClick" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
