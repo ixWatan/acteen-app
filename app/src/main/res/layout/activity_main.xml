@@ -96,14 +96,6 @@
                 android:onClick="goToHome"
                 android:text="Sign In" />
 
-            <Button
-                android:id="@+id/interests"
-                android:layout_width="136dp"
-                android:layout_height="match_parent"
-                android:width="50px"
-                android:background="@drawable/rounded_button"
-                android:onClick="goToActivityInterests"
-                android:text="interests" />
         </LinearLayout>
 
     </LinearLayout>

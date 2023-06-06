@@ -37,10 +37,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    public void goToActivityInterests(View view) {
-        Intent intent = new Intent(this, ActivityInterests.class);
-        startActivity(intent);
-    }
 
     public void goToHome(View view) {
         loginUser(email.getText().toString(), password.getText().toString());

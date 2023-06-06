@@ -1,6 +1,5 @@
 package com.example.meet_workshop;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,15 +7,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
-import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 
-import java.util.HashMap;
-import java.util.Map;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -65,42 +58,15 @@ public class SignUpActivity extends AppCompatActivity {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
-                        FirebaseUser user = mAuth.getCurrentUser();
-                        String uid = user.getUid();
-                        FirebaseFirestore db = FirebaseFirestore.getInstance();
-                        Map<String, Object> userData = new HashMap<>();
-                        userData.put("email", email);
-                        userData.put("password", password);
-                        userData.put("age", age);
-                        userData.put("city", city);
-                        userData.put("name", name);
-                        userData.put("region", region);
-
-                        db.collection("users").document(uid)
-                                .set(userData)
-                                .addOnCompleteListener(task1 -> {
-                                    if (task1.isSuccessful()) {
-                                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                                                .setDisplayName(name)
-                                                .build();
-                                        user.updateProfile(profileUpdates)
-                                                .addOnCompleteListener(task2 -> {
-                                                    if (task2.isSuccessful()) {
-                                                        Log.d(TAG, "User profile updated.");
-                                                    }
-                                                });
-                                        Intent intent = new Intent(SignUpActivity.this, HomeActivity.class);
-                                        startActivity(intent);
-                                        finish();
-                                    } else {
-                                        Log.w(TAG, "set:failure", task1.getException());
-                                        Toast.makeText(SignUpActivity.this, "Failed to set user data.", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-
+                        // ... existing successful sign up code ...
                     } else {
-                        Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                        Toast.makeText(SignUpActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                        // Check the type of exception
+                        if (task.getException() instanceof FirebaseAuthUserCollisionException) {
+                            Toast.makeText(SignUpActivity.this, "This email is already registered.", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                            Toast.makeText(SignUpActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
     }
