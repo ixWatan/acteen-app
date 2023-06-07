@@ -40,6 +40,53 @@ public class ActivityInterests extends AppCompatActivity {
                 handleButtonInteraction(button);
                 break;
 
+            case R.id.my_button2:
+                handleButtonInteraction(button);
+                break;
+
+            case R.id.my_button3:
+                handleButtonInteraction(button);
+                break;
+
+            case R.id.my_button4:
+                handleButtonInteraction(button);
+                break;
+
+            case R.id.my_button5:
+                handleButtonInteraction(button);
+                break;
+
+            case R.id.my_button6:
+                handleButtonInteraction(button);
+                break;
+            case R.id.my_button7:
+                handleButtonInteraction(button);
+                break;
+            case R.id.my_button8:
+                handleButtonInteraction(button);
+                break;
+            case R.id.my_button9:
+                handleButtonInteraction(button);
+                break;
+            case R.id.my_button10:
+                handleButtonInteraction(button);
+                break;
+            case R.id.my_button11:
+                handleButtonInteraction(button);
+                break;
+            case R.id.my_button12:
+                handleButtonInteraction(button);
+                break;
+            case R.id.my_button13:
+                handleButtonInteraction(button);
+                break;
+            case R.id.my_button14:
+                handleButtonInteraction(button);
+                break;
+            case R.id.my_button15:
+                handleButtonInteraction(button);
+                break;
+
             default:
                 // if the id does not match any case
                 break;
@@ -59,9 +106,14 @@ public class ActivityInterests extends AppCompatActivity {
     }
 
     public void onSubmitClick(View view) {
+        if (selectedInterests.size() < 3) {
+            Toast.makeText(ActivityInterests.this, "Please select at least 3 interests.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         List<Task<Void>> tasks = new ArrayList<>();
         for (String interest : selectedInterests) {
-            Task<Void> task = db.collection("users").document(mAuth.getCurrentUser().getUid())
+            Task<Void> task = db.collection("teenActivists").document(mAuth.getCurrentUser().getUid())
                     .collection("interests").document(interest)
                     .set(new InterestData(interest));
             tasks.add(task);
@@ -78,6 +130,8 @@ public class ActivityInterests extends AppCompatActivity {
             }
         });
     }
+
+
 
 }
 

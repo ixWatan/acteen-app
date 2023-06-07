@@ -4,100 +4,101 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/colorful_background"
     tools:context=".MainActivity">
 
     <LinearLayout
-        android:layout_width="412dp"
-        android:layout_height="732dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:gravity="center"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent">
-
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:paddingBottom="100px"
+            android:paddingTop="100dp"
             android:text="Sign In"
-            android:textColor="@color/black"
+            android:textColor="@android:color/black"
             android:textSize="35sp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/editTextTextPersonName2"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="30px"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:paddingLeft="80px"
-            android:text="Email:"
-            android:textColor="@color/black"
-            android:textSize="21sp" />
+            android:layout_marginTop="50dp"
+            android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/signin_email"
-            android:layout_width="match_parent"
-            android:layout_height="90px"
-            android:layout_marginHorizontal="80px"
-            android:background="@drawable/rounded_edittext"
-            android:ems="10"
-            android:inputType="textEmailAddress" />
+            <TextView
+                android:id="@+id/editTextTextPersonName2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="Email:"
+                android:textColor="@android:color/black"
+                android:textSize="21sp" />
 
-        <TextView
-            android:id="@+id/te"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="30px"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:paddingLeft="80px"
-            android:text="Password:"
+            <EditText
+                android:id="@+id/signin_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_edittext_with_background"
+                android:ems="10"
+                android:inputType="textEmailAddress" />
 
-            android:textColor="@color/black"
-            android:textSize="21sp" />
-
-        <EditText
-            android:id="@+id/signin_pass"
-            android:layout_width="match_parent"
-            android:layout_height="90px"
-            android:layout_marginHorizontal="80px"
-            android:layout_marginBottom="30px"
-            android:background="@drawable/rounded_edittext"
-            android:ems="10"
-            android:inputType="textPassword" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/te"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="Password:"
+                android:textColor="@android:color/black"
+                android:textSize="21sp" />
+
+            <EditText
+                android:id="@+id/signin_pass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_edittext_with_background"
+                android:ems="10"
+                android:inputType="textPassword" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/signup"
-                android:layout_width="136dp"
-                android:layout_height="match_parent"
-                android:width="50px"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:background="@drawable/rounded_button"
-                android:onClick="goToSignUp"
+                android:onClick="goToOrgOrActActivity"
                 android:text="Sign Up" />
 
             <Button
                 android:id="@+id/signin"
-                android:layout_width="142dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="30px"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="10dp"
                 android:background="@drawable/rounded_button"
                 android:onClick="goToHome"
                 android:text="Sign In" />
 
         </LinearLayout>
-
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

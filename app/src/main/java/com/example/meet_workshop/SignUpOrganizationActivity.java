@@ -14,7 +14,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SignUpActivity extends AppCompatActivity {
+public class SignUpOrganizationActivity extends AppCompatActivity {
 
     private static final String TAG = "SignUpActivity";
     private FirebaseAuth mAuth;
@@ -29,7 +29,7 @@ public class SignUpActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up);
+        setContentView(R.layout.activity_sign_up_organization);
         mAuth = FirebaseAuth.getInstance();
         email = findViewById(R.id.signup_email);
         password  = findViewById(R.id.signup_pass);
@@ -70,7 +70,7 @@ public class SignUpActivity extends AppCompatActivity {
                         userData.put("region", region);
                         userData.put("city", city);
 
-                        db.collection("teenActivists").document(uid)
+                        db.collection("organizations").document(uid)   // Changed the collection to "organizations"
                                 .set(userData)
                                 .addOnCompleteListener(task1 -> {
                                     if (task1.isSuccessful()) {
@@ -86,23 +86,23 @@ public class SignUpActivity extends AppCompatActivity {
 
                                         // Navigate to the interests page after successfully creating the user.
                                         Toast.makeText(this,"You're in",Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(SignUpActivity.this, ActivityInterests.class);
+                                        Intent intent = new Intent(SignUpOrganizationActivity.this, HomeOrgActivity.class);
                                         startActivity(intent);
                                         finish();
 
                                     } else {
                                         Log.w(TAG, "set:failure", task1.getException());
-                                        Toast.makeText(SignUpActivity.this, "Failed to set user data.", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(SignUpOrganizationActivity.this, "Failed to set user data.", Toast.LENGTH_SHORT).show();
                                     }
                                 });
 
                     } else {
                         // Check the type of exception
                         if (task.getException() instanceof FirebaseAuthUserCollisionException) {
-                            Toast.makeText(SignUpActivity.this, "This email is already registered.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignUpOrganizationActivity.this, "This email is already registered.", Toast.LENGTH_SHORT).show();
                         } else {
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(SignUpActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignUpOrganizationActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -110,5 +110,3 @@ public class SignUpActivity extends AppCompatActivity {
 
 
 }
-
-

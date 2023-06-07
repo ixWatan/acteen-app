@@ -36,14 +36,12 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
-
     public void goToHome(View view) {
         loginUser(email.getText().toString(), password.getText().toString());
     }
 
-    public void goToSignUp(View view) {
-        Intent intent = new Intent(this, SignUpActivity.class);
+    public void goToOrgOrActActivity(View view) {
+        Intent intent = new Intent(this, OrgOrActActivity.class);
         startActivity(intent);
     }
 
@@ -60,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                         FirebaseUser user = mAuth.getCurrentUser();
                         if (user != null) {
                             FirebaseFirestore db = FirebaseFirestore.getInstance();
-                            db.collection("users")
+                            db.collection("teenActivists")
                                     .document(user.getUid())
                                     .get()
                                     .addOnCompleteListener(task1 -> {
@@ -74,11 +72,10 @@ public class MainActivity extends AppCompatActivity {
                                                     Intent intent = new Intent(MainActivity.this, HomeActivity.class);
                                                     startActivity(intent);
                                                 } else {
-                                                    // User's email is not in the system
-                                                    Toast.makeText(MainActivity.this,
-                                                            "Your email is not registered.",
-                                                            Toast.LENGTH_SHORT).show();
+                                                    checkForOrganizationUser(email, user.getUid());
                                                 }
+                                            } else {
+                                                checkForOrganizationUser(email, user.getUid());
                                             }
                                         } else {
                                             Log.d(TAG, "Failed to get user document.", task1.getException());
@@ -90,6 +87,39 @@ public class MainActivity extends AppCompatActivity {
                         Log.w(TAG, "signInWithEmail:failure", task.getException());
                         Toast.makeText(MainActivity.this, "Authentication failed.",
                                 Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private void checkForOrganizationUser(String email, String uid) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("organizations")
+                .document(uid)
+                .get()
+                .addOnCompleteListener(task1 -> {
+                    if (task1.isSuccessful()) {
+                        DocumentSnapshot document = task1.getResult();
+                        if (document != null && document.exists()) {
+                            String storedEmail = document.getString("email");
+                            if (email.equalsIgnoreCase(storedEmail)) {
+                                // User's email is in the system
+                                // Proceed to the next activity
+                                Intent intent = new Intent(MainActivity.this, HomeOrgActivity.class);
+                                startActivity(intent);
+                            } else {
+                                // User's email is not in the system
+                                Toast.makeText(MainActivity.this,
+                                        "Your email is not registered.",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            // User's email is not in the system
+                            Toast.makeText(MainActivity.this,
+                                    "Your email is not registered.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Log.d(TAG, "Failed to get user document.", task1.getException());
                     }
                 });
     }
