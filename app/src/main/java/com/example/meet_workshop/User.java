@@ -10,6 +10,35 @@ public class User {
     private String city;
     private String region;
     private String age;
+    private int followers;
+    private int following;
+    private int posts;
+
+    public int getFollowing() {
+        return following;
+    }
+
+    public void setFollowing(int following) {
+        this.following = following;
+    }
+
+    public int getPosts() {
+        return posts;
+    }
+
+    public void setPosts(int posts) {
+        this.posts = posts;
+    }
+
+
+    public int getFollowers() {
+        return followers;
+    }
+
+    public void setFollowers(int followers) {
+        this.followers = followers;
+    }
+
 
     public String getAge() {
         return age;
@@ -35,9 +64,6 @@ public class User {
         this.region = region;
     }
 
-    public User() {
-
-    }
 
     public User(String name, String email, String password, String city, String region, String age) {
         this.name = name;
@@ -46,6 +72,9 @@ public class User {
         this.city = city;
         this.region = region;
         this.age = age;
+        this.following = 0;
+        this.followers = 0;
+        this.posts = 0;
     }
 
     public String getName() {
@@ -84,3 +113,4 @@ public class User {
                 '}';
     }
 }
+

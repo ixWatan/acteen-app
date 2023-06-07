@@ -1,14 +1,16 @@
-package com.example.meet_workshop;
+package com.example.meet_workshop.homepage.homeactivist;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class HomeOrgActivity extends AppCompatActivity {
+import com.example.meet_workshop.R;
+
+public class SearchPage extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_org);
+        setContentView(R.layout.activity_search_page);
     }
 }

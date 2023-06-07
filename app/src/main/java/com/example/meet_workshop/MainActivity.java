@@ -3,6 +3,9 @@ package com.example.meet_workshop;
 import static android.content.ContentValues.TAG;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.meet_workshop.homepage.homeactivist.HomeActivity;
+import com.example.meet_workshop.homepage.homeorganization.HomeOrgActivity;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.DocumentSnapshot;
 
