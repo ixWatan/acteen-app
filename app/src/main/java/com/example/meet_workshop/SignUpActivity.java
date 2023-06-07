@@ -1,4 +1,5 @@
 package com.example.meet_workshop;
+
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,63 +20,72 @@ public class SignUpActivity extends AppCompatActivity {
     private static final String TAG = "SignUpActivity";
     private FirebaseAuth mAuth;
 
-    EditText email;
-    EditText password;
-    EditText age;
-    EditText name;
-    EditText city;
-    EditText region;
+    private EditText emailEditText;
+    private EditText passwordEditText;
+    private EditText nameEditText;
+    private EditText ageEditText;
+    private EditText regionEditText;
+    private EditText cityEditText;
+    private User person = new User(null,null,null,null,null,null);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         mAuth = FirebaseAuth.getInstance();
-        email = findViewById(R.id.signup_email);
-        password  = findViewById(R.id.signup_pass);
-        name = findViewById(R.id.signup_name);
-        age = findViewById(R.id.signup_age);
-        region = findViewById(R.id.signup_region);
-        city = findViewById(R.id.signup_city);
+        this.emailEditText = findViewById(R.id.signup_email);
+        this.passwordEditText = findViewById(R.id.signup_pass);
+        this.nameEditText = findViewById(R.id.signup_name);
+        this.ageEditText = findViewById(R.id.signup_age);
+        this.regionEditText = findViewById(R.id.signup_region);
+        this.cityEditText = findViewById(R.id.signup_city);
 
     }
 
     public void goToHome(View view) {
-        String emailStr = email.getText().toString();
-        String passwordStr = password.getText().toString();
-        String nameStr = name.getText().toString();
-        String ageStr = age.getText().toString();
-        String regionStr = region.getText().toString();
-        String cityStr = city.getText().toString();
-
-        if (emailStr.isEmpty() || passwordStr.isEmpty() || nameStr.isEmpty() || ageStr.isEmpty() || regionStr.isEmpty() || cityStr.isEmpty()) {
-            Toast.makeText(this, "Please enter email, password, name, city, age and region", Toast.LENGTH_SHORT).show();
+        String email = emailEditText.getText().toString();
+        String password = passwordEditText.getText().toString();
+        String name = nameEditText.getText().toString();
+        String age = ageEditText.getText().toString();
+        String region = regionEditText.getText().toString();
+        String city = cityEditText.getText().toString();
+        if (email.isEmpty() || password.isEmpty() || name.isEmpty() || age.isEmpty() || region.isEmpty() || city.isEmpty()) {
+            Toast.makeText(this, "Please enter email, password, name, city, age, and region", Toast.LENGTH_SHORT).show();
         } else {
-            create_user(emailStr, passwordStr, nameStr, ageStr,regionStr, cityStr);
-        }
+            this.person.setEmail(email);
+            this.person.setPassword(password);
+            this.person.setName(name);
+            this.person.setAge(age);
+            this.person.setRegion(region);
+            this.person.setCity(city);
+
+            createUser(person);        }
     }
 
-    public void create_user(String email, String password, String name , String age, String region, String  city) {
-        mAuth.createUserWithEmailAndPassword(email, password)
+    public void createUser(User person) {
+        mAuth.createUserWithEmailAndPassword(person.getEmail(), person.getPassword())
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         FirebaseUser user = mAuth.getCurrentUser();
                         String uid = user.getUid();
                         FirebaseFirestore db = FirebaseFirestore.getInstance();
                         Map<String, Object> userData = new HashMap<>();
-                        userData.put("email", email);
-                        userData.put("password", password);
-                        userData.put("name", name);
-                        userData.put("age", age);
-                        userData.put("region", region);
-                        userData.put("city", city);
+                        userData.put("email", person.getEmail());
+                        userData.put("password", person.getPassword());
+                        userData.put("name", person.getName());
+                        userData.put("age", person.getAge());
+                        userData.put("region", person.getRegion());
+                        userData.put("city", person.getCity());
+                        userData.put("followers", person.getFollowers());
+                        userData.put("following", person.getFollowing());
+                        userData.put("posts", person.getPosts());
 
                         db.collection("teenActivists").document(uid)
                                 .set(userData)
                                 .addOnCompleteListener(task1 -> {
                                     if (task1.isSuccessful()) {
                                         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                                                .setDisplayName(name)
+                                                .setDisplayName(person.getName())
                                                 .build();
                                         user.updateProfile(profileUpdates)
                                                 .addOnCompleteListener(task2 -> {
@@ -85,7 +95,7 @@ public class SignUpActivity extends AppCompatActivity {
                                                 });
 
                                         // Navigate to the interests page after successfully creating the user.
-                                        Toast.makeText(this,"You're in",Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(this, "You're in", Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(SignUpActivity.this, ActivityInterests.class);
                                         startActivity(intent);
                                         finish();
@@ -107,8 +117,6 @@ public class SignUpActivity extends AppCompatActivity {
                     }
                 });
     }
-
-
 }
 
 
