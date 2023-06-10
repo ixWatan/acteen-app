@@ -33,17 +33,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
             android:onClick="goToSignUp"
-            android:background="@drawable/button_background"
             android:text="A Teen Activist"
             android:textColor="@color/black" />
 
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="30dp"
-            android:src="@drawable/circle_shape"
-            android:background="@drawable/circle_background"
-            android:contentDescription="Circle Shape" />
+
 
         <TextView
             android:id="@+id/textView1"
@@ -61,17 +54,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:onClick="SignUpOrganizationActivity"
-            android:background="@drawable/button_background"
             android:text="An Organization"
             android:textColor="@color/black" />
 
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="30dp"
-            android:src="@drawable/rectangle_shape"
-            android:background="@drawable/rectangle_background"
-            android:contentDescription="Rectangle Shape" />
+
 
     </LinearLayout>
 

@@ -65,25 +65,6 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
-    public void onNavHomeClick(View view) {
-        // Handle the nav_home button click
-        openHomePage();
-    }
-
-    public void onNavSearchClick(View view) {
-        // Handle the nav_search button click
-        openSearchPage();
-    }
-
-    public void onNavProfileClick(View view) {
-        // Handle the nav_profile button click
-        openUserProfile();
-    }
-
-    public void onNavVideoClick(View view) {
-        // Handle the nav_notifications button click
-        openVideoPage();
-    }
 
     public void onNavAddPostClick(View view) {
         // Handle the nav_settings button click
@@ -97,7 +78,7 @@ public class HomeActivity extends AppCompatActivity {
     }
     private void openAddPost() {
         // Start the UserProfile activity
-        Intent intent = new Intent(HomeActivity.this, NewPost.class);
+        Intent intent = new Intent(HomeActivity.this, AddPostActivity.class);
         startActivity(intent);
     }
 

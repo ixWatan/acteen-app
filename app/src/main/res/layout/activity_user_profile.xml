@@ -1,44 +1,58 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_background">
 
 
     <include
         layout="@layout/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true" />
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="3dp" />
 
     <TextView
         android:id="@+id/userNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/profileImageView"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="289dp"
         android:text="User Name"
         android:textSize="24sp" />
 
     <ImageView
         android:id="@+id/profileImageView"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_below="@id/userNameTextView"
+        android:layout_width="109dp"
+        android:layout_height="110dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="299dp"
+        android:background="@drawable/circle_shape"
         android:scaleType="centerCrop" />
 
     <TextView
         android:id="@+id/followersTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/profileImageView"
+        android:layout_alignBottom="@+id/followingTextView"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="198dp"
+        android:layout_marginBottom="-1dp"
         android:text="Followers: 0"
         android:textSize="18sp" />
 
     <TextView
         android:id="@+id/followingTextView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/profileImageView"
-        android:layout_toRightOf="@id/followersTextView"
-        android:layout_marginStart="16dp"
+        android:layout_height="24dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginLeft="164dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="90dp"
         android:text="Following: 0"
         android:textSize="18sp" />
 
@@ -46,7 +60,10 @@
         android:id="@+id/postsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/followersTextView"
+        android:layout_alignBottom="@+id/followingTextView"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="11dp"
+        android:layout_marginBottom="0dp"
         android:text="Posts: 0"
         android:textSize="18sp" />
 

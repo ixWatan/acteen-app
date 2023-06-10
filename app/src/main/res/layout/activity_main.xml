@@ -42,8 +42,9 @@
                 android:id="@+id/signin_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/rounded_edittext_with_background"
                 android:ems="10"
+                android:textColorLink="@color/black"
+                android:background="@drawable/edittext_background"
                 android:inputType="textEmailAddress" />
 
         </LinearLayout>
@@ -67,8 +68,9 @@
                 android:id="@+id/signin_pass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/rounded_edittext_with_background"
                 android:ems="10"
+                android:textColorLink="@color/black"
+                android:background="@drawable/edittext_background"
                 android:inputType="textPassword" />
 
         </LinearLayout>
@@ -84,7 +86,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@drawable/rounded_button"
                 android:onClick="goToOrgOrActActivity"
                 android:text="Sign Up" />
 
@@ -94,7 +95,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginStart="10dp"
-                android:background="@drawable/rounded_button"
                 android:onClick="goToHome"
                 android:text="Sign In" />
 
