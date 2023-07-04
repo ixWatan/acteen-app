@@ -1,4 +1,5 @@
 package com.example.meet_workshop.homepage.homeactivist;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,8 +31,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.Map;
 import java.util.UUID;
 
-public class AddPostActivity extends AppCompatActivity {
-
+public class AddPostActivity extends AppCompatActivity implements ImagePagerAdapter.OnImageRemoveListener {
 
     private static final int PICK_IMAGE_REQUEST = 1;
 
@@ -55,30 +55,22 @@ public class AddPostActivity extends AppCompatActivity {
         ImageView selectImageButton = findViewById(R.id.select_image_button);
         captionEditText = findViewById(R.id.caption_edit_text);
 
-        selectImageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openImagePicker();
-            }
-        });
+        selectImageButton.setOnClickListener(v -> openImagePicker());
 
         Button uploadButton = findViewById(R.id.upload_button);
-        uploadButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (currentUser != null && currentUser.getUid() != null) {
-                    uploadPost();
-                } else {
-                    Toast.makeText(AddPostActivity.this, "User not authenticated", Toast.LENGTH_SHORT).show();
-                }
+        uploadButton.setOnClickListener(v -> {
+            if (currentUser != null && currentUser.getUid() != null) {
+                uploadPost();
+            } else {
+                Toast.makeText(AddPostActivity.this, "User not authenticated", Toast.LENGTH_SHORT).show();
             }
         });
 
         // Initialize the list of image URIs
         imageUris = new ArrayList<>();
 
-        // Initialize the image pager adapter
-        imagePagerAdapter = new ImagePagerAdapter(this, imageUris);
+        // Instantiate the image pager adapter with the listener
+        imagePagerAdapter = new ImagePagerAdapter(this, imageUris, this);
 
         // Set up the view pager
         ViewPager2 viewPager = findViewById(R.id.image_view_pager);
@@ -112,7 +104,7 @@ public class AddPostActivity extends AppCompatActivity {
 
             totalImages = imageUris.size();
             String string = String.valueOf(totalImages);
-            Toast.makeText(this,string.toString() , Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, string, Toast.LENGTH_SHORT).show();
 
             // Create a reference to the "images" subcollection under the post document
             CollectionReference imagesRef = postsRef.document(postId).collection("images");
@@ -138,37 +130,37 @@ public class AddPostActivity extends AppCompatActivity {
                     // Upload the image to the "images" subcollection with the generated image ID
                     imagesRef.document(imageId)
                             .set(imageMap)
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    // Image uploaded successfully
-                                    // Increment the successful uploads counter
-                                    successfulUploads++;
+                            .addOnSuccessListener(aVoid -> {
+                                // Image uploaded successfully
+                                // Increment the successful uploads counter
+                                successfulUploads++;
 
-                                    // Check if all images have been uploaded successfully
-                                    if (successfulUploads == imageUris.size()) {
-                                        // All images uploaded successfully
-                                        Toast.makeText(AddPostActivity.this, "All posts uploaded successfully", Toast.LENGTH_SHORT).show();
-                                        // Perform any additional actions here
-                                    }
+                                // Check if all images have been uploaded successfully
+                                if (successfulUploads == imageUris.size()) {
+                                    // All images uploaded successfully
+                                    Toast.makeText(AddPostActivity.this, "All posts uploaded successfully", Toast.LENGTH_SHORT).show();
+                                    // Perform any additional actions here
+                                    Intent intent = new Intent(AddPostActivity.this, HomeActivity.class);
+                                    startActivity(intent);
                                 }
                             })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    // Error occurred while uploading the image
-                                    String errorMessage = "Failed to upload image: " + e.getMessage();
-                                    Toast.makeText(AddPostActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
-                                }
+                            .addOnFailureListener(e -> {
+                                // Error occurred while uploading the image
+                                String errorMessage = "Failed to upload image: " + e.getMessage();
+                                Toast.makeText(AddPostActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
                             });
                 }
             }
-
 
         } else {
             // No images selected, show an error message
             Toast.makeText(AddPostActivity.this, "Please select images", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void removeImage(int position) {
+        imageUris.remove(position);
+        imagePagerAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -191,6 +183,11 @@ public class AddPostActivity extends AppCompatActivity {
             // Update the imagePagerAdapter with the new image URIs
             imagePagerAdapter.notifyDataSetChanged();
         }
+    }
+
+    @Override
+    public void onImageRemoved(int position) {
+        removeImage(position);
     }
 }
 
