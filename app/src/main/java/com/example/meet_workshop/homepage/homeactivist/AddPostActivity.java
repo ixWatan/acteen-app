@@ -46,6 +46,7 @@ public class AddPostActivity extends AppCompatActivity implements ImagePagerAdap
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getSupportActionBar().hide();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_post);
 

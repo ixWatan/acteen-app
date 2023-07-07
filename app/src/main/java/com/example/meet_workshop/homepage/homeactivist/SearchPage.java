@@ -18,6 +18,7 @@ public class SearchPage extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getSupportActionBar().hide();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_page);
         profileImageButton = findViewById(R.id.nav_profile);
