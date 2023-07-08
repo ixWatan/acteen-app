@@ -104,7 +104,7 @@ public class UserProfile extends AppCompatActivity {
 
                                 // Populate the views with the retrieved information
                                 userNameTextView.setText(userName);
-                                followersTextView.setText("Followers: " + followersCount);
+                                followersTextView.setText("Followers \n        "+ followersCount);
                             }
                         } else {
                             Toast.makeText(this, "An error occurred. Please try again.", Toast.LENGTH_SHORT).show();
