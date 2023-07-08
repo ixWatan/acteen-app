@@ -10,6 +10,7 @@ public class User {
     private String city;
     private String region;
     private String age;
+
     private int followers;
     private int following;
     private int posts;
