@@ -40,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
+
+
     public void goToHome(View view) {
         loginUser(email.getText().toString(), password.getText().toString());
     }

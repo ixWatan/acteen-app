@@ -2,10 +2,16 @@ package com.example.meet_workshop;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
+import android.graphics.Paint;
+import android.net.Uri;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.meet_workshop.homepage.homeactivist.AddPostActivity;
@@ -30,6 +36,12 @@ public class SignUpActivity extends AppCompatActivity {
     FirebaseUser currentUser = firebaseAuth.getCurrentUser();
     private FirebaseAuth mAuth;
     private EditText emailEditText;
+
+    private CheckBox checkBox;
+
+    private Boolean checkBoxState;
+
+    private TextView checkBoxText;
     private EditText passwordEditText;
     private EditText nameEditText;
     private EditText ageEditText;
@@ -43,12 +55,15 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         mAuth = FirebaseAuth.getInstance();
+        this.checkBoxText = findViewById(R.id.checkBoxText);
+        this.checkBox = findViewById(R.id.simpleCheckBox);
         this.emailEditText = findViewById(R.id.signup_email);
         this.passwordEditText = findViewById(R.id.signup_pass);
         this.nameEditText = findViewById(R.id.signup_name);
         this.ageEditText = findViewById(R.id.signup_age);
         this.regionEditText = findViewById(R.id.signup_region);
         this.cityEditText = findViewById(R.id.signup_city);
+
 
     }
 
@@ -59,8 +74,11 @@ public class SignUpActivity extends AppCompatActivity {
         String age = ageEditText.getText().toString();
         String region = regionEditText.getText().toString();
         String city = cityEditText.getText().toString();
-        if (email.isEmpty() || password.isEmpty() || name.isEmpty() || age.isEmpty() || region.isEmpty() || city.isEmpty()) {
-            Toast.makeText(this, "Please enter email, password, name, city, age, and region", Toast.LENGTH_SHORT).show();
+
+        Boolean checkBoxState = checkBox.isChecked();
+
+        if (email.isEmpty() || password.isEmpty() || name.isEmpty() || age.isEmpty() || region.isEmpty() || city.isEmpty() || checkBoxState == false) {
+            Toast.makeText(this, "Please enter email, password, name ...., Or accept terms and conditions", Toast.LENGTH_SHORT).show();
         } else {
             this.person.setEmail(email);
             this.person.setPassword(password);
@@ -73,6 +91,11 @@ public class SignUpActivity extends AppCompatActivity {
     }
     private void checkPostsCollectionExistence() {
 
+    }
+
+    public void OpenTermsAndGuidelines(View view) {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"));
+        startActivity(browserIntent);
     }
     public void createUser(User person) {
         mAuth.createUserWithEmailAndPassword(person.getEmail(), person.getPassword())
