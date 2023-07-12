@@ -97,7 +97,7 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center|bottom"
         android:layout_alignParentBottom="true"
@@ -107,12 +107,11 @@
         <Button
             android:id="@+id/buttonHabibi"
             android:layout_width="200dp"
-            android:clickable="true"
-            android:onClick="signOut"
             android:layout_height="wrap_content"
-            android:text="Sign Outtt" />
+            android:text="Sign Out" />
 
     </RelativeLayout>
+
 
 
 </RelativeLayout>

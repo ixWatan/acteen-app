@@ -5,11 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.meet_workshop.MainActivity;
 import com.example.meet_workshop.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -29,6 +31,8 @@ public class UserProfile extends AppCompatActivity {
     private ImageButton videoPageButton;
     private ImageButton addPostButton;
     private ImageButton homePageButton;
+
+    private Button buttonHabibi;
 
 
 
@@ -50,8 +54,19 @@ public class UserProfile extends AppCompatActivity {
         addPostButton = findViewById(R.id.nav_addPost);
         homePageButton = findViewById(R.id.nav_home);
 
+        // Find the Sign Out button by ID
+        buttonHabibi = findViewById(R.id.buttonHabibi);
 
-        profileImageButton.setOnClickListener(new View.OnClickListener() {
+        // Set click listener for the button
+        buttonHabibi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signOut();
+            }
+        });
+
+
+            profileImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Handle the profileImageButton click event
@@ -113,8 +128,19 @@ public class UserProfile extends AppCompatActivity {
         }
 
     }
+    private void signOut() {
+        // Sign out from Firebase Authentication
+        FirebaseAuth.getInstance().signOut();
 
+        // Show a toast message
+        Toast.makeText(this, "Signed out successfully", Toast.LENGTH_SHORT).show();
 
+        // Start the MainActivity
+        Intent intent = new Intent(UserProfile.this, MainActivity.class);
+        startActivity(intent);
+        finish(); // Optionally, call finish() to prevent the user from returning to the UserProfileActivity using the back button
+
+    }
 
     private void openUserProfile() {
         // Start the UserProfile activity

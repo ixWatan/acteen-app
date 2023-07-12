@@ -43,7 +43,7 @@
             android:name=".homepage.homeorganization.HomeOrgActivity"
             android:exported="false" />
         <activity
-            android:name=".UserProfileActivity"
+            android:name=".homepage.homeorganization.UserProfileActivity"
             android:exported="false" />
         <activity
             android:name=".SignUpOrganizationActivity"
