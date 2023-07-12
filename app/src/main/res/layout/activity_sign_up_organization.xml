@@ -42,19 +42,21 @@
             android:layout_marginBottom="24dp"/>
 
         <EditText
-            android:id="@+id/signup_name"
+            android:id="@+id/signup_orgname"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:hint="Name"
+            android:hint="Organization Name"
             android:background="@drawable/edittext_background"
             android:padding="12dp"
             android:layout_marginBottom="24dp"/>
 
         <EditText
-            android:id="@+id/signup_age"
+            android:id="@+id/signup_phone"
+            android:digits="0123456789+"
             android:layout_width="300dp"
+            android:inputType="phone"
             android:layout_height="wrap_content"
-            android:hint="Age"
+            android:hint="Phone Number"
             android:background="@drawable/edittext_background"
             android:padding="12dp"
             android:layout_marginBottom="24dp"/>
@@ -75,7 +77,37 @@
             android:hint="City"
             android:background="@drawable/edittext_background"
             android:padding="12dp"
-            android:layout_marginBottom="24dp"/>
+            android:layout_marginBottom="12dp"/>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/simpleCheckBox"
+                android:layout_marginLeft="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+
+            <TextView
+                android:id="@+id/checkBoxText"
+                android:clickable="true"
+                android:textAlignment="textStart"
+                android:textColor="@color/AntiqueWhite"
+                android:onClick="OpenTermsAndGuidelines"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="5dp"
+                android:text="@string/checkBoxText"
+                />
+        </LinearLayout>
+
 
         <Button
             android:id="@+id/signup"

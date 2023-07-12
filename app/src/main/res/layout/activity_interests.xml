@@ -46,7 +46,7 @@
                 android:layout_weight="1"
                 android:backgroundTint="@color/gray"
                 android:onClick="onButtonClick"
-                android:text="Comedy" />
+                android:text="Climate" />
 
             <Button
                 android:id="@+id/my_button1"
@@ -56,7 +56,7 @@
                 android:layout_marginLeft="150px"
                 android:backgroundTint="@color/gray"
                 android:onClick="onButtonClick"
-                android:text="Daily Day Life" />
+                android:text="Women Rights" />
         </LinearLayout>
 
         <LinearLayout
@@ -72,7 +72,7 @@
                 android:layout_weight="1"
                 android:backgroundTint="@color/gray"
                 android:onClick="onButtonClick"
-                android:text="Click me" />
+                android:text="Refugees" />
 
             <Button
                 android:id="@+id/my_button3"
@@ -82,7 +82,7 @@
                 android:layout_marginLeft="150px"
                 android:backgroundTint="@color/gray"
                 android:onClick="onButtonClick"
-                android:text="Click me" />
+                android:text="Politics" />
         </LinearLayout>
 
         <LinearLayout
@@ -98,7 +98,7 @@
                 android:layout_weight="1"
                 android:backgroundTint="@color/gray"
                 android:onClick="onButtonClick"
-                android:text="Click me" />
+                android:text="Pullotion" />
 
             <Button
                 android:id="@+id/my_button5"

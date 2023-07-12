@@ -19,19 +19,24 @@ public class UserProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
 
-        signOutBtn = findViewById(R.id.button3);
-    }
+        signOutBtn = findViewById(R.id.buttonHabibi);
 
-
-
-    public void signOut() {
-        signOutBtn.setOnClickListener(new View.OnClickListener(){
+        signOutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(UserProfileActivity.this, MainActivity.class));
             }
         });
+
     }
+
+
+
+
+
+
+
 
     public void goToOrgOrActActivity(View view) {
         Intent intent = new Intent(this, OrgOrActActivity.class);

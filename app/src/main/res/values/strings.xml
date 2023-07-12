@@ -7,7 +7,7 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
     <string name="user_profile">User Profile</string>
-            <string name="checkBoxText">I Agree to <b><u> Terms and Conditions </u></b> &amp; <b><u> Comuunity Guidelines</u></b>.
+            <string name="checkBoxText">I Agree to <b><u> Terms and Conditions </u></b> &amp; <b><u> Community Guidelines</u></b>.
             </string>
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
