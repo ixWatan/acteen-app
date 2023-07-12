@@ -25,7 +25,7 @@
 <br />
 <div align="center">
   <a href="/">
-    <img src="https://firebasestorage.googleapis.com/v0/b/meet-workshop.appspot.com/o/Logo.jpeg?alt=media&token=6670f4c7-17fe-4653-8102-93623942d60c" alt="Logo" width="200" height="200">
+    <img src="https://firebasestorage.googleapis.com/v0/b/meet-workshop.appspot.com/o/WhatsApp%20Image%202023-07-11%20at%2009.41.20.jpg?alt=media&token=a700ba81-e2b6-473b-8015-0296fa59b59c" alt="Logo" width="250" height="200">
   </a>
 
   <h3 align="center">Acteen</h3>
@@ -33,7 +33,7 @@
   <p align="center">
     a  social media platform that is designed to connect young people with a passion for activism.
     <br />
-    <a href="#"><strong>Explore the docs »</strong></a>
+    <a href="https://trello.com/b/goKf2jJ1"><strong>Explore the docs »</strong></a>
     <br />
     <br />
     <a href="#">View Demo</a>
