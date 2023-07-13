@@ -12,15 +12,22 @@
         android:gravity="center"
         android:background="@drawable/gradient_background">
 
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/screenshot_2023_06_25_at_18_35_1" />
+
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="left"
             android:text="Sign Up"
             android:textSize="36sp"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
             android:textStyle="bold"
-            android:layout_marginBottom="48dp"/>
+            android:layout_marginBottom="20dp"/>
 
         <EditText
             android:id="@+id/signup_email"
