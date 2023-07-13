@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.meet_workshop.MainActivity;
 import com.example.meet_workshop.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -19,10 +20,10 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class UserProfile extends AppCompatActivity {
+
     private FirebaseAuth mAuth;
 
     private TextView userNameTextView;
-    private ImageView profileImageView;
     private TextView followersTextView;
     private TextView followingTextView;
     private TextView postsTextView;
@@ -31,18 +32,17 @@ public class UserProfile extends AppCompatActivity {
     private ImageButton videoPageButton;
     private ImageButton addPostButton;
     private ImageButton homePageButton;
+    private ImageView profileImageView;
+    private Button signOutButton;
 
-    private Button buttonHabibi;
-
-
-
+    private static final int EDIT_PROFILE_PICTURE_REQUEST_CODE = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        getSupportActionBar().hide();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
         mAuth = FirebaseAuth.getInstance();
+
         userNameTextView = findViewById(R.id.userNameTextView);
         profileImageView = findViewById(R.id.profileImageView);
         followersTextView = findViewById(R.id.followersTextView);
@@ -53,31 +53,32 @@ public class UserProfile extends AppCompatActivity {
         videoPageButton = findViewById(R.id.nav_video);
         addPostButton = findViewById(R.id.nav_addPost);
         homePageButton = findViewById(R.id.nav_home);
+        signOutButton = findViewById(R.id.buttonHabibi);
 
-        // Find the Sign Out button by ID
-        buttonHabibi = findViewById(R.id.buttonHabibi);
+        profileImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openEditProfilePictureActivity();
+            }
+        });
 
-        // Set click listener for the button
-        buttonHabibi.setOnClickListener(new View.OnClickListener() {
+        signOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 signOut();
             }
         });
 
-
-            profileImageButton.setOnClickListener(new View.OnClickListener() {
+        profileImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Handle the profileImageButton click event
-                openUserProfile();
+                openEditProfilePictureActivity();
             }
         });
 
         searchPageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Handle the searchPageButton click event
                 openSearchPage();
             }
         });
@@ -85,21 +86,20 @@ public class UserProfile extends AppCompatActivity {
         videoPageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Handle the videoPageButton click event
                 openVideoPage();
             }
         });
+
         addPostButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Handle the videoPageButton click event
                 openAddPost();
             }
         });
+
         homePageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Handle the videoPageButton click event
                 openHomePage();
             }
         });
@@ -116,18 +116,36 @@ public class UserProfile extends AppCompatActivity {
                             if (document.exists()) {
                                 String userName = document.getString("name");
                                 int followersCount = document.getLong("followers").intValue();
+                                String profilePictureUrl = document.getString("profilePictureUrl");
+
+                                // Update the profile picture ImageView with the new URL
+                                if (profilePictureUrl != null && !profilePictureUrl.isEmpty()) {
+                                    Glide.with(UserProfile.this).load(profilePictureUrl).into(profileImageView);
+                                } else {
+                                    // Display the default profile picture
+                                    Glide.with(UserProfile.this).load(R.drawable.default_profile_picture).into(profileImageView);
+                                }
 
                                 // Populate the views with the retrieved information
                                 userNameTextView.setText(userName);
-                                followersTextView.setText("Followers \n        "+ followersCount);
+                                followersTextView.setText("Followers: " + followersCount);
                             }
                         } else {
-                            Toast.makeText(this, "An error occurred. Please try again.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(UserProfile.this, "An error occurred. Please try again.", Toast.LENGTH_SHORT).show();
                         }
                     });
         }
 
+        // Load and display the user's profile picture using a library like Glide or Picasso
+        String profilePictureUrl = getIntent().getStringExtra("profilePictureUrl");
+        if (profilePictureUrl != null && !profilePictureUrl.isEmpty()) {
+            Glide.with(this).load(profilePictureUrl).into(profileImageView);
+        } else {
+            // Set the default profile picture
+            Glide.with(this).load(R.drawable.default_profile_picture).into(profileImageView);
+        }
     }
+
     private void signOut() {
         // Sign out from Firebase Authentication
         FirebaseAuth.getInstance().signOut();
@@ -137,24 +155,38 @@ public class UserProfile extends AppCompatActivity {
 
         // Start the MainActivity
         Intent intent = new Intent(UserProfile.this, MainActivity.class);
+        intent.putExtra("profilePictureUrl", ""); // Clear the current profile picture URL
         startActivity(intent);
         finish(); // Optionally, call finish() to prevent the user from returning to the UserProfileActivity using the back button
-
     }
 
-    private void openUserProfile() {
-        // Start the UserProfile activity
-        Intent intent = new Intent(UserProfile.this, UserProfile.class);
-        startActivity(intent);
+    private void openEditProfilePictureActivity() {
+        Intent intent = new Intent(UserProfile.this, EditProfilePictureActivity.class);
+        startActivityForResult(intent, EDIT_PROFILE_PICTURE_REQUEST_CODE);
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == EDIT_PROFILE_PICTURE_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
+            String profilePictureUrl = data.getStringExtra("profilePictureUrl");
+            if (profilePictureUrl != null && !profilePictureUrl.isEmpty()) {
+                Glide.with(this).load(profilePictureUrl).into(profileImageView);
+            } else {
+                Glide.with(this).load(R.drawable.default_profile_picture).into(profileImageView);
+            }
+        }
+    }
+
     private void openAddPost() {
-        // Start the UserProfile activity
+        // Start the AddPostActivity
         Intent intent = new Intent(UserProfile.this, AddPostActivity.class);
         startActivity(intent);
     }
 
     private void openHomePage() {
-        // Start the UserProfile activity
+        // Start the HomeActivity
         Intent intent = new Intent(UserProfile.this, HomeActivity.class);
         startActivity(intent);
     }
@@ -171,4 +203,3 @@ public class UserProfile extends AppCompatActivity {
         startActivity(intent);
     }
 }
-

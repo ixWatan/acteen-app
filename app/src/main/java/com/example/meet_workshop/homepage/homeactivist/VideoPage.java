@@ -1,12 +1,9 @@
 package com.example.meet_workshop.homepage.homeactivist;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
-
 import com.example.meet_workshop.R;
 
 public class VideoPage extends AppCompatActivity {

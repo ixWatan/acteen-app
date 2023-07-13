@@ -11,48 +11,20 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="6dp" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="144dp"
-        android:layout_marginEnd="37dp"
-        android:layout_marginBottom="480dp"
-        android:gravity="center_horizontal">
-
-        <TextView
-            android:id="@+id/userNameTextView"
-            android:layout_width="185dp"
-            android:layout_height="150dp"
-            android:layout_below="@+id/profileImageView"
-            android:layout_alignParentEnd="true"
-            android:gravity="center_horizontal"
-            android:text="User Name"
-            android:textSize="25sp"
-            android:textStyle="bold" />
-    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="129dp"
-       >
+        android:layout_height="129dp">
+
 
         <ImageView
             android:id="@+id/profileImageView"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="290dp"
-        android:background="@drawable/circle_shape"
-        android:scaleType="centerCrop" />
+            android:layout_width="117dp"
+            android:layout_height="106dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="36dp"
+            android:layout_marginBottom="7dp"
+            android:layout_toStartOf="@+id/followersTextView" />
 
         <TextView
             android:id="@+id/followersTextView"
@@ -60,13 +32,12 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/followingTextView"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="185dp"
-            android:layout_marginBottom="-1dp"
+            android:layout_marginEnd="171dp"
+            android:layout_marginBottom="1dp"
             android:lines="2"
             android:maxLines="2"
             android:text="Followers \n        0"
             android:textSize="16sp" />
-
 
         <TextView
             android:id="@+id/followingTextView"
@@ -76,7 +47,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginLeft="164dp"
             android:layout_marginTop="50dp"
-            android:layout_marginEnd="95dp"
+            android:layout_marginEnd="80dp"
             android:lines="2"
             android:maxLines="2"
             android:text="Following\n       0"
@@ -88,7 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/followingTextView"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="30dp"
+            android:layout_marginEnd="21dp"
             android:layout_marginBottom="0dp"
             android:lines="2"
             android:maxLines="2"
@@ -112,6 +83,18 @@
 
     </RelativeLayout>
 
+    <TextView
+        android:id="@+id/userNameTextView"
+        android:layout_width="185dp"
+        android:layout_height="150dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="107dp"
+        android:layout_marginBottom="275dp"
+        android:gravity="center_horizontal"
+        android:text="User Name"
+        android:textSize="25sp"
+        android:textStyle="bold" />
 
 
 </RelativeLayout>
