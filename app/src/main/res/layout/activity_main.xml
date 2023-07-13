@@ -13,7 +13,6 @@
         android:gravity="center"
         android:orientation="vertical">
 
-
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
@@ -23,7 +22,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:layout_marginHorizontal="15dp"
             android:orientation="vertical">
 
@@ -31,32 +29,23 @@
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="20dp"
                 android:layout_marginHorizontal="10dp"
-                android:text="Login"
+                android:paddingTop="20dp"
                 android:paddingBottom="20dp"
+                android:text="Login"
                 android:textColor="@android:color/black"
                 android:textSize="35sp"
                 android:textStyle="bold" />
 
-         <!--   <TextView
-                android:id="@+id/editTextTextPersonName2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:text="Email:"
-                android:textColor="@android:color/black"
-                android:textSize="21sp" />
--->
             <EditText
                 android:id="@+id/signin_email"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:ems="10"
                 android:hint="Email"
+                android:layout_marginHorizontal="10dp"
                 android:paddingHorizontal="10dp"
                 android:textColorLink="@color/black"
-                android:layout_marginHorizontal="10dp"
                 android:background="@drawable/edittext_background"
                 android:inputType="textEmailAddress" />
 
@@ -68,15 +57,6 @@
             android:layout_marginTop="20dp"
             android:layout_marginHorizontal="15dp"
             android:orientation="vertical">
-
-          <!--  <TextView
-                android:id="@+id/te"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:text="Password:"
-                android:textColor="@android:color/black"
-                android:textSize="21sp" />-->
 
             <EditText
                 android:id="@+id/signin_pass"
@@ -90,6 +70,14 @@
                 android:background="@drawable/edittext_background"
                 android:inputType="textPassword" />
 
+            <CheckBox
+                android:id="@+id/passwordToggleCheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Show Password"
+                android:textColor="@android:color/black" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -99,14 +87,6 @@
             android:layout_marginTop="20dp"
             android:orientation="horizontal">
 
-           <!-- <Button
-                android:id="@+id/signup"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:onClick="goToOrgOrActActivity"
-                android:text="Sign Up" />-->
-
             <Button
                 android:id="@+id/signin"
                 android:layout_width="0dp"
@@ -115,9 +95,10 @@
                 android:layout_marginStart="10dp"
                 android:onClick="goToHome"
                 android:text="Login"
-                android:textSize="20sp"/>
+                android:textSize="20sp" />
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -132,8 +113,8 @@
                 android:text="Do you have an account?  "
                 android:paddingBottom="20dp"
                 android:textColor="@android:color/black"
-                android:textSize="15sp"
-                />
+                android:textSize="15sp" />
+
             <TextView
                 android:id="@+id/createnewaccount"
                 android:layout_width="wrap_content"
@@ -143,13 +124,9 @@
                 android:paddingBottom="20dp"
                 android:textColor="@android:color/black"
                 android:textStyle="bold"
-                android:textSize="15sp"
-                />
-
-
+                android:textSize="15sp" />
 
         </LinearLayout>
-
 
     </LinearLayout>
 

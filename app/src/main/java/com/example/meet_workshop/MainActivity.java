@@ -1,9 +1,10 @@
 package com.example.meet_workshop;
-
 import static android.content.ContentValues.TAG;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+
+import com.example.meet_workshop.R;
 import com.example.meet_workshop.homepage.homeactivist.HomeActivity;
 import com.example.meet_workshop.homepage.homeorganization.HomeOrgActivity;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -11,11 +12,12 @@ import com.google.firebase.firestore.DocumentSnapshot;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
-
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -24,24 +26,28 @@ public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
 
-    EditText email;
-    EditText password;
+    private EditText email;
+    private EditText password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        getSupportActionBar().hide();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mAuth = FirebaseAuth.getInstance();
-        email = (EditText) findViewById(R.id.signin_email);
-        password = (EditText) findViewById(R.id.signin_pass);
+        email = findViewById(R.id.signin_email);
+        password = findViewById(R.id.signin_pass);
 
+        CheckBox passwordToggleCheckBox = findViewById(R.id.passwordToggleCheckBox);
+        passwordToggleCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                // Show password
+                password.setTransformationMethod(null);
+            } else {
+                // Hide password
+                password.setTransformationMethod(new PasswordTransformationMethod());
+            }
+        });
     }
-
-
-
-
-
 
     public void goToHome(View view) {
         loginUser(email.getText().toString(), password.getText().toString());
@@ -130,5 +136,4 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
     }
-
 }
