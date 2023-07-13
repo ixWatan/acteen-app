@@ -49,8 +49,6 @@ public class UserProfile extends AppCompatActivity {
         followingTextView = findViewById(R.id.followingTextView);
         postsTextView = findViewById(R.id.postsTextView);
         profileImageButton = findViewById(R.id.nav_profile);
-        searchPageButton = findViewById(R.id.nav_search);
-        videoPageButton = findViewById(R.id.nav_video);
         addPostButton = findViewById(R.id.nav_addPost);
         homePageButton = findViewById(R.id.nav_home);
         signOutButton = findViewById(R.id.buttonHabibi);
@@ -76,19 +74,6 @@ public class UserProfile extends AppCompatActivity {
             }
         });
 
-        searchPageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openSearchPage();
-            }
-        });
-
-        videoPageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openVideoPage();
-            }
-        });
 
         addPostButton.setOnClickListener(new View.OnClickListener() {
             @Override

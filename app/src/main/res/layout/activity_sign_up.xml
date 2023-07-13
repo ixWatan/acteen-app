@@ -39,6 +39,7 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:hint="Email"
+            android:textSize="14sp"
             android:background="@drawable/edittext_background"
             android:padding="12dp"
             android:layout_marginBottom="15dp"/>
@@ -48,6 +49,8 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:hint="Password"
+            android:textSize="14sp"
+
             android:background="@drawable/edittext_background"
             android:padding="12dp"
             android:inputType="textPassword"
@@ -57,6 +60,7 @@
             android:id="@+id/signup_name"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:textSize="14sp"
             android:hint="Name"
             android:background="@drawable/edittext_background"
             android:padding="12dp"
@@ -66,6 +70,7 @@
             android:id="@+id/signup_age"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:textSize="14sp"
             android:hint="Age"
             android:background="@drawable/edittext_background"
             android:padding="12dp"
@@ -75,6 +80,7 @@
             android:id="@+id/signup_region"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:textSize="14sp"
             android:hint="Region"
             android:background="@drawable/edittext_background"
             android:padding="12dp"
@@ -84,6 +90,7 @@
             android:id="@+id/signup_city"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:textSize="14sp"
             android:hint="City"
             android:background="@drawable/edittext_background"
             android:padding="12dp"
@@ -97,7 +104,7 @@
 
         <CheckBox
             android:id="@+id/simpleCheckBox"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="40dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             />
@@ -109,6 +116,8 @@
             android:clickable="true"
             android:onClick="OpenTermsAndGuidelines"
             android:layout_width="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:textSize="12sp"
             android:textColor="@color/black"
             android:layout_height="wrap_content"
             android:paddingRight="5dp"

@@ -19,10 +19,7 @@ public class HomeActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
         profileImageButton = findViewById(R.id.nav_profile);
-        searchPageButton = findViewById(R.id.nav_search);
-        videoPageButton = findViewById(R.id.nav_video);
         addPostButton = findViewById(R.id.nav_addPost);
         homePageButton = findViewById(R.id.nav_home);
 
@@ -35,21 +32,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        searchPageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Handle the searchPageButton click event
-                openSearchPage();
-            }
-        });
-
-        videoPageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Handle the videoPageButton click event
-                openVideoPage();
-            }
-        });
         addPostButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

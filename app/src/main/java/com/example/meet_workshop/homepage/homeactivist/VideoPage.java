@@ -20,8 +20,7 @@ public class VideoPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_page);
         profileImageButton = findViewById(R.id.nav_profile);
-        searchPageButton = findViewById(R.id.nav_search);
-        videoPageButton = findViewById(R.id.nav_video);
+
         addPostButton = findViewById(R.id.nav_addPost);
         homePageButton = findViewById(R.id.nav_home);
 
@@ -34,21 +33,6 @@ public class VideoPage extends AppCompatActivity {
             }
         });
 
-        searchPageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Handle the searchPageButton click event
-                openSearchPage();
-            }
-        });
-
-        videoPageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Handle the videoPageButton click event
-                openVideoPage();
-            }
-        });
         addPostButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,15 +67,4 @@ public class VideoPage extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void openSearchPage() {
-        // Start the SearchPage activity
-        Intent intent = new Intent(VideoPage.this, SearchPage.class);
-        startActivity(intent);
-    }
-
-    private void openVideoPage() {
-        // Start the VideoPage activity
-        Intent intent = new Intent(VideoPage.this, VideoPage.class);
-        startActivity(intent);
-    }
 }

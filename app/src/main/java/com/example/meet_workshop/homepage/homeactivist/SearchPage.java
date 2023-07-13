@@ -22,8 +22,7 @@ public class SearchPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_page);
         profileImageButton = findViewById(R.id.nav_profile);
-        searchPageButton = findViewById(R.id.nav_search);
-        videoPageButton = findViewById(R.id.nav_video);
+
         addPostButton = findViewById(R.id.nav_addPost);
         homePageButton = findViewById(R.id.nav_home);
 
