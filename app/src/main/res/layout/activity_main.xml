@@ -74,6 +74,7 @@
                 android:id="@+id/passwordToggleCheckBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
                 android:layout_marginTop="10dp"
                 android:text="Show Password"
                 android:textColor="@android:color/black" />
@@ -84,7 +85,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="15dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
             <Button
@@ -102,7 +103,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="50dp"
+            android:layout_marginHorizontal="20dp"
+            android:gravity="center"
             android:orientation="horizontal">
 
             <TextView
@@ -110,21 +112,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="20dp"
-                android:text="Do you have an account?  "
+                android:text="Do you have an account? "
                 android:paddingBottom="20dp"
                 android:textColor="@android:color/black"
-                android:textSize="15sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/createnewaccount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:clickable="true"
+                android:onClick="goToSignUp"
                 android:paddingTop="20dp"
                 android:text="@string/create_new_account"
                 android:paddingBottom="20dp"
                 android:textColor="@android:color/black"
                 android:textStyle="bold"
-                android:textSize="15sp" />
+                android:textSize="12sp" />
 
         </LinearLayout>
 

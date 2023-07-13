@@ -11,6 +11,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.DocumentSnapshot;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getSupportActionBar().hide();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mAuth = FirebaseAuth.getInstance();
@@ -55,6 +57,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void goToOrgOrActActivity(View view) {
         Intent intent = new Intent(this, OrgOrActActivity.class);
+        startActivity(intent);
+    }
+
+    public void goToSignUp(View view) {
+        Intent intent = new Intent(this, SignUpActivity.class);
         startActivity(intent);
     }
 

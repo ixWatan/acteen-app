@@ -24,10 +24,11 @@
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:text="Sign Up"
-            android:textSize="36sp"
+            android:textSize="25sp"
             android:textColor="@android:color/black"
             android:textStyle="bold"
-            android:layout_marginBottom="20dp"/>
+            android:layout_marginLeft="55dp"
+            android:layout_marginBottom="10dp"/>
 
         <EditText
             android:id="@+id/signup_email"
@@ -36,7 +37,7 @@
             android:hint="Email"
             android:background="@drawable/edittext_background"
             android:padding="12dp"
-            android:layout_marginBottom="24dp"/>
+            android:layout_marginBottom="15dp"/>
 
         <EditText
             android:id="@+id/signup_pass"
@@ -46,7 +47,7 @@
             android:background="@drawable/edittext_background"
             android:padding="12dp"
             android:inputType="textPassword"
-            android:layout_marginBottom="24dp"/>
+            android:layout_marginBottom="15dp"/>
 
         <EditText
             android:id="@+id/signup_name"
@@ -55,7 +56,7 @@
             android:hint="Name"
             android:background="@drawable/edittext_background"
             android:padding="12dp"
-            android:layout_marginBottom="24dp"/>
+            android:layout_marginBottom="15dp"/>
 
         <EditText
             android:id="@+id/signup_age"
@@ -64,7 +65,7 @@
             android:hint="Age"
             android:background="@drawable/edittext_background"
             android:padding="12dp"
-            android:layout_marginBottom="24dp"/>
+            android:layout_marginBottom="15dp"/>
 
         <EditText
             android:id="@+id/signup_region"
@@ -73,7 +74,7 @@
             android:hint="Region"
             android:background="@drawable/edittext_background"
             android:padding="12dp"
-            android:layout_marginBottom="24dp"/>
+            android:layout_marginBottom="15dp"/>
 
         <EditText
             android:id="@+id/signup_city"
@@ -100,9 +101,9 @@
 
         <TextView
             android:id="@+id/checkBoxText"
-            android:clickable="true"
             android:textAlignment="textStart"
             android:textColor="@color/AntiqueWhite"
+            android:clickable="true"
             android:onClick="OpenTermsAndGuidelines"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
