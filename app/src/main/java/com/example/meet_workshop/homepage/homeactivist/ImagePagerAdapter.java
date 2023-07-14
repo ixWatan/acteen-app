@@ -17,7 +17,8 @@ import com.example.meet_workshop.R;
 
 import java.util.List;
 
-public class ImagePagerAdapter extends RecyclerView.Adapter<ImagePagerAdapter.ImageViewHolder> {
+public class
+ImagePagerAdapter extends RecyclerView.Adapter<ImagePagerAdapter.ImageViewHolder> {
 
     private Context context;
     private List<Uri> imageUris;
