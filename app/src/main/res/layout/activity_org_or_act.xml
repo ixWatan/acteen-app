@@ -38,7 +38,7 @@
             android:id="@+id/button1"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="30dp"
             android:onClick="goToSignUp"
             android:text="A Teen Activist"
             android:textColor="@color/black" />
@@ -53,11 +53,11 @@
             android:textColor="@color/black"
             android:textSize="29sp"
             android:textStyle="bold"
-            android:layout_marginTop="30dp" />
+            android:layout_marginTop="40dp" />
 
         <ImageView
             android:id="@+id/imageViewOrg"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="40dp"
             android:layout_width="250px"
             android:layout_height="250px"
             app:srcCompat="@drawable/organization_logo" />
