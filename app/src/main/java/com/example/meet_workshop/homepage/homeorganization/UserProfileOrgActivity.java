@@ -25,7 +25,6 @@ public class UserProfileOrgActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        getSupportActionBar().hide();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile_org);
         profileImageButton = findViewById(R.id.nav_profile);

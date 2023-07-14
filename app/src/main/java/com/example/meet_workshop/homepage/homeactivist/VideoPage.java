@@ -16,7 +16,6 @@ public class VideoPage extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        getSupportActionBar().hide();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_page);
         profileImageButton = findViewById(R.id.nav_profile);

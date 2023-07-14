@@ -20,7 +20,6 @@ public class CampaignManagementOrgActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        getSupportActionBar().hide();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_campaign_management_org);
         profileImageButton = findViewById(R.id.nav_profile);
