@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Meetworkshop" parent="Theme.MaterialComponents.Light.DarkActionBar">
+    <style name="Theme.Meetworkshop" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">#F9DD39</item>
         <item name="colorPrimaryVariant">#F9DD39</item>
@@ -21,7 +21,7 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Theme.Meetworkshop.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.Meetworkshop.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark" />
 
     <style name="Theme.Meetworkshop.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

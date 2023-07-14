@@ -21,6 +21,7 @@ public class OnboardingFragment4 extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_onboarding4, container, false);
 
+
         // Find and assign the startButton within the inflated layout
         Button startButton = rootView.findViewById(R.id.startButton);
         startButton.setOnClickListener(new View.OnClickListener() {

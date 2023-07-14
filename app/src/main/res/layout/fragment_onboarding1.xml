@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/textView12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Welcome to Acteen!"
@@ -36,7 +36,7 @@
             app:srcCompat="@drawable/screenshot_2023_06_25_at_18_35_1" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/textView123"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Find an Opportunity!"
@@ -45,7 +45,7 @@
             android:textStyle="bold"
             android:layout_marginBottom="10dp" />
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/textView123123"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="We’ve got a collection of over 100 activism opportunities for you to choose from!"
