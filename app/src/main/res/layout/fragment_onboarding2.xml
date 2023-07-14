@@ -18,16 +18,16 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/textView123123"
+            android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sign Up!"
             android:textColor="@color/black"
             android:textSize="32sp"
-            android:textStyle="bold"
-            />
+            android:textStyle="bold" />
+
         <TextView
-            android:id="@+id/textView31233"
+            android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sign up for the opportunity you would like to attend and connect it to your calendar so that you will be reminded of it before it happens."

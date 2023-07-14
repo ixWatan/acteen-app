@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".OnboardingFragment4">
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -33,7 +32,7 @@
                 app:srcCompat="@drawable/onboard4" />
 
             <TextView
-                android:id="@+id/textView12312311"
+                android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Explore Acteen!"
@@ -42,7 +41,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textView123123"
+                android:id="@+id/textView1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="30dp"
@@ -75,9 +74,6 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
 
 
 

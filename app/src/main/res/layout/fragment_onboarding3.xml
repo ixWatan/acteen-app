@@ -18,16 +18,16 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/textView1232323"
+            android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Attend!"
             android:textColor="@color/black"
             android:textSize="32sp"
-            android:textStyle="bold"
-            />
+            android:textStyle="bold" />
+
         <TextView
-            android:id="@+id/textView2323222"
+            android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="We’ve had many teens enjoy their experiences at different activism opportunities and give back to their communities!"

@@ -3,6 +3,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
@@ -36,8 +37,7 @@ public class SignUpOrganizationActivity extends AppCompatActivity {
     private TextView checkBoxText;
     EditText city;
 
-
-
+    private EditText password1;
 
     EditText region;
 
@@ -55,6 +55,19 @@ public class SignUpOrganizationActivity extends AppCompatActivity {
         phoneNum = findViewById(R.id.signup_phone);
         region = findViewById(R.id.signup_region);
         city = findViewById(R.id.signup_city);
+        password1 = findViewById(R.id.signup_pass);
+
+
+        CheckBox passwordToggleCheckBox = findViewById(R.id.passwordToggleCheckBox);
+        passwordToggleCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                // Show password
+                password.setTransformationMethod(null);
+            } else {
+                // Hide password
+                password.setTransformationMethod(new PasswordTransformationMethod());
+            }
+        });
 
     }
 

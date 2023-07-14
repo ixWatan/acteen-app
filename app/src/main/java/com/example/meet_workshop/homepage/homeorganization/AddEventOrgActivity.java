@@ -8,14 +8,10 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import com.example.meet_workshop.R;
-import com.example.meet_workshop.homepage.homeactivist.AddPostActivity;
 import com.example.meet_workshop.homepage.homeactivist.HomeActivity;
-import com.example.meet_workshop.homepage.homeactivist.SearchPage;
 import com.example.meet_workshop.homepage.homeactivist.UserProfile;
-import com.example.meet_workshop.homepage.homeactivist.VideoPage;
 
-public class HomeOrgActivity extends AppCompatActivity {
-
+public class AddEventOrgActivity extends AppCompatActivity {
     private ImageButton profileImageButton;
     private ImageButton addEventButton;
     private ImageButton campaignManagementButton;
@@ -25,7 +21,7 @@ public class HomeOrgActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         getSupportActionBar().hide();
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_org);
+        setContentView(R.layout.activity_add_event_org);
         profileImageButton = findViewById(R.id.nav_profile);
         homePageButton = findViewById(R.id.nav_home);
         campaignManagementButton = findViewById(R.id.nav_manage);
@@ -68,29 +64,27 @@ public class HomeOrgActivity extends AppCompatActivity {
     }
 
     private void openAddEventOrgActivity() {
-        Intent intent = new Intent(HomeOrgActivity.this, AddEventOrgActivity.class);
+        Intent intent = new Intent(this, AddEventOrgActivity.class);
         startActivity(intent);
     }
 
     private void openCampaignManagement() {
-        Intent intent = new Intent(HomeOrgActivity.this, CampaignManagementOrgActivity.class);
+        Intent intent = new Intent(this, CampaignManagementOrgActivity.class);
         startActivity(intent);
     }
 
 
-
     private void openUserProfile() {
         // Start the UserProfile activity
-        Intent intent = new Intent(HomeOrgActivity.this, UserProfileOrgActivity.class);
+        Intent intent = new Intent(this, UserProfileOrgActivity.class);
         startActivity(intent);
     }
 
 
     private void openHomePage() {
         // Start the UserProfile activity
-        Intent intent = new Intent(HomeOrgActivity.this, HomeOrgActivity.class);
+        Intent intent = new Intent(this, HomeOrgActivity.class);
         startActivity(intent);
     }
-
 
 }

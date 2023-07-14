@@ -6,6 +6,7 @@ import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
@@ -47,6 +48,8 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText ageEditText;
     private EditText regionEditText;
     private EditText cityEditText;
+    private EditText password;
+
     private User person = new User(null,null,null,null,null,null);
 
     @Override
@@ -63,7 +66,19 @@ public class SignUpActivity extends AppCompatActivity {
         this.ageEditText = findViewById(R.id.signup_age);
         this.regionEditText = findViewById(R.id.signup_region);
         this.cityEditText = findViewById(R.id.signup_city);
+        password = findViewById(R.id.signup_pass);
 
+
+        CheckBox passwordToggleCheckBox = findViewById(R.id.passwordToggleCheckBox);
+        passwordToggleCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                // Show password
+                password.setTransformationMethod(null);
+            } else {
+                // Hide password
+                password.setTransformationMethod(new PasswordTransformationMethod());
+            }
+        });
 
     }
 
