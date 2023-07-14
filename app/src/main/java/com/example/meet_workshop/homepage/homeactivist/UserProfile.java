@@ -75,12 +75,7 @@ public class UserProfile extends AppCompatActivity {
         });
 
 
-        addPostButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openAddPost();
-            }
-        });
+
 
         homePageButton.setOnClickListener(new View.OnClickListener() {
             @Override

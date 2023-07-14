@@ -38,6 +38,19 @@
             android:padding="10dp"
             />
 
+        <ImageButton
+            android:id="@+id/nav_manage"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="0.7"
+            android:src="@drawable/icon_management"
+            android:scaleType="centerInside"
+            android:onClick="onNavAddPostClick"
+            android:background="@null"
+            android:padding="10dp"
+            />
+
+
 
 
         <ImageButton

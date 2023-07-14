@@ -32,13 +32,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        addPostButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Handle the videoPageButton click event
-                openAddPost();
-            }
-        });
+
         homePageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

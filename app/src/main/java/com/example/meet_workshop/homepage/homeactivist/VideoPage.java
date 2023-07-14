@@ -20,7 +20,6 @@ public class VideoPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_page);
         profileImageButton = findViewById(R.id.nav_profile);
-
         addPostButton = findViewById(R.id.nav_addPost);
         homePageButton = findViewById(R.id.nav_home);
 
@@ -33,13 +32,7 @@ public class VideoPage extends AppCompatActivity {
             }
         });
 
-        addPostButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Handle the videoPageButton click event
-                openAddPost();
-            }
-        });
+
         homePageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -1,0 +1,58 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- Content layout -->
+
+    <LinearLayout
+        android:id="@+id/navigation_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#fff1a1"
+        android:layout_alignParentBottom="true">
+
+        <ImageButton
+            android:background="@null"
+            android:id="@+id/nav_home"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="0.7"
+            android:src="@drawable/home"
+            android:scaleType="centerInside"
+            android:onClick="onNavHomeClick"
+            android:padding="10dp"
+            />
+
+
+        <!--<ImageButton
+            android:id="@+id/nav_addPost"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="0.7"
+            android:src="@drawable/more"
+            android:scaleType="centerInside"
+            android:onClick="onNavAddPostClick"
+            android:background="@null"
+            android:padding="10dp"
+            />-->
+
+
+
+        <ImageButton
+            android:id="@+id/nav_profile"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="0.7"
+            android:src="@drawable/user"
+            android:scaleType="centerInside"
+            android:onClick="onNavProfileClick"
+            android:padding="10dp"
+            android:background="@null"
+            />
+
+
+    </LinearLayout>
+
+</RelativeLayout>
