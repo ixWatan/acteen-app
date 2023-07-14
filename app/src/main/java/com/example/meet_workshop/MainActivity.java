@@ -65,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+
     private void loginUser(String email, String password) {
         if (email.isEmpty() || password.isEmpty()) {
             Toast.makeText(MainActivity.this, "Email and password cannot be empty.", Toast.LENGTH_SHORT).show();

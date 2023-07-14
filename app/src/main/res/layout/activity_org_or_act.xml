@@ -22,10 +22,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Are You..."
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="29sp"
             android:textStyle="bold"
-            android:layout_marginTop="150dp" />
+            android:layout_marginTop="0dp" />
+
+        <ImageView
+            android:layout_marginTop="30dp"
+            android:id="@+id/imageViewAct"
+            android:layout_width="250px"
+            android:layout_height="250px"
+            app:srcCompat="@drawable/activistr_logo" />
 
         <Button
             android:id="@+id/button1"
@@ -43,10 +50,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Or"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="29sp"
             android:textStyle="bold"
             android:layout_marginTop="30dp" />
+
+        <ImageView
+            android:id="@+id/imageViewOrg"
+            android:layout_marginTop="30dp"
+            android:layout_width="250px"
+            android:layout_height="250px"
+            app:srcCompat="@drawable/organization_logo" />
 
         <Button
             android:id="@+id/button2"
@@ -56,6 +70,7 @@
             android:onClick="SignUpOrganizationActivity"
             android:text="An Organization"
             android:textColor="@color/black" />
+
 
 
 

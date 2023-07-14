@@ -12,7 +12,14 @@
         android:gravity="center"
         android:background="@drawable/gradient_background">
 
-        <TextView
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="20dp"
+            app:srcCompat="@drawable/screenshot_2023_06_25_at_18_35_1" />
+       <!-- <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -20,16 +27,18 @@
             android:textSize="36sp"
             android:textColor="@android:color/white"
             android:textStyle="bold"
-            android:layout_marginBottom="48dp"/>
+            android:layout_marginBottom="48dp"/>-->
 
         <EditText
             android:id="@+id/signup_email"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:hint="Email"
+            android:singleLine="true"
             android:background="@drawable/edittext_background"
             android:padding="12dp"
-            android:layout_marginBottom="24dp"/>
+            android:textSize="14sp"
+            android:layout_marginBottom="12dp"/>
 
         <EditText
             android:id="@+id/signup_pass"
@@ -38,37 +47,45 @@
             android:hint="Password"
             android:background="@drawable/edittext_background"
             android:padding="12dp"
+            android:textSize="14sp"
+            android:singleLine="true"
             android:inputType="textPassword"
-            android:layout_marginBottom="24dp"/>
+            android:layout_marginBottom="12dp"/>
 
         <EditText
             android:id="@+id/signup_orgname"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:hint="Organization Name"
+            android:singleLine="true"
+            android:textSize="14sp"
             android:background="@drawable/edittext_background"
             android:padding="12dp"
-            android:layout_marginBottom="24dp"/>
+            android:layout_marginBottom="12dp"/>
 
         <EditText
             android:id="@+id/signup_phone"
+            android:textSize="14sp"
             android:digits="0123456789+"
             android:layout_width="300dp"
             android:inputType="phone"
+            android:singleLine="true"
             android:layout_height="wrap_content"
             android:hint="Phone Number"
             android:background="@drawable/edittext_background"
             android:padding="12dp"
-            android:layout_marginBottom="24dp"/>
+            android:layout_marginBottom="12dp"/>
 
         <EditText
             android:id="@+id/signup_region"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:hint="Region"
+            android:singleLine="true"
             android:background="@drawable/edittext_background"
             android:padding="12dp"
-            android:layout_marginBottom="24dp"/>
+            android:textSize="14sp"
+            android:layout_marginBottom="12dp"/>
 
         <EditText
             android:id="@+id/signup_city"
@@ -77,6 +94,8 @@
             android:hint="City"
             android:background="@drawable/edittext_background"
             android:padding="12dp"
+            android:textSize="14sp"
+            android:singleLine="true"
             android:layout_marginBottom="12dp"/>
 
 
@@ -89,7 +108,7 @@
 
             <CheckBox
                 android:id="@+id/simpleCheckBox"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="40dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 />
@@ -97,23 +116,24 @@
 
             <TextView
                 android:id="@+id/checkBoxText"
-                android:clickable="true"
                 android:textAlignment="textStart"
-                android:textColor="@color/AntiqueWhite"
+                android:clickable="true"
                 android:onClick="OpenTermsAndGuidelines"
                 android:layout_width="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:textSize="12sp"
+                android:textColor="@color/black"
                 android:layout_height="wrap_content"
                 android:paddingRight="5dp"
                 android:text="@string/checkBoxText"
                 />
         </LinearLayout>
 
-
         <Button
             android:id="@+id/signup"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:text="Submit"
+            android:text="Sign Up"
             android:textColor="@android:color/white"
             android:onClick="goToHome"
             android:padding="12dp"/>

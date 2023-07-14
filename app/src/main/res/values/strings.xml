@@ -15,5 +15,6 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
     <string name="create_new_account"><b><u>Create New Account</u></b></string>
+    <string name="create_new_account_organ"><b><u>Create New Organization Account</u></b></string>
 
 </resources>
