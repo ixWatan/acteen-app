@@ -42,12 +42,7 @@ public class MainActivity extends AppCompatActivity {
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
 
-        if(currentUser != null) {
-            Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-            startActivity(intent);
-        } else {
-            Toast.makeText(MainActivity.this, "Not logged in before", Toast.LENGTH_SHORT).show();
-        }
+
 
         CheckBox passwordToggleCheckBox = findViewById(R.id.passwordToggleCheckBox);
         passwordToggleCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
