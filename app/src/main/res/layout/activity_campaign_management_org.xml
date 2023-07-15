@@ -7,15 +7,14 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:layout_below="@+id/iv_divider"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center">
     <TextView
-        android:text="Campaign Management
-"
+        android:text="Campaign Management"
         android:layout_width="match_parent"
         android:textSize="27sp"
         android:textStyle="bold"
@@ -36,7 +35,7 @@
         android:layout_marginTop="30dp"
         android:elevation="25dp"
         android:background="@drawable/manage_custom_shape"
-        android:layout_height="115dp">
+        android:layout_height="110dp">
 
         <LinearLayout
          android:id="@+id/center_point"
@@ -100,7 +99,7 @@
         android:layout_marginTop="30dp"
         android:elevation="25dp"
         android:background="@drawable/manage_custom_shape"
-        android:layout_height="115dp">
+        android:layout_height="110dp">
 
         <LinearLayout
             android:id="@+id/center_point2"
@@ -143,7 +142,7 @@
             android:layout_alignLeft="@+id/center_point2">
             <TextView
                 android:layout_width="wrap_content"
-                android:text="Audience sentiment analysis
+                android:text="Audience Analysis
 "
                 android:textAlignment="center"
                 android:textSize="23sp"
@@ -171,7 +170,7 @@
         android:layout_marginTop="30dp"
         android:elevation="25dp"
         android:background="@drawable/manage_custom_shape"
-        android:layout_height="115dp">
+        android:layout_height="110dp">
 
         <LinearLayout
             android:id="@+id/center_point3"
@@ -242,7 +241,7 @@
         android:layout_marginTop="30dp"
         android:elevation="25dp"
         android:background="@drawable/manage_custom_shape"
-        android:layout_height="115dp">
+        android:layout_height="110dp">
 
         <LinearLayout
             android:id="@+id/center_point4"
