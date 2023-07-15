@@ -58,10 +58,20 @@ public class UserProfile extends AppCompatActivity {
         homePageButton = findViewById(R.id.nav_homeActivist);
         signOutButton = findViewById(R.id.buttonHabibi);
 
+        ImageButton NavButton = (ImageButton) this.findViewById(R.id.nav_profileActivist);
+        NavButton.setColorFilter(Color.rgb(255, 223, 54)); // Yellow Tint
+
         profileImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openEditProfilePictureActivity();
+            }
+        });
+
+        profileImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openUserProfile();
             }
         });
 
@@ -72,12 +82,7 @@ public class UserProfile extends AppCompatActivity {
             }
         });
 
-        profileImageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openEditProfilePictureActivity();
-            }
-        });
+
 
         homePageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,8 +141,7 @@ public class UserProfile extends AppCompatActivity {
                     .into(profileImageView);
         }
 
-        ImageButton NavButton = (ImageButton) this.findViewById(R.id.nav_profileActivist);
-        NavButton.setColorFilter(Color.rgb(255, 223, 54)); // Yellow Tint
+
     }
 
     private void signOut() {
@@ -232,9 +236,9 @@ public class UserProfile extends AppCompatActivity {
         }
     }
 
-    private void openAddPost() {
-        // Start the AddPostActivity
-        Intent intent = new Intent(UserProfile.this, AddPostActivity.class);
+
+    private void openUserProfile(){
+        Intent intent = new Intent(UserProfile.this, UserProfile.class);
         startActivity(intent);
     }
 
@@ -244,15 +248,7 @@ public class UserProfile extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void openSearchPage() {
-        // Start the SearchPage activity
-        Intent intent = new Intent(UserProfile.this, SearchPage.class);
-        startActivity(intent);
-    }
 
-    private void openVideoPage() {
-        // Start the VideoPage activity
-        Intent intent = new Intent(UserProfile.this, VideoPage.class);
-        startActivity(intent);
-    }
+
+
 }
