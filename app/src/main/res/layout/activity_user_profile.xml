@@ -26,7 +26,7 @@
             android:layout_width="110dp"
             android:layout_height="110dp"
             android:layout_marginTop="70dp"
-            android:background="@drawable/circle_shape"
+            android:background="@drawable/profile_background_border"
             android:layout_centerHorizontal="true"
             android:layout_alignParentEnd="true"
             android:src="@drawable/icon_account"
@@ -37,19 +37,41 @@
 
 
 
-
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:gravity="center">
     <TextView
-        android:id="@+id/userNameTextView"
-        android:layout_width="185dp"
+        android:id="@+id/name_activist"
+        android:layout_width="wrap_content"
         android:layout_height="150dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="356dp"
-        android:layout_marginEnd="105dp"
+        android:textColor="@color/black"
         android:gravity="center_horizontal"
         android:text="User Name"
-        android:textSize="25sp"
+        android:textSize="28sp"
         android:textStyle="bold" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="250dp"
+        android:gravity="center">
+        <TextView
+            android:id="@+id/email_activist"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:textColor="@color/gray"
+            android:gravity="center_horizontal"
+            android:text="Email"
+            android:textSize="15sp"
+            />
+
+
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"

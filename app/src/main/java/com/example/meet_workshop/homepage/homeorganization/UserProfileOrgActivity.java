@@ -55,7 +55,7 @@ public class UserProfileOrgActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile_org);
         mAuth = FirebaseAuth.getInstance();
-        userNameTextView = findViewById(R.id.userNameTextView);
+        userNameTextView = findViewById(R.id.name_org);
         profileImageView = findViewById(R.id.profileImageView);
 
         profileImageButton = findViewById(R.id.nav_profile); // For the  navigation bar
@@ -115,6 +115,8 @@ public class UserProfileOrgActivity extends AppCompatActivity {
             }
         });
 
+        TextView emailTextView = (TextView) this.findViewById(R.id.email_org);
+
         // Retrieve user information from the Firestore database
         FirebaseUser user = mAuth.getCurrentUser();
         if (user != null) {
@@ -126,6 +128,7 @@ public class UserProfileOrgActivity extends AppCompatActivity {
                             DocumentSnapshot document = task.getResult();
                             if (document.exists()) {
                                 String userName = document.getString("organization_name");
+                                String email = document.getString("email");
                                 String profilePictureUrl = document.getString("profilePictureUrl");
 
                                 // Update the profile picture ImageView with the new URL
@@ -142,6 +145,7 @@ public class UserProfileOrgActivity extends AppCompatActivity {
 
                                 // Populate the views with the retrieved information
                                 userNameTextView.setText(userName);
+                                emailTextView.setText(email);
                             }
                         } else {
                             Toast.makeText(this, "An error occurred. Please try again.", Toast.LENGTH_SHORT).show();

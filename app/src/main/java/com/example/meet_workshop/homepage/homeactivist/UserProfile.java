@@ -30,6 +30,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import org.w3c.dom.Text;
+
 import java.io.ByteArrayOutputStream;
 
 public class UserProfile extends AppCompatActivity {
@@ -52,7 +54,7 @@ public class UserProfile extends AppCompatActivity {
         setContentView(R.layout.activity_user_profile);
         mAuth = FirebaseAuth.getInstance();
 
-        userNameTextView = findViewById(R.id.userNameTextView);
+        userNameTextView = findViewById(R.id.name_activist);
         profileImageView = findViewById(R.id.profileImageView);
         profileImageButton = findViewById(R.id.nav_profileActivist);
         homePageButton = findViewById(R.id.nav_homeActivist);
@@ -91,6 +93,8 @@ public class UserProfile extends AppCompatActivity {
             }
         });
 
+        TextView emailTextView = (TextView) this.findViewById(R.id.email_activist);
+
         // Retrieve user information from the Firestore database
         FirebaseUser user = mAuth.getCurrentUser();
         if (user != null) {
@@ -102,6 +106,7 @@ public class UserProfile extends AppCompatActivity {
                             DocumentSnapshot document = task.getResult();
                             if (document.exists()) {
                                 String userName = document.getString("name");
+                                String email = document.getString("email");
                                 String profilePictureUrl = document.getString("profilePictureUrl");
 
                                 // Update the profile picture ImageView with the new URL
@@ -118,6 +123,7 @@ public class UserProfile extends AppCompatActivity {
 
                                 // Populate the views with the retrieved information
                                 userNameTextView.setText(userName);
+                                emailTextView.setText(email);
                             }
                         } else {
                             Toast.makeText(UserProfile.this, "An error occurred. Please try again.", Toast.LENGTH_SHORT).show();
