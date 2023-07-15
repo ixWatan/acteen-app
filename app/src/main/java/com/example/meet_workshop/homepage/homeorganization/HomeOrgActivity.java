@@ -1,19 +1,14 @@
 package com.example.meet_workshop.homepage.homeorganization;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.meet_workshop.R;
-import com.example.meet_workshop.homepage.homeactivist.AddPostActivity;
-import com.example.meet_workshop.homepage.homeactivist.HomeActivity;
-import com.example.meet_workshop.homepage.homeactivist.SearchPage;
-import com.example.meet_workshop.homepage.homeactivist.UserProfile;
-import com.example.meet_workshop.homepage.homeactivist.VideoPage;
 
 public class HomeOrgActivity extends AppCompatActivity {
 
