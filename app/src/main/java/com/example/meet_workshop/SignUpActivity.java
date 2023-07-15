@@ -67,6 +67,7 @@ public class SignUpActivity extends AppCompatActivity {
         this.cityEditText = findViewById(R.id.signup_city);
         password = findViewById(R.id.signup_pass);
 
+/*
 
         CheckBox passwordToggleCheckBox = findViewById(R.id.passwordToggleCheckBox);
         passwordToggleCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -78,6 +79,7 @@ public class SignUpActivity extends AppCompatActivity {
                 password.setTransformationMethod(new PasswordTransformationMethod());
             }
         });
+*/
 
     }
 

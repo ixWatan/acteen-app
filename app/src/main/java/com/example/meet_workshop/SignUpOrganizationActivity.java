@@ -57,7 +57,7 @@ public class SignUpOrganizationActivity extends AppCompatActivity {
         password1 = findViewById(R.id.signup_pass);
 
 
-        CheckBox passwordToggleCheckBox = findViewById(R.id.passwordToggleCheckBox);
+        /*CheckBox passwordToggleCheckBox = findViewById(R.id.passwordToggleCheckBox);
         passwordToggleCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 // Show password
@@ -66,7 +66,7 @@ public class SignUpOrganizationActivity extends AppCompatActivity {
                 // Hide password
                 password.setTransformationMethod(new PasswordTransformationMethod());
             }
-        });
+        });*/
 
     }
 

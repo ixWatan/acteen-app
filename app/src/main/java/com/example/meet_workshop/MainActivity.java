@@ -36,14 +36,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mAuth = FirebaseAuth.getInstance();
         email = findViewById(R.id.signin_email);
-        password = findViewById(R.id.signin_pass);
+        password = findViewById(R.id.signup_pass);
 
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
 
 
 
-        CheckBox passwordToggleCheckBox = findViewById(R.id.passwordToggleCheckBox);
+        /*CheckBox passwordToggleCheckBox = findViewById(R.id.passwordToggleCheckBox);
         passwordToggleCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 // Show password
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
                 // Hide password
                 password.setTransformationMethod(new PasswordTransformationMethod());
             }
-        });
+        });*/
     }
 
     public void goToHome(View view) {

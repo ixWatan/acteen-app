@@ -40,19 +40,27 @@
             android:textSize="14sp"
             android:layout_marginBottom="12dp"/>
 
-        <EditText
-            android:id="@+id/signup_pass"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="300dp"
-            android:layout_height="wrap_content"
+            app:passwordToggleEnabled="true"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp"
             android:hint="Password"
-            android:background="@drawable/edittext_background"
-            android:padding="12dp"
-            android:textSize="14sp"
-            android:singleLine="true"
-            android:inputType="textPassword"
-            android:layout_marginBottom="12dp"/>
 
-        <CheckBox
+            android:layout_height="65dp">
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="300dp"
+                android:id="@+id/signup_pass"
+                android:textSize="14sp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittext_background"
+                android:inputType="textPassword"
+                android:layout_marginBottom="15dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+        <!--<CheckBox
             android:id="@+id/passwordToggleCheckBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -60,7 +68,7 @@
             android:layout_marginTop="10dp"
             android:text="Show Password"
             android:textColor="@android:color/black" />
-
+-->
 
         <EditText
             android:id="@+id/signup_orgname"

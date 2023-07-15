@@ -42,9 +42,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:ems="10"
+                android:textSize="14sp"
                 android:hint="Email"
                 android:layout_marginHorizontal="10dp"
-                android:paddingHorizontal="10dp"
+                android:paddingHorizontal="17dp"
                 android:textColorLink="@color/black"
                 android:background="@drawable/edittext_background"
                 android:inputType="textEmailAddress" />
@@ -58,26 +59,35 @@
             android:layout_marginHorizontal="15dp"
             android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/signin_pass"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:ems="10"
+                app:passwordToggleEnabled="true"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
                 android:hint="Password"
-                android:layout_marginHorizontal="10dp"
-                android:paddingHorizontal="10dp"
-                android:textColorLink="@color/black"
-                android:background="@drawable/edittext_background"
-                android:inputType="textPassword" />
 
-            <CheckBox
+                android:layout_height="65dp">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/signup_pass"
+                    android:layout_marginHorizontal="10dp"
+                    android:textSize="14sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:background="@drawable/edittext_background"
+                    android:inputType="textPassword"
+                    android:layout_marginBottom="15dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+            <!--<CheckBox
                 android:id="@+id/passwordToggleCheckBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
                 android:layout_marginTop="10dp"
                 android:text="Show Password"
-                android:textColor="@android:color/black" />
+                android:textColor="@android:color/black" />-->
 
         </LinearLayout>
 
