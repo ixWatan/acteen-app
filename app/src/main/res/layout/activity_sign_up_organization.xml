@@ -151,7 +151,11 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:text="Sign Up"
-            android:textColor="@android:color/white"
+            app:iconGravity="textEnd"
+            app:iconTint="@color/white"
+            app:icon="@drawable/icon_right"
+            app:iconPadding="10dp"
+            android:textColor="@android:color/black"
             android:onClick="goToHome"
             android:padding="12dp"/>
 

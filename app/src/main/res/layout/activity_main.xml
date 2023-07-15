@@ -40,12 +40,12 @@
             <EditText
                 android:id="@+id/signin_email"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="55dp"
                 android:ems="10"
-                android:textSize="14sp"
+                android:textSize="15sp"
                 android:hint="Email"
                 android:layout_marginHorizontal="10dp"
-                android:paddingHorizontal="17dp"
+                android:paddingHorizontal="15dp"
                 android:textColorLink="@color/black"
                 android:background="@drawable/edittext_background"
                 android:inputType="textEmailAddress" />
@@ -106,6 +106,11 @@
                 android:layout_marginStart="10dp"
                 android:onClick="goToHome"
                 android:text="Login"
+                app:icon="@drawable/icon_right"
+                app:iconGravity="textEnd"
+                app:iconTint="@color/white"
+                app:iconPadding="10dp"
+                android:textColor="@android:color/black"
                 android:textSize="20sp" />
 
         </LinearLayout>
