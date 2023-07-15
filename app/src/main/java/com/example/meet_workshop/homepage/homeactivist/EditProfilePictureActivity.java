@@ -1,15 +1,9 @@
 package com.example.meet_workshop.homepage.homeactivist;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -18,17 +12,28 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.example.meet_workshop.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.yalantis.ucrop.UCrop;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 
 public class EditProfilePictureActivity extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST_CODE = 1;
@@ -57,7 +62,12 @@ public class EditProfilePictureActivity extends AppCompatActivity {
         String currentProfilePictureUrl = getIntent().getStringExtra("profilePictureUrl");
 
         if (currentProfilePictureUrl != null && !currentProfilePictureUrl.isEmpty()) {
-            Glide.with(this).load(currentProfilePictureUrl).into(profileImageView);
+            Glide.with(this)
+                    .load(currentProfilePictureUrl)
+                    .placeholder(R.drawable.placeholder_image)
+                    .into(profileImageView);
+        } else {
+            profileImageView.setImageResource(R.drawable.default_profile_picture);
         }
 
         selectImageButton.setOnClickListener(new View.OnClickListener() {
@@ -99,26 +109,69 @@ public class EditProfilePictureActivity extends AppCompatActivity {
             String userId = user.getUid();
             FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-            db.collection("teenActivists").document(userId)
-                    .update("profilePictureUrl", profilePictureUrl)
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            Toast.makeText(EditProfilePictureActivity.this, "Profile picture updated successfully", Toast.LENGTH_SHORT).show();
+            // Upload the cropped image to Firebase Storage and obtain the download URL
+            uploadImageToStorage(profilePictureUrl, new OnImageUploadListener() {
+                @Override
+                public void onImageUploadSuccess(String downloadUrl) {
+                    // Update the profile picture URL in the Firestore document
+                    db.collection("teenActivists").document(userId)
+                            .update("profilePictureUrl", downloadUrl)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Toast.makeText(EditProfilePictureActivity.this, "Profile picture updated successfully", Toast.LENGTH_SHORT).show();
 
-                            Intent intent = new Intent();
-                            intent.putExtra("profilePictureUrl", profilePictureUrl);
-                            setResult(RESULT_OK, intent);
-                            finish();
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(EditProfilePictureActivity.this, "Failed to update profile picture. Please try again.", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                                    Intent intent = new Intent();
+                                    intent.putExtra("profilePictureUrl", downloadUrl);
+                                    setResult(RESULT_OK, intent);
+                                    finish();
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(EditProfilePictureActivity.this, "Failed to update profile picture. Please try again.", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                }
+
+                @Override
+                public void onImageUploadFailure() {
+                    Toast.makeText(EditProfilePictureActivity.this, "Failed to upload profile picture. Please try again.", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
+    }
+
+    private void uploadImageToStorage(String profilePictureUrl, final OnImageUploadListener listener) {
+        Glide.with(EditProfilePictureActivity.this)
+                .asBitmap()
+                .load(profilePictureUrl)
+                .addListener(new RequestListener<Bitmap>() {
+                    @Override
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Bitmap> target, boolean isFirstResource) {
+                        listener.onImageUploadFailure();
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onResourceReady(Bitmap resource, Object model, Target<Bitmap> target, DataSource dataSource, boolean isFirstResource) {
+                        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                        resource.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+                        byte[] imageBytes = byteArrayOutputStream.toByteArray();
+
+                        listener.onImageUploadSuccess(profilePictureUrl);
+
+                        return false;
+                    }
+                })
+                .submit();
+    }
+
+    interface OnImageUploadListener {
+        void onImageUploadSuccess(String downloadUrl);
+
+        void onImageUploadFailure();
     }
 
     @Override
@@ -128,16 +181,13 @@ public class EditProfilePictureActivity extends AppCompatActivity {
         if (requestCode == PICK_IMAGE_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
             selectedImageUri = data.getData();
 
-            try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImageUri);
-                profileImageView.setImageBitmap(bitmap);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            startCropActivity(selectedImageUri);
         } else if (requestCode == CAMERA_REQUEST_CODE && resultCode == RESULT_OK) {
             Bitmap imageBitmap = (Bitmap) data.getExtras().get("data");
             selectedImageUri = getImageUri(imageBitmap);
-            profileImageView.setImageBitmap(imageBitmap);
+            startCropActivity(selectedImageUri);
+        } else if (requestCode == UCrop.REQUEST_CROP && resultCode == RESULT_OK) {
+            handleCropResult(data);
         }
     }
 
@@ -148,6 +198,38 @@ public class EditProfilePictureActivity extends AppCompatActivity {
         return Uri.parse(path);
     }
 
+    private void startCropActivity(Uri sourceUri) {
+        Uri destinationUri = Uri.fromFile(new File(getCacheDir(), "cropped_image.jpg"));
+
+        UCrop uCrop = UCrop.of(sourceUri, destinationUri)
+                .withAspectRatio(1, 1)
+                .withMaxResultSize(500, 500);
+
+        uCrop.start(this);
+    }
+
+    private void handleCropResult(Intent result) {
+        final Uri croppedImageUri = UCrop.getOutput(result);
+
+        if (croppedImageUri != null) {
+            try {
+                Bitmap croppedBitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), croppedImageUri);
+                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                croppedBitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+                byte[] croppedImageBytes = byteArrayOutputStream.toByteArray();
+
+                Intent intent = new Intent();
+                intent.putExtra("croppedImage", croppedImageBytes);
+                setResult(RESULT_OK, intent);
+                finish();
+            } catch (IOException e) {
+                e.printStackTrace();
+                Toast.makeText(this, "Failed to crop image", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(this, "Failed to crop image", Toast.LENGTH_SHORT).show();
+        }
+    }
 
     private void requestCameraPermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {

@@ -20,7 +20,6 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-
     <style name="Theme.Meetworkshop.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark" />
 
     <style name="Theme.Meetworkshop.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />

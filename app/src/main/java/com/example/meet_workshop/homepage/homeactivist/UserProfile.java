@@ -1,9 +1,10 @@
 package com.example.meet_workshop.homepage.homeactivist;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,13 +13,24 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.meet_workshop.MainActivity;
 import com.example.meet_workshop.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.io.ByteArrayOutputStream;
 
 public class UserProfile extends AppCompatActivity {
 
@@ -43,7 +55,6 @@ public class UserProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
         mAuth = FirebaseAuth.getInstance();
-
 
         userNameTextView = findViewById(R.id.userNameTextView);
         profileImageView = findViewById(R.id.profileImageView);
@@ -76,9 +87,6 @@ public class UserProfile extends AppCompatActivity {
             }
         });
 
-
-
-
         homePageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,7 +97,7 @@ public class UserProfile extends AppCompatActivity {
         // Retrieve user information from the Firestore database
         FirebaseUser user = mAuth.getCurrentUser();
         if (user != null) {
-            String userId = user.getUid(); // Replace with the actual user ID
+            String userId = user.getUid();
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             db.collection("teenActivists").document(userId).get()
                     .addOnCompleteListener(task -> {
@@ -102,10 +110,14 @@ public class UserProfile extends AppCompatActivity {
 
                                 // Update the profile picture ImageView with the new URL
                                 if (profilePictureUrl != null && !profilePictureUrl.isEmpty()) {
-                                    Glide.with(UserProfile.this).load(profilePictureUrl).into(profileImageView);
+                                    Glide.with(UserProfile.this)
+                                            .load(profilePictureUrl + "?timestamp=" + System.currentTimeMillis())
+                                            .into(profileImageView);
                                 } else {
                                     // Display the default profile picture
-                                    Glide.with(UserProfile.this).load(R.drawable.default_profile_picture).into(profileImageView);
+                                    Glide.with(UserProfile.this)
+                                            .load(R.drawable.default_profile_picture)
+                                            .into(profileImageView);
                                 }
 
                                 // Populate the views with the retrieved information
@@ -121,10 +133,17 @@ public class UserProfile extends AppCompatActivity {
         // Load and display the user's profile picture using a library like Glide or Picasso
         String profilePictureUrl = getIntent().getStringExtra("profilePictureUrl");
         if (profilePictureUrl != null && !profilePictureUrl.isEmpty()) {
-            Glide.with(this).load(profilePictureUrl).into(profileImageView);
+            Glide.with(UserProfile.this)
+                    .load(profilePictureUrl)
+                    .skipMemoryCache(true)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .into(profileImageView);
+
         } else {
             // Set the default profile picture
-            Glide.with(this).load(R.drawable.default_profile_picture).into(profileImageView);
+            Glide.with(this)
+                    .load(R.drawable.default_profile_picture)
+                    .into(profileImageView);
         }
 
         ImageButton NavButton = (ImageButton) this.findViewById(R.id.nav_profileActivist);
@@ -155,11 +174,70 @@ public class UserProfile extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == EDIT_PROFILE_PICTURE_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
-            String profilePictureUrl = data.getStringExtra("profilePictureUrl");
-            if (profilePictureUrl != null && !profilePictureUrl.isEmpty()) {
-                Glide.with(this).load(profilePictureUrl).into(profileImageView);
-            } else {
-                Glide.with(this).load(R.drawable.default_profile_picture).into(profileImageView);
+            byte[] croppedImageBytes = data.getByteArrayExtra("croppedImage");
+            if (croppedImageBytes != null) {
+                Bitmap croppedBitmap = BitmapFactory.decodeByteArray(croppedImageBytes, 0, croppedImageBytes.length);
+                profileImageView.setImageBitmap(croppedBitmap);
+
+                // Update the profile picture in Firebase Firestore
+                FirebaseUser user = mAuth.getCurrentUser();
+                if (user != null) {
+                    String userId = user.getUid();
+                    FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+                    // Convert the bitmap to a byte array
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    croppedBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                    byte[] imageBytes = baos.toByteArray();
+
+                    // Upload the byte array to Firebase Storage and update the profile picture URL in Firestore
+                    StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+                    StorageReference profilePictureRef = storageRef.child("profile_pictures").child(userId + ".jpg");
+
+                    UploadTask uploadTask = profilePictureRef.putBytes(imageBytes);
+                    uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            // Get the download URL of the uploaded image
+                            profilePictureRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri downloadUri) {
+                                    String profilePictureUrl = downloadUri.toString();
+
+                                    // Update the profile picture URL in Firestore
+                                    db.collection("teenActivists").document(userId)
+                                            .update("profilePictureUrl", profilePictureUrl)
+                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void aVoid) {
+                                                    // Profile picture URL updated successfully
+                                                    // You can display a success message if needed
+                                                }
+                                            })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    // Failed to update profile picture URL
+                                                    // You can display an error message if needed
+                                                }
+                                            });
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    // Failed to get the download URL of the uploaded image
+                                    // You can display an error message if needed
+                                }
+                            });
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            // Failed to upload the image to Firebase Storage
+                            // You can display an error message if needed
+                        }
+                    });
+                }
             }
         }
     }
