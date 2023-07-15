@@ -1,41 +1,308 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".homepage.homeorganization.UserProfileOrgActivity">
+    android:orientation="vertical"
+    android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/iv_divider"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/header_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Campaign"
-                android:textSize="24sp" />
-
-        </RelativeLayout>
-
-
-        <include
-            layout="@layout/bottom_navigation_organ"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true" />
-
+        android:gravity="center">
+    <TextView
+        android:text="Campaign Management
+"
+        android:layout_width="match_parent"
+        android:textSize="27sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:layout_height="wrap_content" />
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--
+    Police Permits
+-->
+
+    <RelativeLayout
+        android:id="@+id/anything"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="30dp"
+        android:elevation="25dp"
+        android:background="@drawable/manage_custom_shape"
+        android:layout_height="115dp">
+
+        <LinearLayout
+         android:id="@+id/center_point"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerInParent="true"/>
+
+        <LinearLayout
+            android:id="@+id/left_layout"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:background="@drawable/left_side_manage_custom_shape"
+
+            android:layout_alignRight="@+id/center_point">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:adjustViewBounds="true"
+                android:gravity="center"
+                android:src="@drawable/policecampaignmanagement" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+               android:id="@+id/right_layout"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:layout_alignLeft="@+id/center_point">
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="Police Permits"
+                android:textAlignment="center"
+                android:textSize="23sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <!--
+    Audience sentiment analysis
+    -->
+
+    <RelativeLayout
+        android:id="@+id/anything2"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="30dp"
+        android:elevation="25dp"
+        android:background="@drawable/manage_custom_shape"
+        android:layout_height="115dp">
+
+        <LinearLayout
+            android:id="@+id/center_point2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerInParent="true"/>
+
+        <LinearLayout
+            android:id="@+id/left_layout2"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:background="@drawable/left_side_manage_custom_shape2"
+
+            android:layout_alignRight="@+id/center_point2">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:adjustViewBounds="true"
+                    android:gravity="center"
+                    android:src="@drawable/surveycampaignmanagement" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/right_layout2"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:layout_alignLeft="@+id/center_point2">
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="Audience sentiment analysis
+"
+                android:textAlignment="center"
+                android:textSize="23sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <!--
+
+
+
+    Analytics
+
+
+
+    -->
+
+    <RelativeLayout
+        android:id="@+id/anything3"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="30dp"
+        android:elevation="25dp"
+        android:background="@drawable/manage_custom_shape"
+        android:layout_height="115dp">
+
+        <LinearLayout
+            android:id="@+id/center_point3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerInParent="true"/>
+
+        <LinearLayout
+            android:id="@+id/left_layout3"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:background="@drawable/left_side_manage_custom_shape3"
+
+            android:layout_alignRight="@+id/center_point3">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:adjustViewBounds="true"
+                    android:gravity="center"
+                    android:layout_marginHorizontal="10dp"
+                    android:src="@drawable/analyticscampaignmanagement" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/right_layout3"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:layout_alignLeft="@+id/center_point3">
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="Campaign Analytics"
+                android:textAlignment="center"
+                android:textSize="23sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <!--
+
+
+
+    Subscription
+
+
+
+    -->
+
+    <RelativeLayout
+        android:id="@+id/anything4"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="30dp"
+        android:elevation="25dp"
+        android:background="@drawable/manage_custom_shape"
+        android:layout_height="115dp">
+
+        <LinearLayout
+            android:id="@+id/center_point4"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerInParent="true"/>
+
+        <LinearLayout
+            android:id="@+id/left_layout4"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:background="@drawable/left_side_manage_custom_shape4"
+
+            android:layout_alignRight="@+id/center_point4">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:adjustViewBounds="true"
+                    android:gravity="center"
+                    android:layout_marginHorizontal="10dp"
+                    android:src="@drawable/subscriptioncampaignmanagement" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/right_layout4"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:layout_alignLeft="@+id/center_point4">
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="Subscription Service
+"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+
+
+    </RelativeLayout>
+
+    <include
+        layout="@layout/bottom_navigation_organ"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" />
+
+</LinearLayout>
