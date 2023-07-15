@@ -128,9 +128,9 @@ public class SignUpActivity extends AppCompatActivity {
                         userData.put("age", person.getAge());
                         userData.put("region", person.getRegion());
                         userData.put("city", person.getCity());
-                        userData.put("followers", person.getFollowers());
-                        userData.put("following", person.getFollowing());
-                        userData.put("posts", person.getPosts());
+                        userData.put("image", "");
+                        userData.put("uid", uid);
+
 
                         db.collection("teenActivists").document(uid)
                                 .set(userData)

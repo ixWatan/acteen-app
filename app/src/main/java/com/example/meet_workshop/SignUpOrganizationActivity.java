@@ -107,6 +107,8 @@ public class SignUpOrganizationActivity extends AppCompatActivity {
                         userData.put("phone", age);
                         userData.put("region", region);
                         userData.put("city", city);
+                        userData.put("profilePictureUrl", "");
+                        userData.put("uid", uid);
 
                         db.collection("organizations").document(uid)   // Changed the collection to "organizations"
                                 .set(userData)
