@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -41,10 +40,8 @@ public class EditProfilePictureOrgActivity extends AppCompatActivity {
     private static final int CAMERA_PERMISSION_REQUEST_CODE = 3;
 
     private FirebaseAuth mAuth;
-    private ImageView profileImageView;
     private Button selectImageButton;
     private Button cameraButton;
-    private Button saveButton;
 
     private Uri selectedImageUri;
 
@@ -54,21 +51,12 @@ public class EditProfilePictureOrgActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_profile_picture_org);
         mAuth = FirebaseAuth.getInstance();
 
-        profileImageView = findViewById(R.id.profile_image_view);
         selectImageButton = findViewById(R.id.select_image_button);
         cameraButton = findViewById(R.id.camera_button);
-        saveButton = findViewById(R.id.save_button);
 
         String currentProfilePictureUrl = getIntent().getStringExtra("profilePictureUrl");
 
-        if (currentProfilePictureUrl != null && !currentProfilePictureUrl.isEmpty()) {
-            Glide.with(this)
-                    .load(currentProfilePictureUrl)
-                    .placeholder(R.drawable.placeholder_image)
-                    .into(profileImageView);
-        } else {
-            profileImageView.setImageResource(R.drawable.default_profile_picture);
-        }
+
 
         selectImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,17 +72,7 @@ public class EditProfilePictureOrgActivity extends AppCompatActivity {
             }
         });
 
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (selectedImageUri != null) {
-                    String newProfilePictureUrl = selectedImageUri.toString();
-                    updateProfilePicture(newProfilePictureUrl);
-                } else {
-                    Toast.makeText(EditProfilePictureOrgActivity.this, "No image selected", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+
     }
 
     private void selectImage() {

@@ -11,40 +11,22 @@
         android:layout_height="match_parent"
         android:padding="16dp">
 
-        <ImageView
-            android:id="@+id/profile_image_view"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:src="@drawable/default_profile_picture"
-            android:scaleType="centerCrop"
-            android:layout_centerInParent="true" />
-
-        <Button
-            android:id="@+id/save_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/profile_image_view"
-            android:text="Save"
-            android:layout_centerHorizontal="true" />
-
         <Button
             android:id="@+id/select_image_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/profile_image_view"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="68dp"
-            android:layout_marginEnd="122dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="117dp"
+            android:layout_marginBottom="23dp"
             android:text="Select Image" />
 
         <Button
             android:id="@+id/camera_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="175dp"
-            android:layout_marginEnd="101dp"
+            android:layout_marginEnd="129dp"
             android:text="Capture Photo" />
 
 
