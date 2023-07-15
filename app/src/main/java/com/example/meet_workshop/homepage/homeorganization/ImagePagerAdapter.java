@@ -1,4 +1,4 @@
-package com.example.meet_workshop.homepage.homeactivist;
+package com.example.meet_workshop.homepage.homeorganization;
 
 import android.content.Context;
 import android.net.Uri;
