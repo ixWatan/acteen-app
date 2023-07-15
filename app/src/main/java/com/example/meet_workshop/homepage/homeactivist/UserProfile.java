@@ -37,13 +37,9 @@ public class UserProfile extends AppCompatActivity {
     private FirebaseAuth mAuth;
 
     private TextView userNameTextView;
-    private TextView followersTextView;
-    private TextView followingTextView;
-    private TextView postsTextView;
+
     private ImageButton profileImageButton;
-    private ImageButton searchPageButton;
-    private ImageButton videoPageButton;
-    private ImageButton addPostButton;
+
     private ImageButton homePageButton;
     private ImageView profileImageView;
     private Button signOutButton;
@@ -58,11 +54,7 @@ public class UserProfile extends AppCompatActivity {
 
         userNameTextView = findViewById(R.id.userNameTextView);
         profileImageView = findViewById(R.id.profileImageView);
-        followersTextView = findViewById(R.id.followersTextView);
-        followingTextView = findViewById(R.id.followingTextView);
-        postsTextView = findViewById(R.id.postsTextView);
         profileImageButton = findViewById(R.id.nav_profileActivist);
-        addPostButton = findViewById(R.id.nav_addPost);
         homePageButton = findViewById(R.id.nav_homeActivist);
         signOutButton = findViewById(R.id.buttonHabibi);
 
@@ -105,7 +97,6 @@ public class UserProfile extends AppCompatActivity {
                             DocumentSnapshot document = task.getResult();
                             if (document.exists()) {
                                 String userName = document.getString("name");
-                                int followersCount = document.getLong("followers").intValue();
                                 String profilePictureUrl = document.getString("profilePictureUrl");
 
                                 // Update the profile picture ImageView with the new URL
@@ -122,7 +113,6 @@ public class UserProfile extends AppCompatActivity {
 
                                 // Populate the views with the retrieved information
                                 userNameTextView.setText(userName);
-                                followersTextView.setText("Followers: " + followersCount);
                             }
                         } else {
                             Toast.makeText(UserProfile.this, "An error occurred. Please try again.", Toast.LENGTH_SHORT).show();
