@@ -19,5 +19,6 @@
     <string name="create_new_account_organ"><b><u>Create New Organization Account</u></b></string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="privacy_policy">https://docs.google.com/document/d/1iXlhoRO3WtEPY7Zf8q7gLHtFwgXpz4JZCXxA8PjMsvc/edit?usp=sharing</string>
 
 </resources>

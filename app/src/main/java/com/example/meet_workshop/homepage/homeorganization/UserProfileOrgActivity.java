@@ -3,6 +3,7 @@ package com.example.meet_workshop.homepage.homeorganization;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +24,9 @@ public class UserProfileOrgActivity extends AppCompatActivity {
     private ImageButton homePageButton;
     private Button signOutButton; // Added sign-out button
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +36,9 @@ public class UserProfileOrgActivity extends AppCompatActivity {
         campaignManagementButton = findViewById(R.id.nav_manage);
         addEventButton = findViewById(R.id.nav_addPost);
         signOutButton = findViewById(R.id.btn_sign_out); // Initialize the sign-out button
+
+        ImageButton NavButton = (ImageButton) this.findViewById(R.id.nav_profile);
+        NavButton.setColorFilter(Color.rgb(255, 223, 54)); // Yellow Tint
 
         signOutButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -10,12 +10,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="#fff1a1"
+        android:background="@drawable/customborder"
         android:layout_alignParentBottom="true">
 
         <ImageButton
             android:background="@null"
-            android:id="@+id/nav_home"
+            android:id="@+id/nav_homeActivist"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_weight="0.7"
@@ -41,7 +41,7 @@
 
 
         <ImageButton
-            android:id="@+id/nav_profile"
+            android:id="@+id/nav_profileActivist"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_weight="0.7"

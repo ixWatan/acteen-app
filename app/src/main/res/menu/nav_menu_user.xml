@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/nav_home"
+        android:id="@+id/nav_homeActivist"
         android:icon="@drawable/icon_home"
         android:title="Home"
         app:cnb_iconColor="#fff2ae"
         />
     <item
-        android:id="@+id/nav_profile"
+        android:id="@+id/nav_profileActivist"
         android:icon="@drawable/icon_account"
         android:title="Profile"
         app:cnb_iconColor="#fff2ae"

@@ -3,6 +3,7 @@ package com.example.meet_workshop.homepage.homeorganization;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -29,6 +30,9 @@ public class HomeOrgActivity extends AppCompatActivity {
         homePageButton = findViewById(R.id.nav_home);
         campaignManagementButton = findViewById(R.id.nav_manage);
         addEventButton = findViewById(R.id.nav_addPost);
+
+        ImageButton NavButton = (ImageButton) this.findViewById(R.id.nav_home);
+        NavButton.setColorFilter(Color.rgb(255, 223, 54)); // Yellow Tint
 
 
         profileImageButton.setOnClickListener(new View.OnClickListener() {

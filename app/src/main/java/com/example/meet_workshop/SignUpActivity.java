@@ -108,7 +108,8 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     public void OpenTermsAndGuidelines(View view) {
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"));
+        String url = getString(R.string.privacy_policy);
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         startActivity(browserIntent);
     }
     public void createUser(User person) {

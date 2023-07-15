@@ -3,6 +3,7 @@ package com.example.meet_workshop.homepage.homeactivist;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -43,14 +44,15 @@ public class UserProfile extends AppCompatActivity {
         setContentView(R.layout.activity_user_profile);
         mAuth = FirebaseAuth.getInstance();
 
+
         userNameTextView = findViewById(R.id.userNameTextView);
         profileImageView = findViewById(R.id.profileImageView);
         followersTextView = findViewById(R.id.followersTextView);
         followingTextView = findViewById(R.id.followingTextView);
         postsTextView = findViewById(R.id.postsTextView);
-        profileImageButton = findViewById(R.id.nav_profile);
+        profileImageButton = findViewById(R.id.nav_profileActivist);
         addPostButton = findViewById(R.id.nav_addPost);
-        homePageButton = findViewById(R.id.nav_home);
+        homePageButton = findViewById(R.id.nav_homeActivist);
         signOutButton = findViewById(R.id.buttonHabibi);
 
         profileImageView.setOnClickListener(new View.OnClickListener() {
@@ -124,6 +126,9 @@ public class UserProfile extends AppCompatActivity {
             // Set the default profile picture
             Glide.with(this).load(R.drawable.default_profile_picture).into(profileImageView);
         }
+
+        ImageButton NavButton = (ImageButton) this.findViewById(R.id.nav_profileActivist);
+        NavButton.setColorFilter(Color.rgb(255, 223, 54)); // Yellow Tint
     }
 
     private void signOut() {

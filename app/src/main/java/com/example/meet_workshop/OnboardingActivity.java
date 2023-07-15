@@ -21,8 +21,8 @@ public class OnboardingActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_onboarding);
 
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
@@ -58,6 +58,9 @@ public class OnboardingActivity extends AppCompatActivity {
         } else {
             Toast.makeText(OnboardingActivity.this, "Not logged in before", Toast.LENGTH_SHORT).show();
         }
+        setContentView(R.layout.activity_onboarding);
+
+
 
         viewPager = findViewById(R.id.viewPager);
         OnboardingPagerAdapter adapter = new OnboardingPagerAdapter(getSupportFragmentManager());

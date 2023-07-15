@@ -1,6 +1,7 @@
 package com.example.meet_workshop.homepage.homeactivist;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -18,9 +19,9 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        profileImageButton = findViewById(R.id.nav_profile);
+        profileImageButton = findViewById(R.id.nav_profileActivist);
         addPostButton = findViewById(R.id.nav_addPost);
-        homePageButton = findViewById(R.id.nav_home);
+        homePageButton = findViewById(R.id.nav_homeActivist);
 
 
         profileImageButton.setOnClickListener(new View.OnClickListener() {
@@ -39,6 +40,9 @@ public class HomeActivity extends AppCompatActivity {
                 openHomePage();
             }
         });
+
+        ImageButton NavButton = (ImageButton) this.findViewById(R.id.nav_homeActivist);
+        NavButton.setColorFilter(Color.rgb(255, 223, 54)); // Yellow Tint
     }
 
 
