@@ -52,10 +52,10 @@
         <ImageButton
             android:background="@null"
             android:id="@+id/nav_home"
-
+            android:layout_marginTop="0dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/pagination3"
+            android:src="@drawable/pagination_2"
             />
 
 

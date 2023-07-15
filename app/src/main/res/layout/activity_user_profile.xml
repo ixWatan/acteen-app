@@ -91,6 +91,7 @@
 
         <Button
             android:id="@+id/buttonHabibi"
+            android:textAllCaps="false"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:text="Sign Out" />

@@ -39,6 +39,8 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:hint="Email"
+            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXY@.Zabcdefghijklmnopqrstuvwxyz1234567890"
+            android:inputType="textFilter"
             android:textSize="14sp"
             android:singleLine="true"
             android:background="@drawable/edittext_background"
@@ -58,8 +60,9 @@
                 android:id="@+id/signup_pass"
                 android:textSize="14sp"
                 android:layout_height="wrap_content"
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXY@.Zabcdefghijklmnopqrstuvwxyz1234567890"
+                android:inputType="textFilter"
                 android:background="@drawable/edittext_background"
-                android:inputType="textPassword"
                 android:layout_marginBottom="15dp" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -85,6 +88,7 @@
             android:layout_height="wrap_content"
             android:textSize="14sp"
             android:hint="Age"
+            android:inputType="number"
             android:background="@drawable/edittext_background"
             android:padding="12dp"
             android:layout_marginBottom="15dp"/>
@@ -148,6 +152,7 @@
             app:iconTint="@color/white"
             app:icon="@drawable/icon_right"
             app:iconPadding="10dp"
+            android:textAllCaps="false"
             android:textColor="@android:color/black"
             android:onClick="goToHome"
             android:padding="12dp"/>

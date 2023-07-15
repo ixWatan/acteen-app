@@ -106,6 +106,7 @@
                 android:layout_marginStart="10dp"
                 android:onClick="goToHome"
                 android:text="Login"
+                android:textAllCaps="false"
                 app:icon="@drawable/icon_right"
                 app:iconGravity="textEnd"
                 app:iconTint="@color/white"
