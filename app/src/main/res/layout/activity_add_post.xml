@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clickable="true"
-    android:focusable="true"
-    android:background="@drawable/gradient_background">
+    android:focusable="true">
 
 <LinearLayout
     android:layout_width="match_parent"
@@ -16,7 +15,6 @@
     <!---EditText: input post title-->
     <EditText
         android:id = "@+id/pTitleEt"
-        android:background=""
         android:padding="10dp"
         android:hint="Enter title"
         android:singleLine="true"
@@ -34,7 +32,6 @@
     <!---EditText: Input post description-->
     <EditText
         android:id = "@+id/pDescriptionEt"
-        android:background=""
         android:padding="10dp"
         android:hint="Enter title"
         android:singleLine="true"
@@ -49,9 +46,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         />
-
-
-
 
 </LinearLayout>
     <include
