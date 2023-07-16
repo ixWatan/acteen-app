@@ -25,8 +25,9 @@
 
 
 <!--
+&lt;!&ndash;
     Police Permits
--->
+&ndash;&gt;
 
     <RelativeLayout
         android:id="@+id/anything"
@@ -87,16 +88,18 @@
         </LinearLayout>
 
     </RelativeLayout>
+-->
 
     <!--
     Audience sentiment analysis
     -->
 
     <RelativeLayout
-        android:id="@+id/anything2"
+        android:id="@+id/audience_analysis"
         android:layout_width="match_parent"
         android:layout_marginHorizontal="30dp"
         android:layout_marginTop="30dp"
+        android:clickable="true"
         android:elevation="25dp"
         android:background="@drawable/manage_custom_shape"
         android:layout_height="110dp">
@@ -164,11 +167,12 @@
     -->
 
     <RelativeLayout
-        android:id="@+id/anything3"
+        android:id="@+id/campaign_analysis"
         android:layout_width="match_parent"
         android:layout_marginHorizontal="30dp"
         android:layout_marginTop="30dp"
         android:elevation="25dp"
+        android:clickable="true"
         android:background="@drawable/manage_custom_shape"
         android:layout_height="110dp">
 
@@ -235,10 +239,11 @@
     -->
 
     <RelativeLayout
-        android:id="@+id/anything4"
+        android:id="@+id/subscripton_service"
         android:layout_width="match_parent"
         android:layout_marginHorizontal="30dp"
         android:layout_marginTop="30dp"
+        android:clickable="true"
         android:elevation="25dp"
         android:background="@drawable/manage_custom_shape"
         android:layout_height="110dp">

@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 
 import com.example.meet_workshop.R;
 import com.example.meet_workshop.homepage.homeactivist.HomeActivity;
@@ -15,6 +16,8 @@ import com.example.meet_workshop.homepage.homeactivist.UserProfile;
 public class CampaignManagementOrgActivity extends AppCompatActivity {
 
     private ImageButton profileImageButton;
+
+
     private ImageButton addEventButton;
     private ImageButton campaignManagementButton;
     private ImageButton homePageButton;
@@ -22,14 +25,51 @@ public class CampaignManagementOrgActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //management view stuff
+
+        /*audienceAnalysis  = findViewById(R.id.audience_analysis);
+        campaignAnalysis = findViewById(R.id.campaign_analysis);
+        subscriptionAnalysis = findViewById(R.id.subscripton_service);
+*/
+
+
+
         setContentView(R.layout.activity_campaign_management_org);
         profileImageButton = findViewById(R.id.nav_profile);
         homePageButton = findViewById(R.id.nav_home);
         campaignManagementButton = findViewById(R.id.nav_manage);
         addEventButton = findViewById(R.id.nav_addPost);
 
+        RelativeLayout audienceAnalysis = (RelativeLayout) this.findViewById(R.id.audience_analysis);
+        RelativeLayout campaignAnalysis = (RelativeLayout) this.findViewById(R.id.campaign_analysis);
+        RelativeLayout subscriptionAnalysis = (RelativeLayout) this.findViewById(R.id.subscripton_service);
         ImageButton NavButton = (ImageButton) this.findViewById(R.id.nav_manage);
         NavButton.setColorFilter(Color.rgb(255, 223, 54)); // Yellow Tint
+
+        audienceAnalysis.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Handle the profileImageButton click event
+                openAudienceAnalysis();
+            }
+        });
+
+        campaignAnalysis.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Handle the profileImageButton click event
+                openCampaignAnalysis();
+            }
+        });
+
+        subscriptionAnalysis.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Handle the profileImageButton click event
+                openSubscriptionAnalysis();
+            }
+        });
+
 
         profileImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,6 +103,23 @@ public class CampaignManagementOrgActivity extends AppCompatActivity {
                 openAddEventOrgActivity();
             }
         });
+
+    }
+
+    private void openAudienceAnalysis() {
+        Intent intent = new Intent(CampaignManagementOrgActivity.this, AudienceAnalysisOrgActivity.class);
+        startActivity(intent);
+    }
+
+    private void openCampaignAnalysis() {
+        Intent intent = new Intent(CampaignManagementOrgActivity.this, CampaignAnalyticsOrgActivity.class);
+        startActivity(intent);
+
+    }
+
+    private void openSubscriptionAnalysis() {
+        Intent intent = new Intent(CampaignManagementOrgActivity.this, SubscriptionServiceOrgActivity.class);
+        startActivity(intent);
 
     }
 

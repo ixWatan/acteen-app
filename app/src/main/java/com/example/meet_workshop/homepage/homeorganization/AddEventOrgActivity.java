@@ -20,19 +20,16 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
-import androidx.appcompat.app.ActionBar;
 
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+
 import com.example.meet_workshop.MainActivity;
 import com.example.meet_workshop.R;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -41,12 +38,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.ktx.Firebase;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
-
-import java.util.HashMap;
 
 
 public class AddEventOrgActivity extends AppCompatActivity  {
@@ -108,8 +99,6 @@ public class AddEventOrgActivity extends AppCompatActivity  {
 
         firebaseAuth = FirebaseAuth.getInstance();
         checkUserStatus();
-
-        actionBar.setSubtitle(email);
 
         //get some info of current user to include in the post
         userDbRef = FirebaseDatabase.getInstance().getReference("organizations");
@@ -216,117 +205,7 @@ public class AddEventOrgActivity extends AppCompatActivity  {
         pd.show();
 
         //for post-image name, post-id, post-publish-time
-        String timeStamp = String.valueOf(System.currentTimeMillis());
-        String filePathAndName = "Posts/" + "post_" + timeStamp;
 
-        if (!uri.equals("noImage")){
-            //post with image
-            StorageReference ref = FirebaseStorage.getInstance().getReference().child(filePathAndName);
-            ref.putFile(Uri.parse(uri))
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            //image is upload to firebase storage, now get it's url
-                            Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-                            while (!uriTask.isSuccessful());
-
-                            String downloadUri = uriTask.getResult().toString();
-
-                            if (uriTask.isSuccessful()){
-
-                                //url is received upload post to fireBase storage
-                                HashMap<Object, String> hashMap = new HashMap<>();
-                                //put post info
-                                hashMap.put("uid", uid);
-                                hashMap.put("uName", name);
-                                hashMap.put("uEmail", email);
-                                hashMap.put("uDp", dp);
-                                hashMap.put("pId", timeStamp);
-                                hashMap.put("pTitle", title);
-                                hashMap.put("pDescription", description);
-                                hashMap.put("pImage", downloadUri);
-                                hashMap.put("pTime", timeStamp);
-
-                                //path to store post data
-                                DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Posts");
-                                //put data in this ref
-                                ref.child(timeStamp).setValue(hashMap)
-                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                            @Override
-                                            public void onSuccess(Void unused) {
-                                                //added in database
-                                                pd.dismiss();
-                                                Toast.makeText(AddEventOrgActivity.this, "Post published", Toast.LENGTH_SHORT).show();
-                                                //reset views
-                                                titleEt.setText("");
-                                                descripionEt.setText("");
-                                                imageIv.setImageURI(null);
-                                                image_uri = null;
-
-                                            }
-                                        })
-                                        .addOnFailureListener(new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-                                                //failed adding post in database
-                                                pd.dismiss();
-                                                Toast.makeText(AddEventOrgActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
-                                            }
-                                        });
-
-
-                            }
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            //failed uploading image
-                            pd.dismiss();
-                            Toast.makeText(AddEventOrgActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
-        }
-        else {
-            //post without image
-            //url is received upload post to fireBase storage
-            HashMap<Object, String> hashMap = new HashMap<>();
-            //put post info
-            hashMap.put("uid", uid);
-            hashMap.put("uName", name);
-            hashMap.put("uEmail", email);
-            hashMap.put("uDp", dp);
-            hashMap.put("pId", timeStamp);
-            hashMap.put("pTitle", title);
-            hashMap.put("pDescription", description);
-            hashMap.put("pImage", "noImage");
-            hashMap.put("pTime", timeStamp);
-
-            //path to store post data
-            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Posts");
-            //put data in this ref
-            ref.child(timeStamp).setValue(hashMap)
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void unused) {
-                            //added in database
-                            pd.dismiss();
-                            Toast.makeText(AddEventOrgActivity.this, "Post published", Toast.LENGTH_SHORT).show();
-                            titleEt.setText("");
-                            descripionEt.setText("");
-                            imageIv.setImageURI(null);
-                            image_uri = null;
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            //failed adding post in database
-                            pd.dismiss();
-                            Toast.makeText(AddEventOrgActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
-        }
     }
 
     private void showImagePickDialog() {
