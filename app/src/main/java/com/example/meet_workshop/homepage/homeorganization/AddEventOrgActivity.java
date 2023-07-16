@@ -262,6 +262,7 @@ public class AddEventOrgActivity extends AppCompatActivity  {
                                                 descripionEt.setText("");
                                                 imageIv.setImageURI(null);
                                                 image_uri = null;
+
                                             }
                                         })
                                         .addOnFailureListener(new OnFailureListener() {
@@ -437,10 +438,10 @@ public class AddEventOrgActivity extends AppCompatActivity  {
         onBackPressed();//goto previous activity
         return super.onSupportNavigateUp();
     }
-/**
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.nav_menu_user,menu);
+        getMenuInflater().inflate(R.menu.menu_main,menu);
 
         menu.findItem(R.id.action_add_post).setVisible(false);
         return super.onCreateOptionsMenu(menu);
@@ -450,12 +451,12 @@ public class AddEventOrgActivity extends AppCompatActivity  {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         //get item id
         int id = item.getItemId();
-        if (id = R.id.action_logout){
+        if (id == R.id.action_logout){
             firebaseAuth.signOut();
             checkUserStatus();
         }
         return super.onOptionsItemSelected(item);
-    }*/
+    }
 
     //handle permission result
     @Override
