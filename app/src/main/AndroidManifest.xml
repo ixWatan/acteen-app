@@ -19,23 +19,23 @@
         android:theme="@style/Theme.Meetworkshop"
         tools:targetApi="31">
         <activity
-            android:name=".SubscriptionServiceOrgActivity"
+            android:name=".homepage.homeorganization.SubscriptionServiceOrgActivity"
             android:exported="false" />
         <activity
-            android:name=".CampaignAnalyticsOrgActivity"
+            android:name=".homepage.homeorganization.CampaignAnalyticsOrgActivity"
             android:exported="false" />
         <activity
-            android:name=".AudienceAnalysisOrgActivity"
+            android:name=".homepage.homeorganization.AudienceAnalysisOrgActivity"
             android:exported="false" />
         <activity
-            android:name=".PolicePermitOrgActivity"
+            android:name=".homepage.homeorganization.PolicePermitOrgActivity"
             android:exported="false" />
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name=".EditProfilePictureOrgActivity"
+            android:name=".homepage.homeorganization.EditProfilePictureOrgActivity"
             android:exported="false" />
         <activity
             android:name=".homepage.homeorganization.CampaignManagementOrgActivity"
