@@ -27,42 +27,6 @@
         app:layout_constraintEnd_toEndOf="parent">
 
 
-        <include
-            layout="@layout/post_design"
-            android:layout_height="wrap_content"
-            />
-
-        <include
-            layout="@layout/post_design"
-            android:layout_height="wrap_content"
-            />
-        <include
-            layout="@layout/post_design"
-            android:layout_height="wrap_content"
-            />
-        <include
-            layout="@layout/post_design"
-            android:layout_height="wrap_content"
-            />
-
-        <include
-            layout="@layout/post_design"
-            android:layout_height="wrap_content"
-            />
-        <include
-            layout="@layout/post_design"
-            android:layout_height="wrap_content"
-            />
-        <include
-            layout="@layout/post_design"
-            android:layout_height="wrap_content"
-            />
-        <include
-            layout="@layout/post_design"
-            android:layout_height="wrap_content"
-            />
-
-
     </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
