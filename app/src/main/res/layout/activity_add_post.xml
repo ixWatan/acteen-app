@@ -65,6 +65,7 @@
             android:layout_weight = "1"/>
         </LinearLayout>
 
+
         <TextView
             android:id="@+id/locationTagTextView"
             android:layout_width="wrap_content"
