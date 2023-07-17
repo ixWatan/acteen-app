@@ -19,7 +19,7 @@
             android:background="@null"
             android:id="@+id/nav_homeActivist"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:layout_weight="0.7"
             android:src="@drawable/home"
             android:scaleType="centerInside"
@@ -45,7 +45,7 @@
         <ImageButton
             android:id="@+id/nav_profileActivist"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:layout_weight="0.7"
             android:src="@drawable/user"
             android:scaleType="centerInside"

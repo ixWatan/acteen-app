@@ -1,5 +1,6 @@
 package com.example.meet_workshop.homepage.homeorganization;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -46,6 +47,8 @@ public class UserProfileOrgActivity extends AppCompatActivity {
     private ImageView profileImageView;
     private Button signOutButton;
 
+    ProgressDialog pd;
+
     private static final int EDIT_PROFILE_PICTURE_REQUEST_CODE = 3;
 
 
@@ -57,6 +60,7 @@ public class UserProfileOrgActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         userNameTextView = findViewById(R.id.name_org);
         profileImageView = findViewById(R.id.profileImageView);
+        pd = new ProgressDialog(this);
 
         profileImageButton = findViewById(R.id.nav_profile); // For the  navigation bar
         homePageButton = findViewById(R.id.nav_home);
@@ -119,6 +123,8 @@ public class UserProfileOrgActivity extends AppCompatActivity {
 
         // Retrieve user information from the Firestore database
         FirebaseUser user = mAuth.getCurrentUser();
+        pd.setMessage("Reloading Profile");
+        pd.show();
         if (user != null) {
             String userId = user.getUid();
             FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -146,11 +152,17 @@ public class UserProfileOrgActivity extends AppCompatActivity {
                                 // Populate the views with the retrieved information
                                 userNameTextView.setText(userName);
                                 emailTextView.setText(email);
+
+                                pd.cancel();
+                                pd.dismiss();
                             }
                         } else {
                             Toast.makeText(this, "An error occurred. Please try again.", Toast.LENGTH_SHORT).show();
                         }
                     });
+
+            pd.cancel();
+            pd.dismiss();
         }
 
         // Load and display the user's profile picture using a library like Glide or Picasso

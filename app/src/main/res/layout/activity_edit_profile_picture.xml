@@ -6,35 +6,31 @@
 
 
     <!-- activity_edit_profile_picture.xml -->
-    <RelativeLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
         android:padding="16dp">
 
         <Button
             android:id="@+id/select_image_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="13dp"
-            android:layout_marginEnd="130dp"
+            android:textColor="@color/black"
             android:text="Select Image" />
 
         <Button
             android:id="@+id/camera_button"
+            android:layout_marginTop="50dp"
+            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="120dp"
-            android:layout_marginBottom="16dp"
             android:text="Capture Photo" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 
-        <!-- Add any additional UI elements as needed -->
 
-    </RelativeLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

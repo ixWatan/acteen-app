@@ -16,6 +16,7 @@
     <string name="view_pager_content_description">ViewPager</string>
 
     <string name="create_new_account"><b><u>Create New Account</u></b></string>
+    <string name="goto_login"><b><u>Go to Login</u></b></string>
     <string name="create_new_account_organ"><b><u>Create New Organization Account</u></b></string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

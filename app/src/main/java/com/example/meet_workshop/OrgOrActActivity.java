@@ -19,6 +19,11 @@ public class OrgOrActActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void goToLogin(View view) {
+        Intent intent = new Intent(OrgOrActActivity.this, MainActivity.class);
+        startActivity(intent);
+    }
+
     public void SignUpOrganizationActivity(View view) {
         Intent intent = new Intent(OrgOrActActivity.this, SignUpOrganizationActivity.class);
         startActivity(intent);

@@ -28,7 +28,7 @@ public class OnboardingFragment4 extends Fragment {
             @Override
             public void onClick(View v) {
                 // Start the MainActivity
-                Intent intent = new Intent(getActivity(), MainActivity.class);
+                Intent intent = new Intent(getActivity(), OrgOrActActivity.class);
                 startActivity(intent);
 
                 // Finish the current activity (OnboardingActivity) if needed

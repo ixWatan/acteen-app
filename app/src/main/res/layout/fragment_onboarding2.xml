@@ -30,7 +30,7 @@
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sign up for the opportunity you would like to attend and connect it to your calendar so that you will be reminded of it before it happens."
+            android:text="Sign up for the opportunity you would like to attend and connect it to your calendar"
             android:textColor="@color/gray"
             android:textSize="15sp"
             android:textAlignment="center"

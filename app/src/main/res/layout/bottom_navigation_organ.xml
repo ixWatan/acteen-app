@@ -10,7 +10,7 @@
     <LinearLayout
         android:id="@+id/navigation_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:orientation="horizontal"
         android:background="@drawable/customborder"
         android:layout_alignParentBottom="true">
@@ -19,7 +19,7 @@
             android:background="@null"
             android:id="@+id/nav_home"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:layout_weight="0.7"
             android:src="@drawable/home"
             android:scaleType="centerInside"
@@ -31,7 +31,7 @@
         <ImageButton
             android:id="@+id/nav_addPost"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:layout_weight="0.7"
             android:src="@drawable/more"
             android:scaleType="centerInside"
@@ -43,7 +43,7 @@
         <ImageButton
             android:id="@+id/nav_manage"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:layout_weight="0.7"
             android:src="@drawable/icon_management"
             android:scaleType="centerInside"
@@ -58,7 +58,7 @@
         <ImageButton
             android:id="@+id/nav_profile"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:layout_weight="0.7"
             android:src="@drawable/user"
             android:scaleType="centerInside"
