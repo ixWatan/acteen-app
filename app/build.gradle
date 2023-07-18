@@ -39,7 +39,7 @@ android {
 }
 
 dependencies {
-
+    implementation 'com.google.android.libraries.places:places:2.5.0'
     implementation 'com.google.android.libraries.places:places:2.4.0'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
     implementation 'pub.devrel:easypermissions:2.0.1'
