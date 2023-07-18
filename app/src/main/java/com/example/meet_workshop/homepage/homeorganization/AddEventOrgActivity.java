@@ -37,6 +37,7 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -61,7 +62,7 @@ import java.util.HashMap;
 import pub.devrel.easypermissions.EasyPermissions;
 
 
-public class AddEventOrgActivity extends AppCompatActivity  {
+public class AddEventOrgActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     DatabaseReference userDbRef;
     ActionBar actionBar;
@@ -123,6 +124,7 @@ public class AddEventOrgActivity extends AppCompatActivity  {
         profileImageButton = findViewById(R.id.nav_profile);
         ImageButton NavButton = findViewById(R.id.nav_addPost);
         NavButton.setColorFilter(Color.rgb(255, 223, 54)); // Yellow Tint*/
+
 
         // Initialize location service in onCreate() or initialization method
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
@@ -196,6 +198,9 @@ public class AddEventOrgActivity extends AppCompatActivity  {
 
             }
         });
+
+
+
 
 
         //init views
@@ -276,6 +281,8 @@ public class AddEventOrgActivity extends AppCompatActivity  {
                 openAddEventOrgActivity();
             }
         });*/
+
+
 
     }
 
@@ -691,6 +698,7 @@ public class AddEventOrgActivity extends AppCompatActivity  {
         Intent intent = new Intent(AddEventOrgActivity.this, ChooseLocationActivity.class);
         startActivityForResult(intent, MAP_ACTIVITY_REQUEST_CODE);
     }
+
 
 
 }
