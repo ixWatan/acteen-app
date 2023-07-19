@@ -23,6 +23,7 @@
     <string name="privacy_policy">https://docs.google.com/document/d/1iXlhoRO3WtEPY7Zf8q7gLHtFwgXpz4JZCXxA8PjMsvc/edit?usp=sharing</string>
     <string name="profile_pic_watan"> https://firebasestorage.googleapis.com/v0/b/meet-workshop.appspot.com/o/profile_pictures%2Frj2pEdoeJpMS5651NakJdjBkjdc2.jpg?alt=media&amp;token=666755ab-0274-41c8-a9e4-a4d355c5b986.jpg
 </string>
+    <string name="title_activity_search_org">SearchActivityOrg</string>
 
 
 </resources>

@@ -82,7 +82,7 @@
         <EditText
             android:id = "@+id/pDescriptionEt"
             android:padding="10dp"
-            android:hint="Enter title"
+            android:hint="Enter Descreption"
             android:inputType="textCapSentences|textMultiLine"
             android:minHeight="120dp"
             android:gravity="start"

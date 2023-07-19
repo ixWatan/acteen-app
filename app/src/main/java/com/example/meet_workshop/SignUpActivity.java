@@ -1,5 +1,6 @@
 package com.example.meet_workshop;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -29,6 +30,9 @@ public class SignUpActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private EditText emailEditText;
 
+    private ProgressDialog pd;
+
+
     private CheckBox checkBox;
 
     private Boolean checkBoxState;
@@ -57,6 +61,8 @@ public class SignUpActivity extends AppCompatActivity {
         this.regionEditText = findViewById(R.id.signup_region);
         this.cityEditText = findViewById(R.id.signup_city);
         password = findViewById(R.id.signup_pass);
+
+        ProgressDialog pd;
 
 /*
 
@@ -106,6 +112,9 @@ public class SignUpActivity extends AppCompatActivity {
         startActivity(browserIntent);
     }
     public void createUser(User person) {
+        pd = new ProgressDialog(this);
+        pd.setMessage("Creating Account...");
+        pd.show();
         mAuth.createUserWithEmailAndPassword(person.getEmail(), person.getPassword())
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
@@ -138,7 +147,6 @@ public class SignUpActivity extends AppCompatActivity {
                                                 });
 
                                         // Navigate to the interests page after successfully creating the user.
-                                        Toast.makeText(this, "You're in", Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(SignUpActivity.this, ActivityInterests.class);
                                         startActivity(intent);
                                         finish();
@@ -158,6 +166,9 @@ public class SignUpActivity extends AppCompatActivity {
                             Toast.makeText(SignUpActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                         }
                     }
+
+                    pd.dismiss();
+
                 });
     }
 }

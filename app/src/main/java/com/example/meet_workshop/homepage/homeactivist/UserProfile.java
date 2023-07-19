@@ -42,6 +42,10 @@ public class UserProfile extends AppCompatActivity {
 
     private ImageButton profileImageButton;
 
+
+    private ImageButton notificationButton;
+    private ImageButton searchButton;
+
     private ImageButton homePageButton;
     private ImageView profileImageView;
     private Button signOutButton;
@@ -52,11 +56,14 @@ public class UserProfile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
+        getSupportActionBar().hide();
         mAuth = FirebaseAuth.getInstance();
 
         userNameTextView = findViewById(R.id.name_activist);
         profileImageView = findViewById(R.id.profileImageView);
         profileImageButton = findViewById(R.id.nav_profileActivist);
+        searchButton = findViewById(R.id.nav_searchActivist);
+        notificationButton = findViewById(R.id.nav_bellActivist);
         homePageButton = findViewById(R.id.nav_homeActivist);
         signOutButton = findViewById(R.id.buttonHabibi);
 
@@ -90,6 +97,20 @@ public class UserProfile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 openHomePage();
+            }
+        });
+
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openSearch();
+            }
+        });
+
+        notificationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openNotification();
             }
         });
 
@@ -149,6 +170,8 @@ public class UserProfile extends AppCompatActivity {
 
 
     }
+
+
 
     private void signOut() {
         // Sign out from Firebase Authentication
@@ -251,6 +274,17 @@ public class UserProfile extends AppCompatActivity {
     private void openHomePage() {
         // Start the HomeActivity
         Intent intent = new Intent(UserProfile.this, HomeActivity.class);
+        startActivity(intent);
+    }
+
+    private void openNotification() {
+
+        Intent intent = new Intent(UserProfile.this, NotificationActivityActivist.class);
+        startActivity(intent);
+    }
+
+    private void openSearch() {
+        Intent intent = new Intent(UserProfile.this, SearchActivityActivist.class);
         startActivity(intent);
     }
 

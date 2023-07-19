@@ -4,19 +4,15 @@ import static android.content.ContentValues.TAG;
 import androidx.appcompat.app.AppCompatActivity;
 
 
-import com.example.meet_workshop.R;
 import com.example.meet_workshop.homepage.homeactivist.HomeActivity;
 import com.example.meet_workshop.homepage.homeorganization.HomeOrgActivity;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.DocumentSnapshot;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 

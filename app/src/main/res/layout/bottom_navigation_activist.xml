@@ -23,7 +23,34 @@
             android:layout_weight="0.7"
             android:src="@drawable/home"
             android:scaleType="centerInside"
-            android:onClick="onNavHomeClick"
+            android:padding="10dp"
+            />
+
+<!--
+        android:onClick="onNavHomeClick"
+-->
+
+
+        <ImageButton
+            android:background="@null"
+            android:id="@+id/nav_searchActivist"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="0.7"
+            android:src="@drawable/icon_search"
+            android:scaleType="centerInside"
+            android:padding="10dp"
+            />
+
+        <ImageButton
+            android:background="@null"
+            android:id="@+id/nav_bellActivist"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="0.7"
+            android:tint="@color/black"
+            android:src="@drawable/icon_bell"
+            android:scaleType="centerInside"
             android:padding="10dp"
             />
 
@@ -49,11 +76,13 @@
             android:layout_weight="0.7"
             android:src="@drawable/user"
             android:scaleType="centerInside"
-            android:onClick="onNavProfileClick"
             android:padding="10dp"
             android:background="@null"
             />
 
+<!--
+        android:onClick="onNavProfileClick"
+-->
 
     </LinearLayout>
 

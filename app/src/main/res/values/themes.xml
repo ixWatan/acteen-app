@@ -23,4 +23,8 @@
     <style name="Theme.Meetworkshop.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark" />
 
     <style name="Theme.Meetworkshop.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="ImageView.Round" parent="">
+        <item name="cornerSize">20%</item>
+    </style>
 </resources>

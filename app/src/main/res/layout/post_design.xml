@@ -1,16 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
     <RelativeLayout
-        android:id="@+id/subscripton_service"
+        android:id="@+id/subscrissspton_service"
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_marginHorizontal="30dp"
+        android:layout_marginHorizontal="20dp"
         android:layout_marginTop="30dp"
         android:layout_weight="1"
         android:clickable="true"
-        android:background="@drawable/manage_custom_shape"
-        android:layout_height="110dp">
+        android:layout_height="450dp">
 
-        <LinearLayout
+    <TextView
+        android:id="@+id/region_text_post"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:gravity="center_horizontal"
+        android:text="Region"
+        android:paddingRight="50dp"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <!--    <LinearLayout
             android:id="@+id/center_point4"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -94,6 +104,84 @@
         </LinearLayout>
 
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+
+        android:background="@drawable/post_custom_shape"
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/image_for_post"
+                android:adjustViewBounds="true"
+                android:gravity="center"
+                android:layout_marginHorizontal="10dp"
+                android:src="@drawable/image_post_example" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/_activist"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="12dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:gravity="center_horizontal"
+                android:text="Post Title "
+                android:paddingRight="180dp"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/date_text_post"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:gravity="center_horizontal"
+                android:padding="5dp"
+                android:text="31.05"
+                android:background="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/_activist"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/gray"
+                    android:gravity="center_horizontal"
+                    android:drawableLeft="@android:drawable/ic_menu_compass"
+                    android:text="Location "
+                    android:drawablePadding="5dp"
+                    android:paddingRight="150dp"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>-->
+
+
 
     </RelativeLayout>
-

@@ -19,22 +19,21 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center_vertical">
-            <com.google.android.material.circularreveal.cardview.CircularRevealCardView
+            <ImageView
              android:id="@+id/uPictureIv"
-                android:scaleType="center"
-                android:src="@drawable/ic_default_img"
+                android:src="@drawable/activistr_logo"
                 android:layout_width="50dp"
                 android:layout_height="50dp"/>
 
             <LinearLayout
-                android:layout_width="100dp"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/uNameTv"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Name"
                     android:textColor="@color/Black"
@@ -46,7 +45,7 @@
                     android:layout_height="wrap_content"
                     android:text="33 min"
                     android:textColor="@color/Black"
-                    android:textSize="20sp" />
+                    android:textSize="10sp" />
 
             </LinearLayout>
                 <ImageButton
@@ -64,12 +63,14 @@
             android:text="Title"
             android:textColor="@color/Black"
             android:textSize="16sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:autoLink="all"/>
         <TextView
             android:id="@+id/pDescriptionTv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="The description of the post"
+            android:autoLink="all"
             android:textColor="@color/Black"/>
         <ImageView
             android:id="@+id/pImageIv"
@@ -95,6 +96,7 @@
             android:gravity="center">
             <Button
                 android:layout_width="wrap_content"
+                android:id="@+id/likeBtn"
                 android:layout_height="wrap_content"
                 android:layout_weight = "1"
                 android:text = "LIKE"/>
@@ -102,11 +104,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight = "1"
+                android:id="@+id/commentBtn"
+
                 android:text = "LIKE"/>
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight = "1"
+                android:id="@+id/shareBtn"
                 android:text = "LIKE"/>
         </LinearLayout>
 

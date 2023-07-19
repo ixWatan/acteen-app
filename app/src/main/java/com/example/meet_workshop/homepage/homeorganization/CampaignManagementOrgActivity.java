@@ -10,14 +10,12 @@ import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 
 import com.example.meet_workshop.R;
-import com.example.meet_workshop.homepage.homeactivist.HomeActivity;
-import com.example.meet_workshop.homepage.homeactivist.UserProfile;
 
 public class CampaignManagementOrgActivity extends AppCompatActivity {
 
     private ImageButton profileImageButton;
 
-
+    private  ImageButton searchButton;
     private ImageButton addEventButton;
     private ImageButton campaignManagementButton;
     private ImageButton homePageButton;
@@ -35,14 +33,18 @@ public class CampaignManagementOrgActivity extends AppCompatActivity {
 
 
         setContentView(R.layout.activity_campaign_management_org);
+        // Navbar organization stuff 5 icons
         profileImageButton = findViewById(R.id.nav_profile);
         homePageButton = findViewById(R.id.nav_home);
         campaignManagementButton = findViewById(R.id.nav_manage);
         addEventButton = findViewById(R.id.nav_addPost);
+        searchButton = findViewById(R.id.nav_search);
 
         RelativeLayout audienceAnalysis = (RelativeLayout) this.findViewById(R.id.audience_analysis);
         RelativeLayout campaignAnalysis = (RelativeLayout) this.findViewById(R.id.campaign_analysis);
         RelativeLayout subscriptionAnalysis = (RelativeLayout) this.findViewById(R.id.subscripton_service);
+
+
         ImageButton NavButton = (ImageButton) this.findViewById(R.id.nav_manage);
         NavButton.setColorFilter(Color.rgb(255, 223, 54)); // Yellow Tint
 
@@ -59,6 +61,13 @@ public class CampaignManagementOrgActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // Handle the profileImageButton click event
                 openCampaignAnalysis();
+            }
+        });
+
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openSearch();
             }
         });
 
@@ -130,6 +139,11 @@ public class CampaignManagementOrgActivity extends AppCompatActivity {
 
     private void openCampaignManagement() {
         Intent intent = new Intent(this, CampaignManagementOrgActivity.class);
+        startActivity(intent);
+    }
+
+    private void openSearch() {
+        Intent intent = new Intent(this, SearchActivityOrg.class);
         startActivity(intent);
     }
 

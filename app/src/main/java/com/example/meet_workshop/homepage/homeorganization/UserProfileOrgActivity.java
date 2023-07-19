@@ -43,6 +43,8 @@ public class UserProfileOrgActivity extends AppCompatActivity {
     private ImageButton campaignManagementButton;
     private ImageButton addEventButton;
 
+    private ImageButton searchButton;
+
     private ImageButton homePageButton;
     private ImageView profileImageView;
     private Button signOutButton;
@@ -62,16 +64,27 @@ public class UserProfileOrgActivity extends AppCompatActivity {
         profileImageView = findViewById(R.id.profileImageView);
         pd = new ProgressDialog(this);
 
-        profileImageButton = findViewById(R.id.nav_profile); // For the  navigation bar
+        // Navbar organization stuff 5 icons
+        profileImageButton = findViewById(R.id.nav_profile);
         homePageButton = findViewById(R.id.nav_home);
         campaignManagementButton = findViewById(R.id.nav_manage);
         addEventButton = findViewById(R.id.nav_addPost);
+        searchButton = findViewById(R.id.nav_search);
+
+
         signOutButton = findViewById(R.id.buttonHabibi); // Initialize the sign-out button
+
 
 
         ImageButton NavButton = (ImageButton) this.findViewById(R.id.nav_profile);
         NavButton.setColorFilter(Color.rgb(255, 223, 54)); // Yellow Tint
 
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openSearch();
+            }
+        });
         profileImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -300,6 +313,12 @@ public class UserProfileOrgActivity extends AppCompatActivity {
         Intent intent = new Intent(this, HomeOrgActivity.class);
         startActivity(intent);
     }
+
+    private void openSearch() {
+        Intent intent = new Intent(this, SearchActivityOrg.class);
+        startActivity(intent);
+    }
+
 
 
 }

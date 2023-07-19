@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
+import android.location.LocationRequest;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Looper;
@@ -40,7 +41,6 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationCallback;
 import com.google.firebase.auth.FirebaseAuth;
@@ -51,6 +51,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.ktx.Firebase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -94,7 +97,7 @@ public class AddEventOrgActivity extends AppCompatActivity  {
     //private ImageButton profileImageButton,addEventButton,campaignManagementButton,homePageButton;
 
     //user info
-    String name, email, uid, dp;
+    private String name, email, uid, dp;
 
     //picked image will be saved in this uri
     Uri image_uri = null;
@@ -124,11 +127,11 @@ public class AddEventOrgActivity extends AppCompatActivity  {
         ImageButton NavButton = findViewById(R.id.nav_addPost);
         NavButton.setColorFilter(Color.rgb(255, 223, 54)); // Yellow Tint*/
 
-        // Initialize location service in onCreate() or initialization method
+        /*// Initialize location service in onCreate() or initialization method
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         locationRequest = LocationRequest.create();
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        locationRequest.setInterval(5000); // Update interval in milliseconds
+        locationRequest.setInterval(5000); // Update interval in milliseconds*/
         locationTagTextView = findViewById(R.id.locationTagTextView);
 
         locationCallback = new LocationCallback() {
@@ -178,24 +181,6 @@ public class AddEventOrgActivity extends AppCompatActivity  {
 
         actionBar.setSubtitle(email);
 
-        //get some info of current user to include in the post
-        userDbRef = FirebaseDatabase.getInstance().getReference("organizations");
-        Query query = userDbRef.orderByChild("email").equalTo(email);
-        query.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot ds: dataSnapshot.getChildren()){
-                    name = ""+ ds.child("name").getValue();
-                    email = ""+ ds.child("email").getValue();
-                    dp = ""+ ds.child("dp").getValue();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
 
 
         //init views
@@ -203,6 +188,10 @@ public class AddEventOrgActivity extends AppCompatActivity  {
         descripionEt = findViewById(R.id.pDescriptionEt);
         imageIv = findViewById(R.id.pImageIv);
         uploadbtn = findViewById(R.id.pUploadBtn);
+
+        if (!checkStoragePermission()) {
+            requestStoragePermission();
+        }
 
 
         //get image from camera/gallery on click
@@ -234,9 +223,10 @@ public class AddEventOrgActivity extends AppCompatActivity  {
                     return;
                 }
 
+
                 if (image_uri == null){
-                    //post without image
-                    uploadData(title, description, "noImage" );
+                    Toast.makeText(AddEventOrgActivity.this, "Add an image...", Toast.LENGTH_SHORT).show();
+                    return;
                 }
                 else {
                     //post with image
@@ -281,9 +271,31 @@ public class AddEventOrgActivity extends AppCompatActivity  {
 
 
 
+
+
     private void uploadData(String title, String description, String uri) {
         pd.setMessage("Publishing post...");
         pd.show();
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        HashMap<Object, String> hashMap = new HashMap<>();
+
+        //DocumentReference dbRef = db.collection("organizations").document(uid);
+        db.collection("organizations").document(uid).get()
+                .addOnCompleteListener(task -> {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            name = document.getString("organization_name");
+                            Toast.makeText(AddEventOrgActivity.this, name, Toast.LENGTH_SHORT).show();
+                            email = document.getString("email");
+                            dp  = document.getString("profilePictureUrl");
+                            Toast.makeText(AddEventOrgActivity.this, dp, Toast.LENGTH_SHORT).show();
+
+                            hashMap.put("uName", name);
+                            hashMap.put("uDp", dp);
+                        }
+                });
 
         //for post-image name, post-id, post-publish-time
         String timeStamp = String.valueOf(System.currentTimeMillis());
@@ -305,12 +317,11 @@ public class AddEventOrgActivity extends AppCompatActivity  {
                             if (uriTask.isSuccessful()){
 
                                 //url is received upload post to fireBase storage
-                                HashMap<Object, String> hashMap = new HashMap<>();
                                 //put post info
                                 hashMap.put("uid", uid);
-                                hashMap.put("uName", name);
+                                Toast.makeText(AddEventOrgActivity.this, name, Toast.LENGTH_SHORT).show();
                                 hashMap.put("uEmail", email);
-                                hashMap.put("uDp", dp);
+                                Toast.makeText(AddEventOrgActivity.this, dp, Toast.LENGTH_SHORT).show();
                                 hashMap.put("pId", timeStamp);
                                 hashMap.put("pTitle", title);
                                 hashMap.put("pDescription", description);
@@ -359,12 +370,10 @@ public class AddEventOrgActivity extends AppCompatActivity  {
         else {
             //post without image
             //url is received upload post to fireBase storage
-            HashMap<Object, String> hashMap = new HashMap<>();
             //put post info
-            hashMap.put("uid", uid);
             hashMap.put("uName", name);
-            hashMap.put("uEmail", email);
             hashMap.put("uDp", dp);
+            hashMap.put("uEmail", email);
             hashMap.put("pId", timeStamp);
             hashMap.put("pTitle", title);
             hashMap.put("pDescription", description);
@@ -486,16 +495,12 @@ public class AddEventOrgActivity extends AppCompatActivity  {
     }
 
     private boolean checkStoragePermission() {
-        return EasyPermissions.hasPermissions(this, Manifest.permission.READ_EXTERNAL_STORAGE);
-    }
+        int resultRead = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
+        int resultWrite = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        return resultRead == PackageManager.PERMISSION_GRANTED && resultWrite == PackageManager.PERMISSION_GRANTED;    }
 
     private void requestStoragePermission() {
-        EasyPermissions.requestPermissions(
-                this,
-                "Storage permission is required to access the gallery",
-                STORAGE_REQUEST_CODE,
-                Manifest.permission.READ_EXTERNAL_STORAGE
-        );
+        ActivityCompat.requestPermissions(this, storagePermissions, STORAGE_REQUEST_CODE);
     }
 
     private boolean checkCameraPermission(){
@@ -660,7 +665,9 @@ public class AddEventOrgActivity extends AppCompatActivity  {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
                 && ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             // Request location updates
+/*
             fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper());
+*/
         } else {
             // Handle case when permissions are not granted
             // Request location permissions from the user
