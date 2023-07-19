@@ -40,6 +40,7 @@ import java.util.List;
 
 public class MapsFragment extends Fragment implements OnMapReadyCallback,
         GoogleMap.OnMapClickListener, GoogleMap.OnMarkerDragListener {
+
     private AutoCompleteTextView placeAutoCompleteTextView;
     private GoogleMap mMap;
     private Marker selectedMarker;
@@ -64,7 +65,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
             }
         });
 
-        placeAutoCompleteTextView = view.findViewById(R.id.placeAutoCompleteTextView);
+       /* placeAutoCompleteTextView = view.findViewById(R.id.placeAutoCompleteTextView);
         placeAutoCompleteTextView.setOnItemClickListener((parent, view1, position, id) -> {
             Place place = (Place) parent.getItemAtPosition(position);
             if (place != null) {
@@ -76,7 +77,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
                 selectedMarker = mMap.addMarker(new MarkerOptions().position(selectedLocation).draggable(true));
                 confirmButton.setVisibility(View.VISIBLE);
             }
-        });
+        });*/
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity());
 

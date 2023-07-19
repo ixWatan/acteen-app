@@ -12,7 +12,11 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -40,6 +44,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -49,7 +55,6 @@ import pub.devrel.easypermissions.EasyPermissions;
 
 public class AddEventOrgActivity extends AppCompatActivity  {
     FirebaseAuth firebaseAuth;
-    DatabaseReference userDbRef;
     ActionBar actionBar;
 
     //permissions constants
@@ -110,6 +115,17 @@ public class AddEventOrgActivity extends AppCompatActivity  {
 
         locationTagTextView = findViewById(R.id.locationTagTextView);
 
+        // Retrieve the Intent object
+        Intent intent = getIntent();
+
+        // Retrieve the data from the Intent
+        double latitude = intent.getDoubleExtra("SelectedLat", 0.0);
+        double longitude = intent.getDoubleExtra("SelectedLng", 0.0);
+
+        // Use the retrieved data as needed
+        String locationTag = "Location: " + latitude + ", " + longitude;
+        locationTagTextView.setText(locationTag);
+
         pLocationBtn = findViewById(R.id.pLocationBtn);
         pLocationBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -147,9 +163,9 @@ public class AddEventOrgActivity extends AppCompatActivity  {
         actionBar.setSubtitle(email);
 
         //get some info of current user to include in the post
-        userDbRef = FirebaseDatabase.getInstance().getReference("organizations");
-        Query query = userDbRef.orderByChild("email").equalTo(email);
-        query.addValueEventListener(new ValueEventListener() {
+//        userDbRef = FirebaseDatabase.getInstance().getReference("organizations");
+//        Query query = userDbRef.orderByChild("email").equalTo(email);
+        /*query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot ds: dataSnapshot.getChildren()){
@@ -163,7 +179,7 @@ public class AddEventOrgActivity extends AppCompatActivity  {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        });*/
 
 
         //init views
@@ -203,8 +219,8 @@ public class AddEventOrgActivity extends AppCompatActivity  {
                 }
 
                 if (image_uri == null){
-                    //post without image
-                    uploadData(title, description, "noImage" );
+                    Toast.makeText(AddEventOrgActivity.this, "Add an image...", Toast.LENGTH_SHORT).show();
+                    return;
                 }
                 else {
                     //post with image
@@ -261,6 +277,26 @@ public class AddEventOrgActivity extends AppCompatActivity  {
         String timeStamp = String.valueOf(System.currentTimeMillis());
         String filePathAndName = "Posts/" + "post_" + timeStamp;
 
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        HashMap<Object, String> hashMap = new HashMap<>();
+
+        //DocumentReference dbRef = db.collection("organizations").document(uid);
+        db.collection("organizations").document(uid).get()
+                .addOnCompleteListener(task -> {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        name = document.getString("organization_name");
+                        Toast.makeText(AddEventOrgActivity.this, name, Toast.LENGTH_SHORT).show();
+                        email = document.getString("email");
+                        dp  = document.getString("profilePictureUrl");
+                        Toast.makeText(AddEventOrgActivity.this, dp, Toast.LENGTH_SHORT).show();
+
+                        hashMap.put("uName", name);
+                        hashMap.put("uDp", dp);
+                    }
+                });
+
         if (!uri.equals("noImage")){
             //post with image
             StorageReference ref = FirebaseStorage.getInstance().getReference().child(filePathAndName);
@@ -277,12 +313,9 @@ public class AddEventOrgActivity extends AppCompatActivity  {
                             if (uriTask.isSuccessful()){
 
                                 //url is received upload post to fireBase storage
-                                HashMap<Object, String> hashMap = new HashMap<>();
                                 //put post info
                                 hashMap.put("uid", uid);
-                                hashMap.put("uName", name);
                                 hashMap.put("uEmail", email);
-                                hashMap.put("uDp", dp);
                                 hashMap.put("pId", timeStamp);
                                 hashMap.put("pTitle", title);
                                 hashMap.put("pDescription", description);
@@ -331,12 +364,9 @@ public class AddEventOrgActivity extends AppCompatActivity  {
         else {
             //post without image
             //url is received upload post to fireBase storage
-            HashMap<Object, String> hashMap = new HashMap<>();
             //put post info
             hashMap.put("uid", uid);
-            hashMap.put("uName", name);
             hashMap.put("uEmail", email);
-            hashMap.put("uDp", dp);
             hashMap.put("pId", timeStamp);
             hashMap.put("pTitle", title);
             hashMap.put("pDescription", description);
@@ -565,8 +595,6 @@ public class AddEventOrgActivity extends AppCompatActivity  {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Toast.makeText(this, "im onnnnnnn", Toast.LENGTH_SHORT).show();
-
         if (resultCode == RESULT_OK) {
             if (requestCode == IMAGE_PICK_GALLERY_CODE) {
                 if (data != null) {
@@ -583,13 +611,30 @@ public class AddEventOrgActivity extends AppCompatActivity  {
             double latitude = data.getDoubleExtra("SelectedLat", 0.0);
             double longitude = data.getDoubleExtra("SelectedLng", 0.0);
 
-            // Update the locationTagTextView with the selected location
-            String locationTag = "Location: " + latitude + ", " + longitude;
-            locationTagTextView.setText(locationTag);
+            // Create the Google Maps URI
+            String mapsUri = "http://maps.google.com/maps?q=" + latitude + "," + longitude;
+
+            // Create a clickable link
+            SpannableString locationLink = new SpannableString("View Location");
+            locationLink.setSpan(new ClickableSpan() {
+                @Override
+                public void onClick(View view) {
+                    // Open Google Maps when the link is clicked
+                    Uri gmmIntentUri = Uri.parse(mapsUri);
+                    Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                    mapIntent.setPackage("com.google.android.apps.maps");
+                    startActivity(mapIntent);
+                }
+            }, 0, locationLink.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+            // Set the location link text in the TextView
+            locationTagTextView.setText(locationLink);
+            locationTagTextView.setMovementMethod(LinkMovementMethod.getInstance());
         }
     }
 
-/*
+
+    /*
     private void openAddEventOrgActivity() {
         Intent intent = new Intent(this, AddEventOrgActivity.class);
         startActivity(intent);

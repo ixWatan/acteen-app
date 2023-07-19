@@ -6,8 +6,13 @@ public class ModelPost {
 
     String pId, pTitle, pDecor, pImage, pTime, uid, uEmail, uDp, uName;
 
+
+
+    boolean PostIsAnEvent;
+
     public ModelPost() {
         this.pId = "ID";
+        this.PostIsAnEvent = false;
         this.pTitle = "Title";
         this.pDecor = "Descreption";
         this.pImage = "Image";
@@ -19,8 +24,9 @@ public class ModelPost {
     }
 
 
-    public ModelPost(String pId, String pTitle, String pDecor, String pImage, String pTime, String uid, String uEmail, String uDp, String uName) {
+    public ModelPost(String pId, String pTitle, String pDecor, String pImage, String pTime, String uid, String uEmail, String uDp, String uName, boolean PostIsAnEvent) {
         this.pId = pId;
+        this.PostIsAnEvent = PostIsAnEvent;
         this.pTitle = pTitle;
         this.pDecor = pDecor;
         this.pImage = pImage;
@@ -29,6 +35,14 @@ public class ModelPost {
         this.uEmail = uEmail;
         this.uDp = uDp;
         this.uName = uName;
+    }
+
+    public boolean isPostIsAnEvent() {
+        return PostIsAnEvent;
+    }
+
+    public void setPostIsAnEvent(boolean postIsAnEvent) {
+        PostIsAnEvent = postIsAnEvent;
     }
 
     public String getpId() {
