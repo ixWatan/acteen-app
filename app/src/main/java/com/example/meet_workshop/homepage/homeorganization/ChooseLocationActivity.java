@@ -14,7 +14,7 @@ public class ChooseLocationActivity extends AppCompatActivity {
         // Load the MapsFragment
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.fragment_container, new MapsFragment())
+                    .add(R.id.map, new MapsFragment())
                     .commit();
         }
     }

@@ -41,8 +41,6 @@ import java.util.List;
 public class MapsFragment extends Fragment implements OnMapReadyCallback,
         GoogleMap.OnMapClickListener, GoogleMap.OnMarkerDragListener {
     private AutoCompleteTextView placeAutoCompleteTextView;
-    private Button searchButton;
-    private PlacesClient placesClient;
     private GoogleMap mMap;
     private Marker selectedMarker;
     private Button confirmButton;
