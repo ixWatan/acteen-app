@@ -4,31 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <fragment
-        android:id="@+id/mapFragment"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".homepage.homeorganization.ChooseLocationActivity" />
-
-    <LinearLayout
-        android:layout_marginTop="30dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center">
-
-        <EditText
-            android:id="@+id/locationBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Search location"
-            android:inputType="text"
-            android:maxLines="1"
-            android:singleLine="true" />
+        android:layout_height="match_parent" />
 
 
-    </LinearLayout>
+
 
 </RelativeLayout>
 
