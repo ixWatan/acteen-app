@@ -80,10 +80,6 @@ public class AddEventOrgActivity extends AppCompatActivity  {
     //show location TV
     TextView locationTagTextView;
 
-    // if event or not
-    boolean eventTruth = false;
-
-
     //user info
     String name, email, uid, dp;
 
@@ -156,14 +152,6 @@ public class AddEventOrgActivity extends AppCompatActivity  {
             }
         });
 
-        isEventBtn = findViewById(R.id.pIsEventBtn);
-        isEventBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Start the isEventBtn
-                isEventBtn();
-            }
-        });
 
 
         actionBar = getSupportActionBar();
@@ -467,6 +455,23 @@ public class AddEventOrgActivity extends AppCompatActivity  {
         builder.create().show();
     }
 
+
+
+
+
+
+    private void openGallery() {
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(intent, IMAGE_PICK_GALLERY_CODE);
+        } else {
+            Toast.makeText(this, "No gallery app found", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
     // Capture image from gallery
     private ActivityResultLauncher<String> galleryLauncher;
 
@@ -486,24 +491,6 @@ public class AddEventOrgActivity extends AppCompatActivity  {
         }
     }
 
-
-
-
-    private void openGallery() {
-        Intent intent = new Intent(Intent.ACTION_PICK);
-        intent.setType("image/*");
-
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(intent, IMAGE_PICK_GALLERY_CODE);
-        } else {
-            Toast.makeText(this, "No gallery app found", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-
-
-
-
     // Capture image from camera
     private void pickFromCamera() {
         ContentValues cv = new ContentValues();
@@ -522,7 +509,17 @@ public class AddEventOrgActivity extends AppCompatActivity  {
     }
 
     private boolean checkStoragePermission() {
-        return EasyPermissions.hasPermissions(this, Manifest.permission.READ_EXTERNAL_STORAGE);
+        int result = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
+        return result == PackageManager.PERMISSION_GRANTED;
+    }
+
+
+    private boolean checkCameraPermission(){
+        boolean result = ContextCompat.checkSelfPermission(this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE) == (PackageManager.PERMISSION_GRANTED);
+        boolean result1 = ContextCompat.checkSelfPermission(this,
+                Manifest.permission.CAMERA) == (PackageManager.PERMISSION_GRANTED);
+        return result && result1;
     }
 
     private void requestStoragePermission() {
@@ -534,17 +531,34 @@ public class AddEventOrgActivity extends AppCompatActivity  {
         );
     }
 
-    private boolean checkCameraPermission(){
-        boolean result = ContextCompat.checkSelfPermission(this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE) == (PackageManager.PERMISSION_GRANTED);
-        boolean result1 = ContextCompat.checkSelfPermission(this,
-                Manifest.permission.CAMERA) == (PackageManager.PERMISSION_GRANTED);
-        return result && result1;
-    }
-
     private void requestCameraPermission(){
         //request runtime camera permission
         ActivityCompat.requestPermissions(this, cameraPermissions, CAMERA_REQUEST_CODE);
+    }
+
+
+    //handle permission result
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        switch (requestCode) {
+            case CAMERA_REQUEST_CODE:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    pickFromCamera();
+                } else {
+                    Toast.makeText(this, "Camera permission denied", Toast.LENGTH_SHORT).show();
+                }
+                break;
+
+            case STORAGE_REQUEST_CODE:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    pickFromGallery();
+                } else {
+                    Toast.makeText(this, "Storage permission denied", Toast.LENGTH_SHORT).show();
+                }
+                break;
+        }
     }
 
     @Override
@@ -601,29 +615,6 @@ public class AddEventOrgActivity extends AppCompatActivity  {
 
 
 
-    //handle permission result
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        switch (requestCode) {
-            case CAMERA_REQUEST_CODE:
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    pickFromCamera();
-                } else {
-                    Toast.makeText(this, "Camera permission denied", Toast.LENGTH_SHORT).show();
-                }
-                break;
-
-            case STORAGE_REQUEST_CODE:
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    pickFromGallery();
-                } else {
-                    Toast.makeText(this, "Storage permission denied", Toast.LENGTH_SHORT).show();
-                }
-                break;
-        }
-    }
 
 
     @Override
@@ -666,22 +657,6 @@ public class AddEventOrgActivity extends AppCompatActivity  {
         startActivity(intent);
     }
 */
-    private void isEventBtn() {
-        eventTruth = !eventTruth; // Toggle the boolean value
-
-        // Update the button text based on the boolean value
-        if (eventTruth) {
-            isEventBtn.setText("Not An Event");
-        } else {
-            isEventBtn.setText("An Event");
-        }
-
-        // Update the value in the Realtime Database
-        // Replace "your_database_reference" with the actual reference to your Realtime Database node
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("your_database_reference");
-        databaseReference.setValue(eventTruth);
-    }
-
 
 
 
