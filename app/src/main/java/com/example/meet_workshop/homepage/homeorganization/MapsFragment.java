@@ -158,8 +158,17 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
             // Handle the confirmed location
             String locationString = "Selected Location: " + selectedLocation.latitude + ", " + selectedLocation.longitude;
             Toast.makeText(requireContext(), locationString, Toast.LENGTH_SHORT).show();
+
+            Intent intent = new Intent(requireActivity(), AddEventOrgActivity.class);
+
+            // Add the selected location as extra data
+            intent.putExtra("SelectedLat", selectedLocation.latitude);
+            intent.putExtra("SelectedLng", selectedLocation.longitude);
+
+            startActivity(intent);
         }
     }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

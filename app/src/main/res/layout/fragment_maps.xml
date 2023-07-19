@@ -8,10 +8,10 @@
     tools:context=".homepage.homeorganization.MapsFragment" >
 
     <Button
-    android:id="@+id/confirmButton"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Confirm Location" />
+        android:id="@+id/confirmButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Confirm Location" />
 
     <LinearLayout
         android:layout_marginTop="30dp"
@@ -37,5 +37,3 @@
 
     </LinearLayout>
 </fragment>
-
-
