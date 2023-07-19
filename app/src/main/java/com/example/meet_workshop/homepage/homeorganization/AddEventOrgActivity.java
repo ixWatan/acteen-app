@@ -93,6 +93,9 @@ public class AddEventOrgActivity extends AppCompatActivity  {
     //progress bar
     ProgressDialog pd;
 
+    private double latitude;
+    private double longitude;
+    private String mapsUri;
 
 /*
     private FusedLocationProviderClient fusedLocationClient;
@@ -121,10 +124,28 @@ public class AddEventOrgActivity extends AppCompatActivity  {
         // Retrieve the data from the Intent
         double latitude = intent.getDoubleExtra("SelectedLat", 0.0);
         double longitude = intent.getDoubleExtra("SelectedLng", 0.0);
+        if (latitude > 0.0 && longitude > 0.0){
+                // Create the Google Maps URI
+                mapsUri = "http://maps.google.com/maps?q=" + latitude + "," + longitude;
 
-        // Use the retrieved data as needed
-        String locationTag = "Location: " + latitude + ", " + longitude;
-        locationTagTextView.setText(locationTag);
+                // Create a clickable link
+                SpannableString locationLink = new SpannableString("View Location");
+                locationLink.setSpan(new ClickableSpan() {
+                    @Override
+                    public void onClick(View view) {
+                        // Open Google Maps when the link is clicked
+                        Uri gmmIntentUri = Uri.parse(mapsUri);
+                        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                        mapIntent.setPackage("com.google.android.apps.maps");
+                        startActivity(mapIntent);
+                    }
+                }, 0, locationLink.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+                // Set the location link text in the TextView
+                locationTagTextView.setText(locationLink);
+                locationTagTextView.setMovementMethod(LinkMovementMethod.getInstance());
+        }
+
 
         pLocationBtn = findViewById(R.id.pLocationBtn);
         pLocationBtn.setOnClickListener(new View.OnClickListener() {
@@ -292,6 +313,8 @@ public class AddEventOrgActivity extends AppCompatActivity  {
                         dp  = document.getString("profilePictureUrl");
                         Toast.makeText(AddEventOrgActivity.this, dp, Toast.LENGTH_SHORT).show();
 
+                        // Add the link to the post data
+                        hashMap.put("pLocationLink", mapsUri);
                         hashMap.put("uName", name);
                         hashMap.put("uDp", dp);
                     }
@@ -337,6 +360,10 @@ public class AddEventOrgActivity extends AppCompatActivity  {
                                                 descripionEt.setText("");
                                                 imageIv.setImageURI(null);
                                                 image_uri = null;
+                                                longitude = 0.0;
+                                                latitude = 0.0;
+                                                mapsUri = "";
+                                                locationTagTextView.setText("Location");
                                             }
                                         })
                                         .addOnFailureListener(new OnFailureListener() {
@@ -365,6 +392,11 @@ public class AddEventOrgActivity extends AppCompatActivity  {
             //post without image
             //url is received upload post to fireBase storage
             //put post info
+            String mapsLink = locationTagTextView.getText().toString();
+            // Add the link to the post data
+            hashMap.put("pLocationLink", mapsLink);
+            hashMap.put("uName", name);
+            hashMap.put("uDp", dp);
             hashMap.put("uid", uid);
             hashMap.put("uEmail", email);
             hashMap.put("pId", timeStamp);
@@ -387,6 +419,8 @@ public class AddEventOrgActivity extends AppCompatActivity  {
                             descripionEt.setText("");
                             imageIv.setImageURI(null);
                             image_uri = null;
+                            longitude = 0.0;
+                            latitude = 0.0;
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -606,31 +640,6 @@ public class AddEventOrgActivity extends AppCompatActivity  {
             }
         }
 
-        if (requestCode == MAP_ACTIVITY_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            // Get the selected location from the ChooseLocationActivity
-            double latitude = data.getDoubleExtra("SelectedLat", 0.0);
-            double longitude = data.getDoubleExtra("SelectedLng", 0.0);
-
-            // Create the Google Maps URI
-            String mapsUri = "http://maps.google.com/maps?q=" + latitude + "," + longitude;
-
-            // Create a clickable link
-            SpannableString locationLink = new SpannableString("View Location");
-            locationLink.setSpan(new ClickableSpan() {
-                @Override
-                public void onClick(View view) {
-                    // Open Google Maps when the link is clicked
-                    Uri gmmIntentUri = Uri.parse(mapsUri);
-                    Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-                    mapIntent.setPackage("com.google.android.apps.maps");
-                    startActivity(mapIntent);
-                }
-            }, 0, locationLink.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-            // Set the location link text in the TextView
-            locationTagTextView.setText(locationLink);
-            locationTagTextView.setMovementMethod(LinkMovementMethod.getInstance());
-        }
     }
 
 
@@ -680,6 +689,7 @@ public class AddEventOrgActivity extends AppCompatActivity  {
         Intent intent = new Intent(AddEventOrgActivity.this, ChooseLocationActivity.class);
         startActivityForResult(intent, MAP_ACTIVITY_REQUEST_CODE);
     }
+
 
 
 }

@@ -163,7 +163,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
             // Add the selected location as extra data
             intent.putExtra("SelectedLat", selectedLocation.latitude);
             intent.putExtra("SelectedLng", selectedLocation.longitude);
-
             startActivity(intent);
         }
     }

@@ -1,4 +1,6 @@
 package com.example.meet_workshop.homepage.homeorganization;
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.meet_workshop.R;
@@ -18,4 +20,7 @@ public class ChooseLocationActivity extends AppCompatActivity {
                     .commit();
         }
     }
+
+    // Inside ChooseLocationActivity
+
 }
