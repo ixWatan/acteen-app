@@ -1,119 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="300dp"
+    android:layout_gravity="center_horizontal"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="3dp"
+    app:cardCornerRadius="20dp"
     app:cardElevation="3dp"
     app:contentPadding="5dp"
+    android:background="@drawable/rounded_rectangle"
     app:cardUseCompatPadding="true"
-    app:cardBackgroundColor="@color/white">
+    android:layout_marginBottom="50dp"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:clickable="true"
+        android:layout_gravity="center_vertical"
         android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:gravity="center_vertical">
-            <ImageView
-             android:id="@+id/uPictureIv"
-                android:src="@drawable/activistr_logo"
-                android:layout_width="50dp"
-                android:layout_height="50dp"/>
+            android:layout_gravity="center_vertical">
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/pImageIv"
+                android:layout_width="match_parent"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize20PercentFeedPost"
+                android:layout_height="290dp"
+                android:src="@drawable/image_post_example"
+                android:background="@drawable/rounded_rectangle"/>
 
-            <LinearLayout
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
+       <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:orientation="horizontal">
+           <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content" >
 
-                <TextView
-                    android:id="@+id/uNameTv"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Name"
-                    android:textColor="@color/Black"
-                    android:textSize="20sp" />
+               <TextView
+                   android:id="@+id/pDateTv"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="   Date   "
+                   android:layout_alignParentRight="true"
+                   android:gravity="center" >
+               </TextView>
 
-                <TextView
-                    android:id="@+id/uTimeTv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="33 min"
-                    android:textColor="@color/Black"
-                    android:textSize="10sp" />
+               <TextView
+                   android:id="@+id/pTitleTv"
+                   android:layout_width="wrap_content"
+                   android:text="Title Of Event"
+                   android:textStyle="bold"
+                   android:textColor="@color/black"
+                   android:layout_marginLeft="10dp"
+                   android:layout_height="wrap_content"
+                   android:layout_alignParentLeft="true"
+                   android:layout_toLeftOf="@id/pDateTv"
+                    >
+               </TextView>
+           </RelativeLayout>
+       </LinearLayout>
 
-            </LinearLayout>
-                <ImageButton
-                    android:id="@+id/moreBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:src="@drawable/ic_more_img"/>
 
-        </LinearLayout>
-        <TextView
-            android:id="@+id/pTitleTv"
+
+            <TextView
+            android:id="@+id/pLocationTv"
+            android:drawableLeft="@drawable/icon_location"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Title"
-            android:textColor="@color/Black"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:autoLink="all"/>
-        <TextView
-            android:id="@+id/pDescriptionTv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="The description of the post"
+            android:text="Location"
             android:autoLink="all"
             android:textColor="@color/Black"/>
-        <ImageView
-            android:id="@+id/pImageIv"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:background="@color/white"/>
-
-        <TextView
-            android:id="@+id/pLikesTv"
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:text="1.2 Likes"
-            android:background="@color/white"/>
-        
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/primaryDarkColor"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center">
-            <Button
-                android:layout_width="wrap_content"
-                android:id="@+id/likeBtn"
-                android:layout_height="wrap_content"
-                android:layout_weight = "1"
-                android:text = "LIKE"/>
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight = "1"
-                android:id="@+id/commentBtn"
-
-                android:text = "LIKE"/>
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight = "1"
-                android:id="@+id/shareBtn"
-                android:text = "LIKE"/>
         </LinearLayout>
-
     </LinearLayout>
+
+
+
+
+
+
 </androidx.cardview.widget.CardView>

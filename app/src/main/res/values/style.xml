@@ -2,7 +2,14 @@
 <resources>
 
     <style name="ShapeAppearanceOverlay.App.CornerSize20Percent" parent="">
-        <item name="cornerSize">24%</item>
+    <item name="cornerSize">24%</item>
+</style>
+
+    <style name="ShapeAppearanceOverlay.App.CornerSize20PercentFeedPost" parent="">
+        <item name="cornerSizeTopLeft">5%</item>
+        <item name="cornerSizeTopRight">5%</item>
+
+
     </style>
 
     <style name="ShapeAppearanceOverlay.App.CornerSize50Percent" parent="">

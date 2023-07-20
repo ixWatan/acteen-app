@@ -5,10 +5,10 @@
 
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="29"
-        tools:ignore="ScopedStorage"
-        />
+        tools:ignore="ScopedStorage" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -29,7 +29,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Meetworkshop"
         tools:targetApi="31">
-
+        <activity
+            android:name=".ShowPostActivity"
+            android:exported="false" />
         <activity
             android:name=".homepage.homeorganization.SearchActivityOrg"
             android:exported="false"

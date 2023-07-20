@@ -11,11 +11,14 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.meet_workshop.R;
+import com.example.meet_workshop.ShowPostActivity;
 import com.example.meet_workshop.homepage.adapters.AdapterPosts;
+import com.example.meet_workshop.homepage.interfaces.RecyclerViewInterface;
 import com.example.meet_workshop.homepage.models.ModelPost;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -27,7 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements RecyclerViewInterface {
 
     FirebaseAuth firebaseAuth;
 
@@ -120,6 +123,8 @@ public class HomeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+
+
     private void loadPosts() {
         pd = new ProgressDialog(this);
         pd.setMessage("Loading Posts...");
@@ -136,9 +141,11 @@ public class HomeActivity extends AppCompatActivity {
                     ModelPost modelPost = ds.getValue(ModelPost.class);
 
                     postList.add(modelPost);
+                    Toast.makeText(HomeActivity.this, "" + "I Wanna Kill Myself", Toast.LENGTH_SHORT).show();
+
 
                     // adapter
-                    adapterPosts = new AdapterPosts(HomeActivity.this, postList);
+                    adapterPosts = new AdapterPosts(HomeActivity.this, postList, null);
 
                     //set  adapter to recyclerview
                     recyclerView.setAdapter(adapterPosts);
@@ -156,6 +163,26 @@ public class HomeActivity extends AppCompatActivity {
             }
 
         });
+    }
+
+  /*  RecycleClick.addTo(recyclerView).setOnItemClickListener(new RecycleClick.OnItemClickListener() {
+        @Override
+        public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+            Toast.makeText(HomeActivity.this, "Clicked On Item", Toast.LENGTH_SHORT).show();
+        }
+    });
+*/
+    @Override
+   public void onItemClick(int position) {
+
+        Intent intent = new Intent(this, ShowPostActivity.class);
+        ModelPost post = postList.get(position);
+        intent.putExtra("org_name", post.getuName());
+        intent.putExtra("org_profile_image", post.getuDp());
+
+        startActivity(intent);
+
+
     }
 
 
@@ -180,5 +207,3 @@ public class HomeActivity extends AppCompatActivity {
 
 
 }
-
-
