@@ -4,19 +4,20 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Location;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.SearchView;
 import android.widget.Toast;
-
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.widget.Autocomplete;
+import com.google.android.libraries.places.widget.AutocompleteActivity;
 import com.example.meet_workshop.R;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -28,20 +29,16 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.libraries.places.api.Places;
-import com.google.android.libraries.places.api.model.Place;
-import com.google.android.libraries.places.api.net.PlacesClient;
-import com.google.android.libraries.places.widget.Autocomplete;
-import com.google.android.libraries.places.widget.AutocompleteActivity;
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 
 import java.util.Arrays;
 import java.util.List;
 
+
 public class MapsFragment extends Fragment implements OnMapReadyCallback,
         GoogleMap.OnMapClickListener, GoogleMap.OnMarkerDragListener {
 
-    private AutoCompleteTextView placeAutoCompleteTextView;
+
     private GoogleMap mMap;
     private Marker selectedMarker;
     private Button confirmButton;
@@ -65,24 +62,33 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
             }
         });
 
-       /* placeAutoCompleteTextView = view.findViewById(R.id.placeAutoCompleteTextView);
-        placeAutoCompleteTextView.setOnItemClickListener((parent, view1, position, id) -> {
-            Place place = (Place) parent.getItemAtPosition(position);
-            if (place != null) {
-                LatLng selectedLocation = place.getLatLng();
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(selectedLocation, 15f));
-                if (selectedMarker != null) {
-                    selectedMarker.remove();
-                }
-                selectedMarker = mMap.addMarker(new MarkerOptions().position(selectedLocation).draggable(true));
-                confirmButton.setVisibility(View.VISIBLE);
-            }
-        });*/
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity());
 
         // Initialize the Places API
         Places.initialize(requireContext(), "AIzaSyAEBeBv-EtGsHmSq9CNC6qfuEv6mTH0YH0");
+
+        SearchView searchView = view.findViewById(R.id.searchView);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                // Handle search query here
+                // For example, you can start the place autocomplete activity
+                List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG);
+                Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.OVERLAY, fields)
+                        .setInitialQuery(query)
+                        .build(requireActivity());
+                startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                // You can also handle changes in the search text here if necessary
+                return false;
+            }
+        });
+
 
         return view;
     }
