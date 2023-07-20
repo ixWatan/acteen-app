@@ -4,11 +4,16 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.app.TimePickerDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -21,9 +26,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 import androidx.appcompat.app.ActionBar;
 import androidx.annotation.NonNull;
@@ -49,6 +56,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.util.Calendar;
 import java.util.HashMap;
 import pub.devrel.easypermissions.EasyPermissions;
 
@@ -65,7 +76,7 @@ public class AddEventOrgActivity extends AppCompatActivity  {
     private static final int IMAGE_PICK_CAMERA_CODE = 300;
     private static final int IMAGE_PICK_GALLERY_CODE = 400;
 
-    private static final int MAP_ACTIVITY_REQUEST_CODE = 1001;
+    //private static final int MAP_ACTIVITY_REQUEST_CODE = 1001;
 
 
     //permissions array
@@ -74,8 +85,11 @@ public class AddEventOrgActivity extends AppCompatActivity  {
 
     //views
     EditText titleEt,descripionEt;
+
+    //Date, Start Time, End Time
+    EditText editTextDate, editTextStart, editTextEnd;
     ImageView imageIv;
-    Button uploadbtn, isEventBtn, pLocationBtn;
+    Button uploadbtn, pLocationBtn;
 
     //show location TV
     TextView locationTagTextView;
@@ -112,14 +126,73 @@ public class AddEventOrgActivity extends AppCompatActivity  {
         ImageButton NavButton = findViewById(R.id.nav_addPost);
         NavButton.setColorFilter(Color.rgb(255, 223, 54)); // Yellow Tint*/
 
+        editTextDate = findViewById(R.id.editTextDate);
+        editTextDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar cldr = Calendar.getInstance();
+                int day = cldr.get(Calendar.DAY_OF_MONTH);
+                int month = cldr.get(Calendar.MONTH);
+                int year = cldr.get(Calendar.YEAR);
+                // date picker dialog
+                DatePickerDialog picker = new DatePickerDialog(AddEventOrgActivity.this,
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                                editTextDate.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                            }
+                        }, year, month, day);
+                picker.show();
+            }
+        });
+
+        editTextStart = findViewById(R.id.editTextStart);
+        editTextStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar cldr = Calendar.getInstance();
+                int hour = cldr.get(Calendar.HOUR_OF_DAY);
+                int minutes = cldr.get(Calendar.MINUTE);
+                // time picker dialog
+                TimePickerDialog picker = new TimePickerDialog(AddEventOrgActivity.this,
+                        new TimePickerDialog.OnTimeSetListener() {
+                            @Override
+                            public void onTimeSet(TimePicker tp, int sHour, int sMinute) {
+                                editTextStart.setText(sHour + ":" + sMinute);
+                            }
+                        }, hour, minutes, true);
+                picker.show();
+            }
+        });
+
+        editTextEnd = findViewById(R.id.editTextEnd);
+        editTextEnd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar cldr = Calendar.getInstance();
+                int hour = cldr.get(Calendar.HOUR_OF_DAY);
+                int minutes = cldr.get(Calendar.MINUTE);
+                // time picker dialog
+                TimePickerDialog picker = new TimePickerDialog(AddEventOrgActivity.this,
+                        new TimePickerDialog.OnTimeSetListener() {
+                            @Override
+                            public void onTimeSet(TimePicker tp, int sHour, int sMinute) {
+                                editTextEnd.setText(sHour + ":" + sMinute);
+                            }
+                        }, hour, minutes, true);
+                picker.show();
+            }
+        });
+
+
         locationTagTextView = findViewById(R.id.locationTagTextView);
 
         // Retrieve the Intent object
         Intent intent = getIntent();
 
         // Retrieve the data from the Intent
-        double latitude = intent.getDoubleExtra("SelectedLat", 0.0);
-        double longitude = intent.getDoubleExtra("SelectedLng", 0.0);
+        latitude = intent.getDoubleExtra("SelectedLat", 0.0);
+        longitude = intent.getDoubleExtra("SelectedLng", 0.0);
         if (latitude > 0.0 && longitude > 0.0){
                 // Create the Google Maps URI
                 mapsUri = "http://maps.google.com/maps?q=" + latitude + "," + longitude;
@@ -301,8 +374,19 @@ public class AddEventOrgActivity extends AppCompatActivity  {
                         dp  = document.getString("profilePictureUrl");
                         Toast.makeText(AddEventOrgActivity.this, dp, Toast.LENGTH_SHORT).show();
 
+                        String selectedDate = editTextDate.getText().toString();
+                        String selectedStartTime = editTextStart.getText().toString();
+                        String selectedEndTime = editTextEnd.getText().toString();
+
+                        //ade date, start time and end time
+                        hashMap.put("pDate", selectedDate);
+                        hashMap.put("pStartT", selectedStartTime);
+                        hashMap.put("pEndT", selectedEndTime);
+
                         // Add the link to the post data
                         hashMap.put("pLocationLink", mapsUri);
+
+                        //ad name and image
                         hashMap.put("uName", name);
                         hashMap.put("uDp", dp);
                     }
@@ -352,6 +436,10 @@ public class AddEventOrgActivity extends AppCompatActivity  {
                                                 latitude = 0.0;
                                                 mapsUri = "";
                                                 locationTagTextView.setText("Location");
+                                                editTextDate.setText("");
+                                                editTextStart.setText("");
+                                                editTextEnd.setText("");
+
                                             }
                                         })
                                         .addOnFailureListener(new OnFailureListener() {
@@ -377,6 +465,9 @@ public class AddEventOrgActivity extends AppCompatActivity  {
                     });
         }
         else {
+
+        }
+        /*else {
             //post without image
             //url is received upload post to fireBase storage
             //put post info
@@ -419,7 +510,7 @@ public class AddEventOrgActivity extends AppCompatActivity  {
                             Toast.makeText(AddEventOrgActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
-        }
+        }*/
     }
 
     private void showImagePickDialog() {
@@ -567,11 +658,7 @@ public class AddEventOrgActivity extends AppCompatActivity  {
         checkUserStatus();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        checkUserStatus();
-    }
+
 
     private void checkUserStatus() {
         //get current user
@@ -660,11 +747,85 @@ public class AddEventOrgActivity extends AppCompatActivity  {
 
 
 
-    private void openMapActivity() {
+    /*private void openMapActivity() {
         Intent intent = new Intent(AddEventOrgActivity.this, ChooseLocationActivity.class);
         startActivityForResult(intent, MAP_ACTIVITY_REQUEST_CODE);
+    }*/
+
+
+   /* @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        // Put data into the bundle with a key to access it later
+        outState.putString("Title", titleEt.getText().toString());
+        outState.putString("Description", descripionEt.getText().toString());
+        outState.putString("Date", editTextDate.getText().toString());
+        outState.putString("StartTime", editTextStart.getText().toString());
+        outState.putString("EndTime", editTextEnd.getText().toString());
     }
 
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        // Retrieve and set the data from the bundle
+        titleEt.setText(savedInstanceState.getString("Title"));
+        descripionEt.setText(savedInstanceState.getString("Description"));
+        editTextDate.setText(savedInstanceState.getString("Date"));
+        editTextStart.setText(savedInstanceState.getString("StartTime"));
+        editTextEnd.setText(savedInstanceState.getString("EndTime"));
+    }
+*/
+   @Override
+   protected void onPause() {
+       super.onPause();
+
+
+       SharedPreferences prefs = getSharedPreferences("myprefs", MODE_PRIVATE);
+       SharedPreferences.Editor editor = prefs.edit();
+
+       editor.putString("Title", titleEt.getText().toString());
+       editor.putString("Description", descripionEt.getText().toString());
+       editor.putString("Date", editTextDate.getText().toString());
+       editor.putString("StartTime", editTextStart.getText().toString());
+       editor.putString("EndTime", editTextEnd.getText().toString());
+
+       // Save the Uri as a String
+       if (image_uri != null) {
+           editor.putString("ImageUri", image_uri.toString());
+       }
+
+
+
+       editor.apply();
+   }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        checkUserStatus();
+
+        SharedPreferences prefs = getSharedPreferences("myprefs", MODE_PRIVATE);
+
+        titleEt.setText(prefs.getString("Title", ""));
+        descripionEt.setText(prefs.getString("Description", ""));
+        editTextDate.setText(prefs.getString("Date", ""));
+        editTextStart.setText(prefs.getString("StartTime", ""));
+        editTextEnd.setText(prefs.getString("EndTime", ""));
+
+        String imageUriString = prefs.getString("ImageUri", null);
+        if (imageUriString != null) {
+            image_uri = Uri.parse(imageUriString);
+            try {
+                InputStream inputStream = getContentResolver().openInputStream(image_uri);
+                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                imageIv.setImageBitmap(bitmap);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
 
 }
