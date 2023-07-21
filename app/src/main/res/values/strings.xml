@@ -24,6 +24,7 @@
     <string name="profile_pic_watan"> https://firebasestorage.googleapis.com/v0/b/meet-workshop.appspot.com/o/profile_pictures%2Frj2pEdoeJpMS5651NakJdjBkjdc2.jpg?alt=media&amp;token=666755ab-0274-41c8-a9e4-a4d355c5b986.jpg
 </string>
     <string name="title_activity_search_org">SearchActivityOrg</string>
+    <string name="descreption_dummy">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nisi ligula, interdum a tristique id, porta quis leo. Donec bibendum tellus vitae mauris tempus porta. Donec iaculis auctor quam vitae porttitor. Aenean ut risus pretium nulla congue varius sed a elit. Sed viverra purus ac dolor tincidunt rhoncus a et leo. Aliquam erat volutpat. Etiam mattis lacus turpis</string>
 
 
 </resources>

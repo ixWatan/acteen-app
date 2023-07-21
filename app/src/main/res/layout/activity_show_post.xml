@@ -1,17 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ShowPostActivity">
 
-    <TextView
-        android:id="@+id/showNameOrg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textSize="30sp"
-        tools:layout_editor_absoluteX="72dp"
-        tools:layout_editor_absoluteY="110dp" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="15dp"
+
+        android:orientation="vertical">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/showImagePost"
+        android:layout_width="match_parent"
+        android:adjustViewBounds="true"
+        android:layout_marginTop="30dp"
+        android:scaleType="centerCrop"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize20PercentShowPost"
+        android:layout_height="250dp"
+        android:src="@drawable/image_post_example"
+        android:background="@drawable/rounded_rectangle"/>
+
+        <TextView
+            android:id="@+id/showNameOrg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dp"
+            android:paddingBottom="10dp"
+            android:text="Organization Name"
+            android:textColor="@android:color/black"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/showLocationAndDateAndTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:text="Locatiom + Date + Start and end time"
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
+         />
+
+        <TextView
+            android:id="@+id/showDescreption"
+            android:layout_width="wrap_content"
+            android:layout_height="130dp"
+            android:paddingBottom="10dp"
+            android:text="@string/descreption_dummy"
+            android:lineSpacingExtra="4sp"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="13sp"
+            />
+
+        <TextView
+            android:id="@+id/showTagText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:text="Tags"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            />
+        <TextView
+            android:id="@+id/showTagLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="#Environment"
+            android:background="@drawable/tag_event_background"
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="15dp"
+            android:textStyle="bold"
+            android:letterSpacing="0.1"
+            android:textColor="@android:color/white"
+            android:textSize="11sp"
+            />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+
+                android:layout_height="wrap_content" >
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_alignParentRight="true"
+                    >
+
+                <ImageView
+                    android:id="@+id/likeBtn"
+                    android:layout_width="40dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/icon_account"
+                    android:gravity="center" >
+                </ImageView>
+                <ImageView
+                    android:id="@+id/saveBtn"
+                    android:layout_width="40dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/icon_home"
+                    android:gravity="center" >
+                </ImageView>
+                <ImageView
+                    android:id="@+id/shareBtn"
+                    android:layout_width="40dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/icon_management"
+                    android:gravity="center" >
+                </ImageView>
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/pTitleTv"
+                    android:layout_width="80dp"
+                    android:text="Attend"
+                    android:textSize="10sp"
+                    android:textColor="@color/black"
+                    android:layout_marginLeft="10dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentLeft="true"
+                    >
+                </Button>
+            </RelativeLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+</RelativeLayout>

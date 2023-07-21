@@ -227,11 +227,7 @@ public class AddEventOrgActivity extends AppCompatActivity  {
 
 
 
-        actionBar = getSupportActionBar();
-        actionBar.setTitle("Add New Post");
-        //enable back button in actionbar
-        actionBar.setDisplayShowHomeEnabled(true);
-        actionBar.setDisplayHomeAsUpEnabled(true);
+
 
         //init permissions arrays
         cameraPermissions = new String[] {android.Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
@@ -242,7 +238,6 @@ public class AddEventOrgActivity extends AppCompatActivity  {
         firebaseAuth = FirebaseAuth.getInstance();
         checkUserStatus();
 
-        actionBar.setSubtitle(email);
 
         //get some info of current user to include in the post
 //        userDbRef = FirebaseDatabase.getInstance().getReference("organizations");

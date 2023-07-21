@@ -132,7 +132,7 @@ public class HomeOrgActivity extends AppCompatActivity {
     }
 
     private void loadPosts() {
-        pd = new ProgressDialog(this);
+    /*    pd = new ProgressDialog(this);
         pd.setMessage("Loading Posts...");
         pd.show();
         //path of  all posts
@@ -150,9 +150,9 @@ public class HomeOrgActivity extends AppCompatActivity {
 
 
                     // adapter
-/*
+*//*
                     adapterPosts = new AdapterPosts(HomeOrgActivity.this, postList);
-*/
+*//*
 
                     //set  adapter to recyclerview
                     recyclerView.setAdapter(adapterPosts);
@@ -168,7 +168,7 @@ public class HomeOrgActivity extends AppCompatActivity {
                 // in case of error
             }
 
-        });
+        });*/
     }
 
 
