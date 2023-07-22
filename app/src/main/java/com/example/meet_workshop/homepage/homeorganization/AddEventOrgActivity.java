@@ -4,8 +4,10 @@ import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
@@ -47,6 +49,7 @@ import com.google.firebase.storage.UploadTask;
 import com.yalantis.ucrop.UCrop;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.HashMap;
 
@@ -88,6 +91,9 @@ public class AddEventOrgActivity extends AppCompatActivity {
     private double longitude;
     private String mapsUri;
 
+    private static final int PICK_IMAGE = 1;
+
+
 /*
     private FusedLocationProviderClient fusedLocationClient;
     private LocationRequest locationRequest;
@@ -109,7 +115,7 @@ public class AddEventOrgActivity extends AppCompatActivity {
         imageIv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mGetContent.launch("image/*"); // the argument here is the MIME type you want to accept
+                mGetContent.launch("image/*");
             }
         });
 
@@ -552,22 +558,19 @@ public class AddEventOrgActivity extends AppCompatActivity {
 
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == UCROP_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
             Uri resultUri = UCrop.getOutput(data);
-
-            // Set the cropped image as the source of the ImageView
-            imageIv = findViewById(R.id.pImageIv);
-            imageIv.setImageURI(resultUri);
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), resultUri);
+                imageIv.setImageBitmap(bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
-
-
-
-
-
 
 
 
