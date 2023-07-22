@@ -10,8 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.meet_workshop.homepage.homeactivist.HomeActivity;
-import com.example.meet_workshop.homepage.models.ModelPost;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.squareup.picasso.Picasso;
 
 import java.util.Calendar;

@@ -79,6 +79,11 @@ public class AddEventOrgActivity extends AppCompatActivity {
 
     //Date, Start Time, End Time
     EditText editTextDate, editTextStart, editTextEnd;
+
+    String selectedDate;
+    String selectedStartTime;
+    String selectedEndTime;
+
     ImageView imageIv;
     Button uploadbtn, pLocationBtn;
 
@@ -96,6 +101,9 @@ public class AddEventOrgActivity extends AppCompatActivity {
     private double latitude;
     private double longitude;
     private String mapsUri;
+
+    SpannableString locationLink;
+
 
     private static final int PICK_IMAGE = 1;
 
@@ -143,6 +151,12 @@ public class AddEventOrgActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 String selectedHashtag = adapterView.getItemAtPosition(position).toString();
+
+                if (selectedHashtags.size() >= 3) {
+                    Toast.makeText(AddEventOrgActivity.this, "You can select only 3 hashtags", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 if (!selectedHashtags.contains(selectedHashtag)) {
                     selectedHashtags.add(selectedHashtag);
                     TextView hashtagTv = new TextView(AddEventOrgActivity.this);
@@ -159,8 +173,12 @@ public class AddEventOrgActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(AddEventOrgActivity.this, "You have already selected this hashtag", Toast.LENGTH_SHORT).show();
                 }
+
+                // Clear the AutoCompleteTextView text
+                autoCompleteTextView.setText("");
             }
         });
+
 
 
 
@@ -264,7 +282,7 @@ public class AddEventOrgActivity extends AppCompatActivity {
             mapsUri = "http://maps.google.com/maps?q=" + Uri.encode(locationAddressInAddEvent);
 
             // Create a clickable link
-            SpannableString locationLink = new SpannableString(locationAddressInAddEvent);
+            locationLink = new SpannableString(locationAddressInAddEvent);
             locationLink.setSpan(new ClickableSpan() {
                 @Override
                 public void onClick(View view) {
@@ -389,6 +407,40 @@ public class AddEventOrgActivity extends AppCompatActivity {
 
 
     private void uploadData(String title, String description, String uri) {
+
+        // Check if at least one hashtag is selected
+        if (selectedHashtags.isEmpty()) {
+            Toast.makeText(AddEventOrgActivity.this, "You must select at least one hashtag", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Check if location is selected
+
+        if (mapsUri == null || mapsUri.isEmpty()) {
+            Toast.makeText(AddEventOrgActivity.this, "You must select a location", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Check if date is selected
+        selectedDate = editTextDate.getText().toString();
+        if (selectedDate.isEmpty()) {
+            Toast.makeText(AddEventOrgActivity.this, "You must select a date", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Check if start hour is selected
+        selectedStartTime = editTextStart.getText().toString();
+        if (selectedStartTime.isEmpty()) {
+            Toast.makeText(AddEventOrgActivity.this, "You must select a start hour", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Check if end hour is selected
+        selectedEndTime = editTextEnd.getText().toString();
+        if (selectedEndTime.isEmpty()) {
+            Toast.makeText(AddEventOrgActivity.this, "You must select an end hour", Toast.LENGTH_SHORT).show();
+            return;
+        }
         pd.setMessage("Publishing post...");
         pd.show();
 
@@ -411,14 +463,18 @@ public class AddEventOrgActivity extends AppCompatActivity {
                         dp = document.getString("profilePictureUrl");
                         Toast.makeText(AddEventOrgActivity.this, dp, Toast.LENGTH_SHORT).show();
 
-                        String selectedDate = editTextDate.getText().toString();
-                        String selectedStartTime = editTextStart.getText().toString();
-                        String selectedEndTime = editTextEnd.getText().toString();
+                        selectedDate = editTextDate.getText().toString();
+                        selectedStartTime = editTextStart.getText().toString();
+                        selectedEndTime = editTextEnd.getText().toString();
 
                         //ade date, start time and end time
                         hashMap.put("pDate", selectedDate);
                         hashMap.put("pStartT", selectedStartTime);
                         hashMap.put("pEndT", selectedEndTime);
+
+                        // Add the link to the post data
+                        hashMap.put("pLocationLinkReal", locationTagTextView.getText().toString());
+
 
                         // Add the link to the post data
                         hashMap.put("pLocationLink", mapsUri);
