@@ -33,6 +33,14 @@ public class ShowPostActivity extends AppCompatActivity {
 
     String postTags;
 
+    String postLocation;
+    String postTimeS;
+    String postTimeE;
+
+    String postDate;
+
+    String LocationAndTime;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +55,7 @@ public class ShowPostActivity extends AppCompatActivity {
         ImageView postImageIv = (ImageView) findViewById(R.id.showImagePost);
         TextView postTitleTv = (TextView) findViewById(R.id.showPostTitle);
         ImageView postPorfileIv = (ImageView) findViewById(R.id.showPostProfileImg);
+        TextView postLocationAndTime = (TextView) findViewById(R.id.showLocationAndDateAndTime);
 
 
         postImage = getIntent().getStringExtra("post_image");
@@ -56,16 +65,25 @@ public class ShowPostActivity extends AppCompatActivity {
         postTimePosted = getIntent().getStringExtra("post_timePosted");
         postTitle = getIntent().getStringExtra("post_title");
         postTags = getIntent().getStringExtra("post_tags");
+        postLocation = getIntent().getStringExtra("post_location");
+        postTimeS = getIntent().getStringExtra("post_startT");
+        postTimeE = getIntent().getStringExtra("post_endT");
+        postDate = getIntent().getStringExtra("post_date");
+
+
 
         Calendar calendar = Calendar.getInstance(Locale.getDefault());
         calendar.setTimeInMillis(Long.parseLong(postTimePosted));
         android.text.format.DateFormat df = new android.text.format.DateFormat();
         String pTime = df.format("dd/MM/yyyy hh:mm aa", calendar).toString();
 
+         LocationAndTime = postLocation + "," + postDate + "," + postTimeS + "-" + postTimeE;
+
 
 
         nameOrgTv.setText(orgName);
         postDescreptionTv.setText(postDescreption);
+        postLocationAndTime.setText(LocationAndTime);
         postTitleTv.setText(postTitle);
         postTimePostedTv.setText(pTime);
         try {

@@ -100,7 +100,6 @@ public class AdapterPosts extends RecyclerView.Adapter<CustomViewHolder> {
         myHolder.pTitleTv.setText(pTitle);
         myHolder.pLocationTv.setText(pLocationLinkReal);
         myHolder.pDateTv.setText(pDate);
-
         // set user profile pic
 
         try {

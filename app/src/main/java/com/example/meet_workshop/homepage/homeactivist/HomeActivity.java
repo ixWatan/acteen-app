@@ -266,7 +266,7 @@ public class HomeActivity extends AppCompatActivity implements SelectListener {
         intent.putExtra("post_date", modelPost.getpDate());
         intent.putExtra("post_tags", modelPost.getpHashtags());
         intent.putExtra("post_locationLink", modelPost.getpLocationLink());
-        intent.putExtra("post_location", modelPost.getpEndT());
+        intent.putExtra("post_location", modelPost.getpLocationLinkReal());
 
 
 
