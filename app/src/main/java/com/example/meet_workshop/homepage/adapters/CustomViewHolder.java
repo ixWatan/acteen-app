@@ -15,7 +15,7 @@ import com.example.meet_workshop.homepage.interfaces.SelectListener;
 
 public class CustomViewHolder extends RecyclerView.ViewHolder {
     ImageView uPictureIv, pImageIv;
-    TextView uNameTv, pTimeTv, pDescriptionTv, pTitleTv, pLikesTv;
+    TextView uNameTv, pDateTv, pDescriptionTv, pTitleTv, pLikesTv, pLocationTv;
     ImageButton moreBtn;
     Button likeBtn, commentBtn, shareBtn;
     CardView cardView;
@@ -29,6 +29,8 @@ public class CustomViewHolder extends RecyclerView.ViewHolder {
         pTitleTv = itemView.findViewById(R.id.pTitleTv);
         pImageIv = itemView.findViewById(R.id.pImageIv);
         cardView = itemView.findViewById(R.id.cardView);
+        pDateTv = itemView.findViewById(R.id.pDateTv);
+        pLocationTv = itemView.findViewById(R.id.pLocationTv);
      /*      uNameTv = itemView.findViewById(R.id.uNameTv);
            pTimeTv = itemView.findViewById(R.id.uTimeTv);
            pDescriptionTv = itemView.findViewById(R.id.pDescriptionTv);
