@@ -234,7 +234,7 @@
                 </LinearLayout>
 
                 <Button
-                    android:id="@+id/pTitleTv"
+                    android:id="@+id/attendBtn"
                     android:layout_width="80dp"
                     android:text="Attend"
                     android:textSize="10sp"

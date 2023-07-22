@@ -1,11 +1,10 @@
 package com.example.meet_workshop;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +33,9 @@ public class ShowPostActivity extends AppCompatActivity {
     String postTags;
 
     String postLocation;
+
+    String locationLinkReal;
+
     String postTimeS;
     String postTimeE;
 
@@ -41,12 +43,21 @@ public class ShowPostActivity extends AppCompatActivity {
 
     String LocationAndTime;
 
+    //attend btn
+    Button attendBtn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_post);
 
+        Intent intent = new Intent(Intent.ACTION_INSERT);
+        intent.setData(CalendarContract.Events.CONTENT_URI);
+        intent.putExtra(CalendarContract.Events.TITLE, postTitle);
+        intent.putExtra(CalendarContract.Events.EVENT_LOCATION, locationLinkReal);
+        intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, postTimeS);
+        intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, postTimeE);
 
 
         TextView nameOrgTv = (TextView) findViewById(R.id.showNameOrg);
@@ -57,6 +68,22 @@ public class ShowPostActivity extends AppCompatActivity {
         ImageView postPorfileIv = (ImageView) findViewById(R.id.showPostProfileImg);
         TextView postLocationAndTime = (TextView) findViewById(R.id.showLocationAndDateAndTime);
 
+        attendBtn = findViewById(R.id.attendBtn);
+
+        attendBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(intent);
+                } else {
+                    // Show error message to user saying "No Application can handle this action"
+                    Toast.makeText(ShowPostActivity.this, "No Application can handle this action", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
+
 
         postImage = getIntent().getStringExtra("post_image");
         uDp = getIntent().getStringExtra("post_user_pfp");
@@ -65,7 +92,8 @@ public class ShowPostActivity extends AppCompatActivity {
         postTimePosted = getIntent().getStringExtra("post_timePosted");
         postTitle = getIntent().getStringExtra("post_title");
         postTags = getIntent().getStringExtra("post_tags");
-        postLocation = getIntent().getStringExtra("post_location");
+        postLocation = getIntent().getStringExtra("post_locationLink");
+        locationLinkReal = getIntent().getStringExtra("post_location");
         postTimeS = getIntent().getStringExtra("post_startT");
         postTimeE = getIntent().getStringExtra("post_endT");
         postDate = getIntent().getStringExtra("post_date");
