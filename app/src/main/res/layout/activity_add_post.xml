@@ -27,7 +27,9 @@
             android:layout_width="match_parent"
             android:layout_height="408dp"
             android:background="@color/colorPrimary"
-            android:minHeight="200dp" />
+            android:minHeight="200dp"
+            android:clickable="true"
+            android:focusable="true"/>
 
 
     <LinearLayout

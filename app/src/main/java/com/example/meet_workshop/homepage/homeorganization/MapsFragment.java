@@ -1,12 +1,10 @@
 package com.example.meet_workshop.homepage.homeorganization;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,10 +12,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.Toast;
-import com.google.android.libraries.places.api.Places;
-import com.google.android.libraries.places.api.model.Place;
-import com.google.android.libraries.places.widget.Autocomplete;
-import com.google.android.libraries.places.widget.AutocompleteActivity;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+
 import com.example.meet_workshop.R;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -29,10 +29,16 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.widget.Autocomplete;
+import com.google.android.libraries.places.widget.AutocompleteActivity;
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 
 public class MapsFragment extends Fragment implements OnMapReadyCallback,
@@ -161,17 +167,17 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
         if (selectedMarker != null) {
             LatLng selectedLocation = selectedMarker.getPosition();
             // Handle the confirmed location
-            String locationString = "Selected Location: " + selectedLocation.latitude + ", " + selectedLocation.longitude;
-            Toast.makeText(requireContext(), locationString, Toast.LENGTH_SHORT).show();
+            String locationAddress = getAddressFromLatLng(selectedLocation);
+            Toast.makeText(requireContext(), "Selected Location: " + locationAddress, Toast.LENGTH_SHORT).show();
 
             Intent intent = new Intent(requireActivity(), AddEventOrgActivity.class);
 
-            // Add the selected location as extra data
-            intent.putExtra("SelectedLat", selectedLocation.latitude);
-            intent.putExtra("SelectedLng", selectedLocation.longitude);
+            // Add the selected location address as extra data
+            intent.putExtra("SelectedLocation", locationAddress);
             startActivity(intent);
         }
     }
+
 
 
     @Override
@@ -218,4 +224,19 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
             }
         }
     }
+
+    private String getAddressFromLatLng(LatLng latLng) {
+        Geocoder geocoder = new Geocoder(requireActivity(), Locale.getDefault());
+
+        try {
+            List<Address> addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
+            Address obj = addresses.get(0);
+            String add = obj.getAddressLine(0);
+            return add;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "Unknown";
+        }
+    }
+
 }

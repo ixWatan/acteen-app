@@ -1,4 +1,5 @@
 package com.example.meet_workshop.homepage.homeorganization;
+
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
@@ -20,9 +21,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-import androidx.appcompat.app.ActionBar;
+
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.meet_workshop.MainActivity;
 import com.example.meet_workshop.R;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -37,16 +44,19 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.yalantis.ucrop.UCrop;
+
+import java.io.File;
 import java.util.Calendar;
 import java.util.HashMap;
 
 
-public class AddEventOrgActivity extends AppCompatActivity  {
+public class AddEventOrgActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     ActionBar actionBar;
 
     //permissions
-
+    private static final int UCROP_REQUEST_CODE = 942;
 
 
     //picked image will be saved in this uri
@@ -56,7 +66,7 @@ public class AddEventOrgActivity extends AppCompatActivity  {
 
 
     //views
-    EditText titleEt,descripionEt;
+    EditText titleEt, descripionEt;
 
     //Date, Start Time, End Time
     EditText editTextDate, editTextStart, editTextEnd;
@@ -72,6 +82,8 @@ public class AddEventOrgActivity extends AppCompatActivity  {
     //progress bar
     ProgressDialog pd;
 
+    private String locationAddressInAddEvent;
+
     private double latitude;
     private double longitude;
     private String mapsUri;
@@ -82,11 +94,27 @@ public class AddEventOrgActivity extends AppCompatActivity  {
     private LocationCallback locationCallback;*/
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_post);
+
+        //init views
+        titleEt = findViewById(R.id.pTitleEt);
+        descripionEt = findViewById(R.id.pDescriptionEt);
+        imageIv = findViewById(R.id.pImageIv);
+        uploadbtn = findViewById(R.id.pUploadBtn);
+
+        imageIv = findViewById(R.id.pImageIv);
+        imageIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mGetContent.launch("image/*"); // the argument here is the MIME type you want to accept
+            }
+        });
+
+
+
 
 
         /*
@@ -162,28 +190,29 @@ public class AddEventOrgActivity extends AppCompatActivity  {
         Intent intent = getIntent();
 
         // Retrieve the data from the Intent
+        String locationAddressInAddEvent = intent.getStringExtra("SelectedLocation");
         latitude = intent.getDoubleExtra("SelectedLat", 0.0);
         longitude = intent.getDoubleExtra("SelectedLng", 0.0);
-        if (latitude > 0.0 && longitude > 0.0){
-                // Create the Google Maps URI
-                mapsUri = "http://maps.google.com/maps?q=" + latitude + "," + longitude;
+        if (locationAddressInAddEvent != null && !locationAddressInAddEvent.isEmpty()) {
+            // Create the Google Maps URI using the address
+            mapsUri = "http://maps.google.com/maps?q=" + Uri.encode(locationAddressInAddEvent);
 
-                // Create a clickable link
-                SpannableString locationLink = new SpannableString("View Location");
-                locationLink.setSpan(new ClickableSpan() {
-                    @Override
-                    public void onClick(View view) {
-                        // Open Google Maps when the link is clicked
-                        Uri gmmIntentUri = Uri.parse(mapsUri);
-                        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-                        mapIntent.setPackage("com.google.android.apps.maps");
-                        startActivity(mapIntent);
-                    }
-                }, 0, locationLink.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            // Create a clickable link
+            SpannableString locationLink = new SpannableString(locationAddressInAddEvent);
+            locationLink.setSpan(new ClickableSpan() {
+                @Override
+                public void onClick(View view) {
+                    // Open Google Maps when the link is clicked
+                    Uri gmmIntentUri = Uri.parse(mapsUri);
+                    Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                    mapIntent.setPackage("com.google.android.apps.maps");
+                    startActivity(mapIntent);
+                }
+            }, 0, locationLink.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-                // Set the location link text in the TextView
-                locationTagTextView.setText(locationLink);
-                locationTagTextView.setMovementMethod(LinkMovementMethod.getInstance());
+            // Set the location link text in the TextView
+            locationTagTextView.setText(locationLink);
+            locationTagTextView.setMovementMethod(LinkMovementMethod.getInstance());
         }
 
 
@@ -195,9 +224,6 @@ public class AddEventOrgActivity extends AppCompatActivity  {
                 openLocationActivity();
             }
         });
-
-
-
 
 
         pd = new ProgressDialog(this);
@@ -226,22 +252,6 @@ public class AddEventOrgActivity extends AppCompatActivity  {
         });*/
 
 
-        //init views
-        titleEt = findViewById(R.id.pTitleEt);
-        descripionEt = findViewById(R.id.pDescriptionEt);
-        imageIv = findViewById(R.id.pImageIv);
-        uploadbtn = findViewById(R.id.pUploadBtn);
-
-
-        //get image from camera/gallery on click
-        imageIv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-
         //upload button click listener
         uploadbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -251,7 +261,7 @@ public class AddEventOrgActivity extends AppCompatActivity  {
                 String description = descripionEt.getText().toString().trim();
 
 
-                if (TextUtils.isEmpty(title)){
+                if (TextUtils.isEmpty(title)) {
                     Toast.makeText(AddEventOrgActivity.this, "Enter title...", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -260,11 +270,10 @@ public class AddEventOrgActivity extends AppCompatActivity  {
                     return;
                 }
 
-                if (image_uri == null){
+                if (image_uri == null) {
                     Toast.makeText(AddEventOrgActivity.this, "Add an image...", Toast.LENGTH_SHORT).show();
                     return;
-                }
-                else {
+                } else {
                     //post with image
                     uploadData(title, description, String.valueOf(image_uri));
                 }
@@ -333,7 +342,7 @@ public class AddEventOrgActivity extends AppCompatActivity  {
                         name = document.getString("organization_name");
                         Toast.makeText(AddEventOrgActivity.this, name, Toast.LENGTH_SHORT).show();
                         email = document.getString("email");
-                        dp  = document.getString("profilePictureUrl");
+                        dp = document.getString("profilePictureUrl");
                         Toast.makeText(AddEventOrgActivity.this, dp, Toast.LENGTH_SHORT).show();
 
                         String selectedDate = editTextDate.getText().toString();
@@ -354,7 +363,7 @@ public class AddEventOrgActivity extends AppCompatActivity  {
                     }
                 });
 
-        if (!uri.equals("noImage")){
+        if (!uri.equals("noImage")) {
             //post with image
             StorageReference ref = FirebaseStorage.getInstance().getReference().child(filePathAndName);
             ref.putFile(Uri.parse(uri))
@@ -363,11 +372,11 @@ public class AddEventOrgActivity extends AppCompatActivity  {
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             //image is upload to firebase storage, now get it's url
                             Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-                            while (!uriTask.isSuccessful());
+                            while (!uriTask.isSuccessful()) ;
 
                             String downloadUri = uriTask.getResult().toString();
 
-                            if (uriTask.isSuccessful()){
+                            if (uriTask.isSuccessful()) {
 
                                 //url is received upload post to fireBase storage
                                 //put post info
@@ -396,6 +405,7 @@ public class AddEventOrgActivity extends AppCompatActivity  {
                                                 image_uri = null;
                                                 longitude = 0.0;
                                                 latitude = 0.0;
+                                                locationAddressInAddEvent = "";
                                                 mapsUri = "";
                                                 locationTagTextView.setText("Location");
                                                 editTextDate.setText("");
@@ -409,7 +419,7 @@ public class AddEventOrgActivity extends AppCompatActivity  {
                                             public void onFailure(@NonNull Exception e) {
                                                 //failed adding post in database
                                                 pd.dismiss();
-                                                Toast.makeText(AddEventOrgActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(AddEventOrgActivity.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
                                             }
                                         });
 
@@ -422,11 +432,10 @@ public class AddEventOrgActivity extends AppCompatActivity  {
                         public void onFailure(@NonNull Exception e) {
                             //failed uploading image
                             pd.dismiss();
-                            Toast.makeText(AddEventOrgActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AddEventOrgActivity.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
-        }
-        else {
+        } else {
 
         }
         /*else {
@@ -486,13 +495,13 @@ public class AddEventOrgActivity extends AppCompatActivity  {
     private void checkUserStatus() {
         //get current user
         FirebaseUser user = firebaseAuth.getCurrentUser();
-        if (user != null){
+        if (user != null) {
             //user is sign in stay here
             email = user.getEmail();
             uid = user.getUid();
         } else {
             //user not signed in go to ain activity
-            startActivity(new Intent(this,MainActivity.class));
+            startActivity(new Intent(this, MainActivity.class));
             finish();
         }
 
@@ -506,7 +515,7 @@ public class AddEventOrgActivity extends AppCompatActivity  {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main,menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
 
         menu.findItem(R.id.action_add_post).setVisible(false);
         return super.onCreateOptionsMenu(menu);
@@ -516,12 +525,51 @@ public class AddEventOrgActivity extends AppCompatActivity  {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         //get item id
         int id = item.getItemId();
-        if (id == R.id.action_logout){
+        if (id == R.id.action_logout) {
             firebaseAuth.signOut();
             checkUserStatus();
         }
         return super.onOptionsItemSelected(item);
     }
+
+    private final ActivityResultLauncher<String> mGetContent = registerForActivityResult(new ActivityResultContracts.GetContent(),
+            new ActivityResultCallback<Uri>() {
+                @Override
+                public void onActivityResult(Uri uri) {
+                    // Handle the returned Uri
+                    image_uri = uri;
+
+                    // Prepare the Uri for the cropped image
+                    Uri outputUri = Uri.fromFile(new File(getCacheDir(), "cropped"));
+
+                    // Start UCrop
+                    UCrop.of(image_uri, outputUri)
+                            .withAspectRatio(1, 1) // square image
+                            .start(AddEventOrgActivity.this, UCROP_REQUEST_CODE);
+                }
+            });
+
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == UCROP_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
+            Uri resultUri = UCrop.getOutput(data);
+
+            // Set the cropped image as the source of the ImageView
+            imageIv = findViewById(R.id.pImageIv);
+            imageIv.setImageURI(resultUri);
+        }
+    }
+
+
+
+
+
+
+
 
 
 
