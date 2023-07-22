@@ -46,7 +46,7 @@ public class CampaignManagementOrgActivity extends AppCompatActivity {
 
 
         ImageButton NavButton = (ImageButton) this.findViewById(R.id.nav_manage);
-        NavButton.setColorFilter(Color.rgb(255, 223, 54)); // Yellow Tint
+        NavButton.setColorFilter(Color.rgb(0,0,0)); // Yellow Tint
 
         audienceAnalysis.setOnClickListener(new View.OnClickListener() {
             @Override

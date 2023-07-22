@@ -1,6 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_weight="5"
     android:elevation="7dp"
     android:orientation="vertical">
@@ -25,6 +26,8 @@
             android:scaleType="centerInside"
             android:onClick="onNavHomeClick"
             android:padding="10dp"
+            app:tint="@color/lightGrayWatanNavIcons"
+
             />
 
         <ImageButton
@@ -37,7 +40,9 @@
         android:onClick="onNavProfileClick"
         android:padding="10dp"
         android:background="@null"
-        />
+            app:tint="@color/lightGrayWatanNavIcons"
+
+            />
 
 
         <ImageButton
@@ -49,6 +54,8 @@
             android:scaleType="centerInside"
             android:onClick="onNavAddPostClick"
             android:background="@null"
+            app:tint="@color/lightGrayWatanNavIcons"
+
             android:padding="10dp"
             />
 
@@ -60,6 +67,8 @@
             android:src="@drawable/icon_management"
             android:scaleType="centerInside"
             android:onClick="onNavAddPostClick"
+            app:tint="@color/lightGrayWatanNavIcons"
+
             android:background="@null"
             android:padding="10dp"
             />
@@ -76,6 +85,8 @@
             android:scaleType="centerInside"
             android:onClick="onNavProfileClick"
             android:padding="10dp"
+            app:tint="@color/lightGrayWatanNavIcons"
+
             android:background="@null"
             />
 

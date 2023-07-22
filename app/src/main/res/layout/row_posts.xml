@@ -58,9 +58,8 @@
                    android:paddingVertical="3dp"
                    android:paddingHorizontal="15dp"
                    android:layout_marginRight="10dp"
-
                    android:textStyle="bold"
-                   android:textSize="13sp"
+                   android:textSize="11sp"
                    android:letterSpacing="0.1"
                    android:textColor="@android:color/white"
                    />

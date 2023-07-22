@@ -78,7 +78,7 @@ public class SearchActivityOrg extends AppCompatActivity {
         searchButton = findViewById(R.id.nav_search);
 
         ImageButton NavButton = (ImageButton) this.findViewById(R.id.nav_search);
-        NavButton.setColorFilter(Color.rgb(255, 223, 54)); // Yellow Tint
+        NavButton.setColorFilter(Color.rgb(0,0,0)); // Yellow Tint
 
         profileImageButton.setOnClickListener(new View.OnClickListener() {
             @Override

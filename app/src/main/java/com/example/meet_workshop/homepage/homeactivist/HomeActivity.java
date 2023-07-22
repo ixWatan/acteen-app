@@ -142,7 +142,7 @@ public class HomeActivity extends AppCompatActivity implements SelectListener {
         });
 
         ImageButton NavButton = (ImageButton) this.findViewById(R.id.nav_homeActivist);
-        NavButton.setColorFilter(Color.rgb(255, 223, 54)); // Yellow Tint
+        NavButton.setColorFilter(Color.rgb(0,0,0)); // Yellow Tint
 
         FirebaseUser user = mAuth.getCurrentUser();
         if (user != null) {

@@ -127,7 +127,7 @@ public class AdapterPosts extends RecyclerView.Adapter<CustomViewHolder> {
 
         myHolder.pTitleTv.setText(pTitle);
         //myHolder.pLocationTv.setText(pLocationLinkReal);
-        myHolder.pDateTv.setText(pDate);
+        myHolder.pDateTv.setText(removeLastFiveCharacters(pDate));
         // set user profile pic
 
         try {
@@ -160,6 +160,16 @@ public class AdapterPosts extends RecyclerView.Adapter<CustomViewHolder> {
     @Override
     public int getItemCount() {
         return postList.size();
+    }
+
+    public static String removeLastFiveCharacters(String input) {
+        if (input == null || input.length() <= 5) {
+            // If the input string is null or its length is less than or equal to 5, return an empty string
+            return "";
+        } else {
+            // Remove the last 5 characters and return the edited string
+            return input.substring(0, input.length() - 5);
+        }
     }
 
 }
