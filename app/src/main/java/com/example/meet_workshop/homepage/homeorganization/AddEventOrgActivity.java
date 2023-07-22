@@ -16,10 +16,14 @@ import android.text.style.ClickableSpan;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -50,8 +54,10 @@ import com.yalantis.ucrop.UCrop;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 
 
 public class AddEventOrgActivity extends AppCompatActivity {
@@ -93,6 +99,23 @@ public class AddEventOrgActivity extends AppCompatActivity {
 
     private static final int PICK_IMAGE = 1;
 
+    //#
+
+    String[] hashTagsList = {"#Environment" , "#Volunteering", "#Protests", "#Women's Rights", "#Human Rights","#Racism", "#LGBTQ+", "#Animals", "#Petitions Education"};
+
+    AutoCompleteTextView autoCompleteTextView;
+
+    ArrayAdapter<String> adapterItems;
+
+    String  selectHashTag;
+
+    TextView selectedHashtagsTv;
+    List<String> selectedHashtags;
+
+    LinearLayout hashtagsContainer;
+
+
+
 
 /*
     private FusedLocationProviderClient fusedLocationClient;
@@ -104,6 +127,43 @@ public class AddEventOrgActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_post);
+
+
+        hashtagsContainer = findViewById(R.id.hashtags_container);
+
+        // drop down menu for regions
+        autoCompleteTextView = findViewById(R.id.autocomplete_Tv);
+        adapterItems = new ArrayAdapter<String>(this,R.layout.list_item, hashTagsList);
+
+
+        autoCompleteTextView.setAdapter(adapterItems);
+        selectedHashtagsTv = findViewById(R.id.selected_hashtags_tv);
+        selectedHashtags = new ArrayList<>();
+        autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                String selectedHashtag = adapterView.getItemAtPosition(position).toString();
+                if (!selectedHashtags.contains(selectedHashtag)) {
+                    selectedHashtags.add(selectedHashtag);
+                    TextView hashtagTv = new TextView(AddEventOrgActivity.this);
+                    hashtagTv.setText("  " + selectedHashtag);
+                    hashtagTv.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            selectedHashtags.remove(selectedHashtag);
+                            hashtagsContainer.removeView(view);
+                        }
+                    });
+                    hashtagsContainer.addView(hashtagTv);
+                    autoCompleteTextView.setText("");
+                } else {
+                    Toast.makeText(AddEventOrgActivity.this, "You have already selected this hashtag", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
+
 
         //init views
         titleEt = findViewById(R.id.pTitleEt);
@@ -366,6 +426,10 @@ public class AddEventOrgActivity extends AppCompatActivity {
                         //ad name and image
                         hashMap.put("uName", name);
                         hashMap.put("uDp", dp);
+
+                        // Convert list of hashtags to a comma-separated string
+                        String joinedHashtags = TextUtils.join(", ", selectedHashtags);
+                        hashMap.put("pHashtags", joinedHashtags);
                     }
                 });
 
@@ -417,6 +481,24 @@ public class AddEventOrgActivity extends AppCompatActivity {
                                                 editTextDate.setText("");
                                                 editTextStart.setText("");
                                                 editTextEnd.setText("");
+                                                // Clear the AutoCompleteTextView input
+                                                autoCompleteTextView.setText("");
+
+                                                // Reinitialize the adapter (this is optional and depends on your use case)
+                                                adapterItems = new ArrayAdapter<String>(AddEventOrgActivity.this, R.layout.list_item, hashTagsList);
+                                                autoCompleteTextView.setAdapter(adapterItems);
+
+                                                // Reset the selected hash tag
+                                                selectHashTag = "";
+
+                                                // Clear the TextView that displays the selected hashtags
+                                                selectedHashtagsTv.setText("");
+
+                                                // Clear the list of selected hashtags
+                                                selectedHashtags.clear();
+
+
+
 
                                             }
                                         })
