@@ -55,7 +55,6 @@ public class SearchActivityActivist extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_activist);
         mAuth = FirebaseAuth.getInstance();
-        getSupportActionBar().hide();
        /* search = findViewById(R.id.simpleSearchView);
 
         search.setQueryHint("Search");

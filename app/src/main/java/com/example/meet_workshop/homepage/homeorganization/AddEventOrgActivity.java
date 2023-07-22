@@ -198,18 +198,13 @@ public class AddEventOrgActivity extends AppCompatActivity  {
 
 
 
-        actionBar = getSupportActionBar();
-        actionBar.setTitle("Add New Post");
-        //enable back button in actionbar
-        actionBar.setDisplayShowHomeEnabled(true);
-        actionBar.setDisplayHomeAsUpEnabled(true);
+
 
         pd = new ProgressDialog(this);
 
         firebaseAuth = FirebaseAuth.getInstance();
         checkUserStatus();
 
-        actionBar.setSubtitle(email);
 
         //get some info of current user to include in the post
 //        userDbRef = FirebaseDatabase.getInstance().getReference("organizations");

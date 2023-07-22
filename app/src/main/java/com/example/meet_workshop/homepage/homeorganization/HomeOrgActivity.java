@@ -131,9 +131,8 @@ public class HomeOrgActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
     private void loadPosts() {
-        pd = new ProgressDialog(this);
+    /*    pd = new ProgressDialog(this);
         pd.setMessage("Loading Posts...");
         pd.show();
         //path of  all posts
@@ -149,8 +148,11 @@ public class HomeOrgActivity extends AppCompatActivity {
 
                     postList.add(modelPost);
 
+
                     // adapter
+*//*
                     adapterPosts = new AdapterPosts(HomeOrgActivity.this, postList);
+*//*
 
                     //set  adapter to recyclerview
                     recyclerView.setAdapter(adapterPosts);
@@ -164,11 +166,12 @@ public class HomeOrgActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 // in case of error
-                Toast.makeText(HomeOrgActivity.this, "" + error.getMessage(), Toast.LENGTH_SHORT).show();
             }
 
-        });
+        });*/
     }
+
+
 
 
     private void openUserProfile() {

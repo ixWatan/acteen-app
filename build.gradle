@@ -17,7 +17,7 @@ plugins {
 allprojects {
     repositories {
         // google()
-        // jcenter()
+//        jcenter()
 
     }
 }

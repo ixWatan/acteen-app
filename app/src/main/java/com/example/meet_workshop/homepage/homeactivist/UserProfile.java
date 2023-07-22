@@ -56,7 +56,6 @@ public class UserProfile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
-        getSupportActionBar().hide();
         mAuth = FirebaseAuth.getInstance();
 
         userNameTextView = findViewById(R.id.name_activist);

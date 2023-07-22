@@ -6,6 +6,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -32,6 +35,14 @@ public class SignUpActivity extends AppCompatActivity {
 
     private ProgressDialog pd;
 
+    String[] regionsList = {"Jerusalem" , "Northern District", "Haifa", "West Bank", "Central District","Tel Aviv", "Southern District"};
+
+    AutoCompleteTextView autoCompleteTextView;
+
+    ArrayAdapter<String> adapterItems;
+
+
+
 
     private CheckBox checkBox;
 
@@ -45,6 +56,8 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText cityEditText;
     private EditText password;
 
+    String  selectedRegion;
+
     private User person = new User(null,null,null,null,null,null);
 
     @Override
@@ -52,6 +65,32 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         mAuth = FirebaseAuth.getInstance();
+
+
+        // drop down menu for regions
+        autoCompleteTextView = findViewById(R.id.autocomplete_Tv);
+        adapterItems = new ArrayAdapter<String>(this,R.layout.list_item, regionsList);
+
+        autoCompleteTextView.setAdapter(adapterItems);
+
+        autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+
+                selectedRegion = adapterView.getItemAtPosition(position).toString();
+                Toast.makeText(SignUpActivity.this, "Region:" + selectedRegion, Toast.LENGTH_SHORT).show();
+
+
+            }
+        });
+
+
+
+
+
+
         this.checkBoxText = findViewById(R.id.checkBoxText);
         this.checkBox = findViewById(R.id.simpleCheckBox);
         this.emailEditText = findViewById(R.id.signup_email);
@@ -64,20 +103,6 @@ public class SignUpActivity extends AppCompatActivity {
 
         ProgressDialog pd;
 
-/*
-
-        CheckBox passwordToggleCheckBox = findViewById(R.id.passwordToggleCheckBox);
-        passwordToggleCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) {
-                // Show password
-                password.setTransformationMethod(null);
-            } else {
-                // Hide password
-                password.setTransformationMethod(new PasswordTransformationMethod());
-            }
-        });
-*/
-
     }
 
     public void goToHome(View view) {
@@ -85,20 +110,28 @@ public class SignUpActivity extends AppCompatActivity {
         String password = passwordEditText.getText().toString();
         String name = nameEditText.getText().toString();
         String age = ageEditText.getText().toString();
-        String region = regionEditText.getText().toString();
         String city = cityEditText.getText().toString();
 
         Boolean checkBoxState = checkBox.isChecked();
 
-        if (email.isEmpty() || password.isEmpty() || name.isEmpty() || age.isEmpty() || region.isEmpty() || city.isEmpty() || checkBoxState == false) {
-            Toast.makeText(this, "Please enter email, password, name ...., Or accept terms and conditions", Toast.LENGTH_SHORT).show();
+        if (email.isEmpty() || password.isEmpty() || name.isEmpty() || age.isEmpty() || selectedRegion.isEmpty() || city.isEmpty() || checkBoxState == false) {
+            Toast.makeText(this, "Please enter email, password, name .., Or accept terms and conditions", Toast.LENGTH_SHORT).show();
         } else {
             this.person.setEmail(email);
             this.person.setPassword(password);
             this.person.setName(name);
             this.person.setAge(age);
-            this.person.setRegion(region);
             this.person.setCity(city);
+            this.person.setRegion(selectedRegion);
+
+
+            autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                    String regionsList = adapterView.getItemAtPosition(position).toString();
+
+                }
+            });
 
             createUser(person);        }
     }

@@ -4,13 +4,13 @@ package com.example.meet_workshop.homepage.models;
 
 public class ModelPost {
 
-    String pId, pTitle, pDecor, pImage, pTime, uid, uEmail, uDp, uName;
+    String pId, pTitle, pDescription, pImage, pTime, uid, uEmail, uDp, uName;
 
 
     public ModelPost() {
         this.pId = "ID";
         this.pTitle = "Title";
-        this.pDecor = "Descreption";
+        this.pDescription = "Descreption";
         this.pImage = "Image";
         this.pTime = "Time";
         this.uid = "uid";
@@ -20,10 +20,10 @@ public class ModelPost {
     }
 
 
-    public ModelPost(String pId, String pTitle, String pDecor, String pImage, String pTime, String uid, String uEmail, String uDp, String uName) {
+    public ModelPost(String pId, String pTitle, String pDescription, String pImage, String pTime, String uid, String uEmail, String uDp, String uName) {
         this.pId = pId;
         this.pTitle = pTitle;
-        this.pDecor = pDecor;
+        this.pDescription = pDescription;
         this.pImage = pImage;
         this.pTime = pTime;
         this.uid = uid;
@@ -49,12 +49,12 @@ public class ModelPost {
         this.pTitle = pTitle;
     }
 
-    public String getpDecor() {
-        return pDecor;
+    public String getpDescription() {
+        return pDescription;
     }
 
-    public void setpDecor(String pDecor) {
-        this.pDecor = pDecor;
+    public void setpDescription(String pDecor) {
+        this.pDescription = pDecor;
     }
 
     public String getpImage() {

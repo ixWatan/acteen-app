@@ -6,7 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -14,26 +14,40 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.meet_workshop.R;
+import com.example.meet_workshop.ShowPostActivity;
 import com.example.meet_workshop.homepage.adapters.AdapterPosts;
+import com.example.meet_workshop.homepage.interfaces.SelectListener;
 import com.example.meet_workshop.homepage.models.ModelPost;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements SelectListener {
 
     FirebaseAuth firebaseAuth;
+
+    private ImageView profileImageView;
+
+    private FirebaseAuth mAuth;
+
+
 
     RecyclerView recyclerView;
     List<ModelPost> postList;
     AdapterPosts adapterPosts;
+
 
     private ImageButton profileImageButton;
 
@@ -49,13 +63,18 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        //profile pic on top init
+        profileImageView = findViewById(R.id.profileImageView);
+        mAuth = FirebaseAuth.getInstance();
+
 
         // navbar icons init
         profileImageButton = findViewById(R.id.nav_profileActivist);
         searchButton = findViewById(R.id.nav_searchActivist);
         notificationButton = findViewById(R.id.nav_bellActivist);
         homePageButton = findViewById(R.id.nav_homeActivist);
-        getSupportActionBar().hide();
+
+        //end of navbar stuff
 
         // post recycler view properties
         recyclerView = findViewById(R.id.postRecyclerView);
@@ -70,10 +89,22 @@ public class HomeActivity extends AppCompatActivity {
         ProgressDialog pd;
 
 
+
+
         // init post list
         postList = new ArrayList<>();
 
+        // init the adapter
+        adapterPosts = new AdapterPosts(this, postList, this);
+
+        // set the adapter to recyclerview
+        recyclerView.setAdapter(adapterPosts);
+
+
+
         loadPosts();
+
+
 
 
 
@@ -110,6 +141,57 @@ public class HomeActivity extends AppCompatActivity {
 
         ImageButton NavButton = (ImageButton) this.findViewById(R.id.nav_homeActivist);
         NavButton.setColorFilter(Color.rgb(255, 223, 54)); // Yellow Tint
+
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user != null) {
+            String userId = user.getUid();
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            db.collection("teenActivists").document(userId).get()
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                String userName = document.getString("name");
+                                String email = document.getString("email");
+                                String profilePictureUrl = document.getString("profilePictureUrl");
+
+                                // Update the profile picture ImageView with the new URL
+                                if (profilePictureUrl != null && !profilePictureUrl.isEmpty()) {
+                                    Glide.with(this)
+                                            .load(profilePictureUrl + "?timestamp=" + System.currentTimeMillis())
+                                            .into(profileImageView);
+                                } else {
+                                    // Display the default profile picture
+                                    Glide.with(this)
+                                            .load(R.drawable.default_profile_picture)
+                                            .into(profileImageView);
+                                }
+
+                            }
+                        } else {
+                            Toast.makeText(this, "An error occurred. Please try again.", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        }
+
+        // Load and display the user's profile picture using a library like Glide or Picasso
+        String profilePictureUrl = getIntent().getStringExtra("profilePictureUrl");
+        if (profilePictureUrl != null && !profilePictureUrl.isEmpty()) {
+            Glide.with(this)
+                    .load(profilePictureUrl)
+                    .skipMemoryCache(true)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .into(profileImageView);
+
+        } else {
+            // Set the default profile picture
+            Glide.with(this)
+                    .load(R.drawable.default_profile_picture)
+                    .into(profileImageView);
+        }
+
+
+
     }
 
 
@@ -119,6 +201,8 @@ public class HomeActivity extends AppCompatActivity {
         Intent intent = new Intent(HomeActivity.this, UserProfile.class);
         startActivity(intent);
     }
+
+
 
     private void loadPosts() {
         pd = new ProgressDialog(this);
@@ -137,14 +221,20 @@ public class HomeActivity extends AppCompatActivity {
 
                     postList.add(modelPost);
 
+
                     // adapter
-                    adapterPosts = new AdapterPosts(HomeActivity.this, postList);
+                    adapterPosts = new AdapterPosts(HomeActivity.this, postList, HomeActivity.this);
 
                     //set  adapter to recyclerview
                     recyclerView.setAdapter(adapterPosts);
+
                 }
 
+                adapterPosts.notifyDataSetChanged();
+
+
                 pd.dismiss();
+
 
 
             }
@@ -158,6 +248,18 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onItemClicked(ModelPost modelPost) {
+        // Handle the item click event here
+        // For example, you can show a Toast with the clicked item title
+        Toast.makeText(this, "Clicked item: " + modelPost.getpTitle(), Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(this, ShowPostActivity.class);
+        intent.putExtra("org_name",  modelPost.getuName());
+        intent.putExtra("post_image",  modelPost.getpImage());
+        intent.putExtra("post_descreption",  modelPost.getpDescription());
+        startActivity(intent);
+    }
 
 
     private void openHomePage() {
@@ -180,5 +282,17 @@ public class HomeActivity extends AppCompatActivity {
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
