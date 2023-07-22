@@ -4,7 +4,7 @@ package com.example.meet_workshop.homepage.models;
 
 public class ModelPost {
 
-    String pId, pTitle, pDescription, pImage, pTime, uid, uEmail, uDp, uName, pStartT, pEndT, pDate, pTag, pLocationLink, pAddress;
+    String pId, pTitle, pDescription, pImage, pTime, uid, uEmail, uDp, uName, pStartT, pEndT, pDate, pHashtags, pLocationLink, pAddress, pLocationLinkReal;
 
 
     public ModelPost() {
@@ -20,14 +20,15 @@ public class ModelPost {
         this.pStartT = "pStartT";
         this.pEndT = "pEndT";
         this.pDate = "pDate";
-        this.pTag = "pTag";
+        this.pHashtags = "pHashtags";
         this.pLocationLink = "pLocationLink";
         this.pAddress = "pAddress";
+        this.pLocationLinkReal = "pLocationLinkReal";
     }
 
 
     public ModelPost(String pId, String pTitle, String pDescription, String pImage, String pTime, String uid, String uEmail, String uDp,
-                     String uName,String pStartT, String pEndT, String pDate, String pTag, String pLocationLink, String pAddress) {
+                     String uName,String pStartT, String pEndT, String pDate, String pHashtags, String pLocationLink, String pAddress, String pLocationLinkReal) {
         this.pId = pId;
         this.pTitle = pTitle;
         this.pDescription = pDescription;
@@ -40,10 +41,19 @@ public class ModelPost {
         this.pStartT = pStartT;
         this.pEndT = pEndT;
         this.pDate = pDate;
-        this.pTag = pTag;
+        this.pHashtags = pHashtags;
         this.pLocationLink = pLocationLink;
         this.pAddress= pAddress;
+        this.pLocationLinkReal = pLocationLinkReal;
 
+    }
+
+    public String getpLocationLinkReal() {
+        return pLocationLinkReal;
+    }
+
+    public void setpLocationLinkReal(String pLocationLinkReal) {
+        this.pLocationLinkReal = pLocationLinkReal;
     }
 
     public String getpLocationLink() {
@@ -78,12 +88,12 @@ public class ModelPost {
         this.pDate = pDate;
     }
 
-    public String getpTag() {
-        return pTag;
+    public String getpHashtags() {
+        return pHashtags;
     }
 
-    public void setpTag(String pTag) {
-        this.pTag = pTag;
+    public void setpHashtags(String pTag) {
+        this.pHashtags = pTag;
     }
 
 

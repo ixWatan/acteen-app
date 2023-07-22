@@ -72,6 +72,11 @@ public class AdapterPosts extends RecyclerView.Adapter<CustomViewHolder> {
         String pImage = postList.get(i).getpImage();
         String pTimeStamp = postList.get(i).getpTime();
         String pLocationLink = postList.get(i).getpLocationLink();
+        String pLocationLinkReal = postList.get(i).getpLocationLinkReal();
+        String pDate = postList.get(i).getpDate();
+
+
+
 
 
 
@@ -93,7 +98,8 @@ public class AdapterPosts extends RecyclerView.Adapter<CustomViewHolder> {
        myHolder.pTimeTv.setText(pTime);
 */
         myHolder.pTitleTv.setText(pTitle);
-        myHolder.pLocationTv.setText(pLocationLink);
+        myHolder.pLocationTv.setText(pLocationLinkReal);
+        myHolder.pDateTv.setText(pDate);
 
         // set user profile pic
 
