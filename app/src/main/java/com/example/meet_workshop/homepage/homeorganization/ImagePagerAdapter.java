@@ -10,6 +10,7 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.bumptech.glide.Glide;
 import com.example.meet_workshop.R;
@@ -34,6 +35,8 @@ ImagePagerAdapter extends RecyclerView.Adapter<ImagePagerAdapter.ImageViewHolder
     public ImageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_image, parent, false);
         return new ImageViewHolder(view);
+
+
     }
 
     @Override
