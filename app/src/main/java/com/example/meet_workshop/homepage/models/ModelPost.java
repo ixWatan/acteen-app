@@ -4,7 +4,7 @@ package com.example.meet_workshop.homepage.models;
 
 public class ModelPost {
 
-    String pId, pTitle, pDescription, pImage, pTime, uid, uEmail, uDp, uName;
+    String pId, pTitle, pDescription, pImage, pTime, uid, uEmail, uDp, uName, pStartT, pEndT, pDate, pTag, pLocationLink, pAddress;
 
 
     public ModelPost() {
@@ -17,10 +17,17 @@ public class ModelPost {
         this.uEmail = "gmal.com";
         this.uDp = "profile";
         this.uName = "Name";
+        this.pStartT = "pStartT";
+        this.pEndT = "pEndT";
+        this.pDate = "pDate";
+        this.pTag = "pTag";
+        this.pLocationLink = "pLocationLink";
+        this.pAddress = "pAddress";
     }
 
 
-    public ModelPost(String pId, String pTitle, String pDescription, String pImage, String pTime, String uid, String uEmail, String uDp, String uName) {
+    public ModelPost(String pId, String pTitle, String pDescription, String pImage, String pTime, String uid, String uEmail, String uDp,
+                     String uName,String pStartT, String pEndT, String pDate, String pTag, String pLocationLink, String pAddress) {
         this.pId = pId;
         this.pTitle = pTitle;
         this.pDescription = pDescription;
@@ -30,6 +37,53 @@ public class ModelPost {
         this.uEmail = uEmail;
         this.uDp = uDp;
         this.uName = uName;
+        this.pStartT = pStartT;
+        this.pEndT = pEndT;
+        this.pDate = pDate;
+        this.pTag = pTag;
+        this.pLocationLink = pLocationLink;
+        this.pAddress= pAddress;
+
+    }
+
+    public String getpLocationLink() {
+        return pLocationLink;
+    }
+
+    public void setpLocationLink(String pLocationLink) {
+        this.pLocationLink = pLocationLink;
+    }
+
+    public String getpStartT() {
+        return pStartT;
+    }
+
+    public void setpStartT(String pStartT) {
+        this.pStartT = pStartT;
+    }
+
+    public String getpEndT() {
+        return pEndT;
+    }
+
+    public void setpEndT(String pEndT) {
+        this.pEndT = pEndT;
+    }
+
+    public String getpDate() {
+        return pDate;
+    }
+
+    public void setpDate(String pDate) {
+        this.pDate = pDate;
+    }
+
+    public String getpTag() {
+        return pTag;
+    }
+
+    public void setpTag(String pTag) {
+        this.pTag = pTag;
     }
 
 
@@ -103,5 +157,13 @@ public class ModelPost {
 
     public void setuName(String uName) {
         this.uName = uName;
+    }
+
+    public String getpAddress() {
+        return pAddress;
+    }
+
+    public void setpAddress(String pAddress) {
+        this.pAddress = pAddress;
     }
 }

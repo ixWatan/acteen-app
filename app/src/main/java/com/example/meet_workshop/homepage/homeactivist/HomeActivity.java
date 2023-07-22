@@ -250,14 +250,27 @@ public class HomeActivity extends AppCompatActivity implements SelectListener {
 
     @Override
     public void onItemClicked(ModelPost modelPost) {
-        // Handle the item click event here
-        // For example, you can show a Toast with the clicked item title
-        Toast.makeText(this, "Clicked item: " + modelPost.getpTitle(), Toast.LENGTH_SHORT).show();
+        // Handle the item click event
 
         Intent intent = new Intent(this, ShowPostActivity.class);
         intent.putExtra("org_name",  modelPost.getuName());
         intent.putExtra("post_image",  modelPost.getpImage());
         intent.putExtra("post_descreption",  modelPost.getpDescription());
+        intent.putExtra("post_timePosted",  modelPost.getpTime());
+        intent.putExtra("post_title",  modelPost.getpTitle());
+        intent.putExtra("post_user_pfp",  modelPost.getuDp());
+        intent.putExtra("post_endT", modelPost.getpEndT());
+        intent.putExtra("post_startT", modelPost.getpStartT());
+        intent.putExtra("post_date", modelPost.getpDate());
+        intent.putExtra("post_tag", modelPost.getpTag());
+        intent.putExtra("post_locationLink", modelPost.getpLocationLink());
+        intent.putExtra("post_location", modelPost.getpEndT());
+
+
+
+
+
+
         startActivity(intent);
     }
 

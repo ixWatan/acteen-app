@@ -73,6 +73,8 @@
                    android:textSize="17sp"
                    android:textColor="@color/black"
                    android:layout_marginLeft="10dp"
+                   android:layout_marginRight="15dp"
+
                    android:layout_height="wrap_content"
                    android:layout_alignParentLeft="true"
                    android:layout_toLeftOf="@id/pDateTv"
@@ -86,12 +88,14 @@
             <TextView
             android:id="@+id/pLocationTv"
             android:drawableLeft="@drawable/icon_location"
-
+                android:drawableTint="@color/gray"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="5dp"
             android:text="Location"
             android:autoLink="all"
-            android:textColor="@color/Black"/>
+            android:textColor="@color/gray"/>
         </LinearLayout>
     </LinearLayout>
 
