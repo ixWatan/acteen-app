@@ -1,24 +1,24 @@
 package com.example.meet_workshop.homepage.adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.TextPaint;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.meet_workshop.R;
-import com.example.meet_workshop.homepage.homeactivist.HomeActivity;
 import com.example.meet_workshop.homepage.interfaces.SelectListener;
 import com.example.meet_workshop.homepage.models.ModelPost;
-import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.Calendar;
@@ -32,6 +32,8 @@ public class AdapterPosts extends RecyclerView.Adapter<CustomViewHolder> {
 
     Context context;
     List<ModelPost> postList;
+    String pLocationLinkReal;
+    String pLocationLink;
 
     public AdapterPosts(Context context, List<ModelPost> postList, SelectListener selectListener) {
         this.context = context;
@@ -53,6 +55,28 @@ public class AdapterPosts extends RecyclerView.Adapter<CustomViewHolder> {
     @Override
     public void onBindViewHolder(@androidx.annotation.NonNull CustomViewHolder myHolder, int i) {
 
+        pLocationLinkReal = postList.get(i).getpLocationLinkReal();
+        SpannableString spannableString = new SpannableString(pLocationLinkReal);
+
+        ClickableSpan clickableSpan = new ClickableSpan() {
+            @Override
+            public void onClick(@NonNull View widget) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(pLocationLink));
+                context.startActivity(browserIntent);
+            }
+            @Override
+            public void updateDrawState(@NonNull TextPaint ds) {
+                super.updateDrawState(ds);
+                ds.setUnderlineText(true);    // To give the link an underline
+                ds.setColor(Color.BLUE);      // Optional: To change the link color
+            }
+        };
+
+        spannableString.setSpan(clickableSpan, 0, pLocationLinkReal.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        myHolder.pLocationTv.setText(spannableString);
+        myHolder.pLocationTv.setMovementMethod(LinkMovementMethod.getInstance());
+
         myHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -71,8 +95,8 @@ public class AdapterPosts extends RecyclerView.Adapter<CustomViewHolder> {
         String pDescreption = postList.get(i).getpDescription();
         String pImage = postList.get(i).getpImage();
         String pTimeStamp = postList.get(i).getpTime();
-        String pLocationLink = postList.get(i).getpLocationLink();
-        String pLocationLinkReal = postList.get(i).getpLocationLinkReal();
+        pLocationLink = postList.get(i).getpLocationLink();
+        pLocationLinkReal = postList.get(i).getpLocationLinkReal();
         String pDate = postList.get(i).getpDate();
 
 
@@ -96,9 +120,12 @@ public class AdapterPosts extends RecyclerView.Adapter<CustomViewHolder> {
 */
 /*
        myHolder.pTimeTv.setText(pTime);
+
 */
+
+
         myHolder.pTitleTv.setText(pTitle);
-        myHolder.pLocationTv.setText(pLocationLinkReal);
+        //myHolder.pLocationTv.setText(pLocationLinkReal);
         myHolder.pDateTv.setText(pDate);
         // set user profile pic
 
