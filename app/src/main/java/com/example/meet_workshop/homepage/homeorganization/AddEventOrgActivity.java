@@ -109,7 +109,7 @@ public class AddEventOrgActivity extends AppCompatActivity {
 
     //#
 
-    String[] hashTagsList = {"#Environment" , "#Volunteering", "#Protests", "#Women's Rights", "#Human Rights","#Racism", "#LGBTQ+", "#Animals", "#Petitions Education"};
+    String[] hashTagsList = {"#Environment" , "#Volunteering", "#Protests", "#Women's Rights", "#Human Rights","#Racism", "#LGBTQ+", "#Animals", "#Petitions", "#Education"};
 
     AutoCompleteTextView autoCompleteTextView;
 

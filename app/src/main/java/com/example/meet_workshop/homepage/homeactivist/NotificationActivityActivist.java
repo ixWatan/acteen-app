@@ -62,7 +62,7 @@ public class NotificationActivityActivist extends AppCompatActivity {
         homePageButton = findViewById(R.id.nav_homeActivist);
 
         ImageButton NavButton = (ImageButton) this.findViewById(R.id.nav_bellActivist);
-        NavButton.setColorFilter(Color.rgb(255, 223, 54)); // Yellow Tint
+        NavButton.setColorFilter(Color.rgb(0,0,0)); // Yellow Tint
 
 
 

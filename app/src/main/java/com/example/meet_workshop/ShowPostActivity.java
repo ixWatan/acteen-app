@@ -105,7 +105,7 @@ public class ShowPostActivity extends AppCompatActivity {
         android.text.format.DateFormat df = new android.text.format.DateFormat();
         String pTime = df.format("dd/MM/yyyy hh:mm aa", calendar).toString();
 
-         LocationAndTime = postLocation + "," + postDate + "," + postTimeS + "-" + postTimeE;
+         LocationAndTime = locationLinkReal + "," + postDate + "," + postTimeS + "-" + postTimeE;
 
 
 
