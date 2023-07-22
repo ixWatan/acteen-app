@@ -13,7 +13,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.squareup.picasso.Picasso;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 
@@ -43,8 +46,8 @@ public class ShowPostActivity extends AppCompatActivity {
 
     String LocationAndTime;
 
-    //attend btn
-    Button attendBtn;
+    //Add To Calender Btn
+    Button addToCalender;
 
 
     @Override
@@ -52,12 +55,7 @@ public class ShowPostActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_post);
 
-        Intent intent = new Intent(Intent.ACTION_INSERT);
-        intent.setData(CalendarContract.Events.CONTENT_URI);
-        intent.putExtra(CalendarContract.Events.TITLE, postTitle);
-        intent.putExtra(CalendarContract.Events.EVENT_LOCATION, locationLinkReal);
-        intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, postTimeS);
-        intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, postTimeE);
+
 
 
         TextView nameOrgTv = (TextView) findViewById(R.id.showNameOrg);
@@ -68,20 +66,7 @@ public class ShowPostActivity extends AppCompatActivity {
         ImageView postPorfileIv = (ImageView) findViewById(R.id.showPostProfileImg);
         TextView postLocationAndTime = (TextView) findViewById(R.id.showLocationAndDateAndTime);
 
-        attendBtn = findViewById(R.id.attendBtn);
 
-        attendBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (intent.resolveActivity(getPackageManager()) != null) {
-                    startActivity(intent);
-                } else {
-                    // Show error message to user saying "No Application can handle this action"
-                    Toast.makeText(ShowPostActivity.this, "No Application can handle this action", Toast.LENGTH_SHORT).show();
-                }
-
-            }
-        });
 
 
 
@@ -97,6 +82,10 @@ public class ShowPostActivity extends AppCompatActivity {
         postTimeS = getIntent().getStringExtra("post_startT");
         postTimeE = getIntent().getStringExtra("post_endT");
         postDate = getIntent().getStringExtra("post_date");
+
+
+
+
 
 
 
@@ -127,11 +116,68 @@ public class ShowPostActivity extends AppCompatActivity {
 
         }
 
+
+
+
+
+
+        // Get a reference to the button
+        addToCalender = findViewById(R.id.addToCalenderBtn);
+
+        // Set an onClick listener for the button
+        addToCalender.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Start
+                /*String postTitle = "Your Event Title";
+                String locationLinkReal = "Your Event Location";
+                String postDate = "2023-08-25";  // date format: "yyyy-MM-dd"
+                String postTimeS = "14:30";  // time format: "HH:mm"
+                String postTimeE = "16:00";  // time format: "HH:mm"*/
+
+
+                //Toast.makeText(ShowPostActivity.this, " date: " + postDate + " ST " + postTimeS + " date2: " + postDate + " ET "  + postTimeE, Toast.LENGTH_SHORT).show();
+                // Parse the post date and time
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
+                Date startDate = null;
+                Date endDate = null;
+                try {
+                    startDate = dateFormat.parse(postDate + " " + postTimeS);
+                    endDate = dateFormat.parse(postDate + " " + postTimeE);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                // Check if startDate and endDate are null, if they are, return from this function early
+                if(startDate == null || endDate == null) {
+                    Toast.makeText(ShowPostActivity.this, "Invalid date/time format.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Create an intent to open the Calendar app
+                Intent intent = new Intent(Intent.ACTION_INSERT)
+                        .setData(CalendarContract.Events.CONTENT_URI)
+                        .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, startDate.getTime())
+                        .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endDate.getTime())
+                        .putExtra(CalendarContract.Events.TITLE, postTitle)
+                        .putExtra(CalendarContract.Events.DESCRIPTION,postDescreption)
+                        .putExtra(CalendarContract.Events.EVENT_LOCATION, locationLinkReal);
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(intent);
+                } else {
+                    // Show an error message if no app can handle the intent
+                    Toast.makeText(ShowPostActivity.this, "No application can handle this action.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        //End
+
         loadTags();
 
 
 
     }
+
 
     private void loadTags() {
 

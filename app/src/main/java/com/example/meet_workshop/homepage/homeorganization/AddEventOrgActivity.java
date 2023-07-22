@@ -222,12 +222,15 @@ public class AddEventOrgActivity extends AppCompatActivity {
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                                editTextDate.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                                // Note: monthOfYear is zero-based, so we add 1 to get the correct month number
+                                String formattedDate = String.format("%04d-%02d-%02d", year, monthOfYear + 1, dayOfMonth);
+                                editTextDate.setText(formattedDate);
                             }
                         }, year, month, day);
                 picker.show();
             }
         });
+
 
         editTextStart = findViewById(R.id.editTextStart);
         editTextStart.setOnClickListener(new View.OnClickListener() {
@@ -241,7 +244,9 @@ public class AddEventOrgActivity extends AppCompatActivity {
                         new TimePickerDialog.OnTimeSetListener() {
                             @Override
                             public void onTimeSet(TimePicker tp, int sHour, int sMinute) {
-                                editTextStart.setText(sHour + ":" + sMinute);
+                                String formattedHour = String.format("%02d", sHour);
+                                String formattedMinute = String.format("%02d", sMinute);
+                                editTextStart.setText(formattedHour + ":" + formattedMinute);
                             }
                         }, hour, minutes, true);
                 picker.show();
@@ -260,12 +265,15 @@ public class AddEventOrgActivity extends AppCompatActivity {
                         new TimePickerDialog.OnTimeSetListener() {
                             @Override
                             public void onTimeSet(TimePicker tp, int sHour, int sMinute) {
-                                editTextEnd.setText(sHour + ":" + sMinute);
+                                String formattedHour = String.format("%02d", sHour);
+                                String formattedMinute = String.format("%02d", sMinute);
+                                editTextEnd.setText(formattedHour + ":" + formattedMinute);
                             }
                         }, hour, minutes, true);
                 picker.show();
             }
         });
+
 
 
         locationTagTextView = findViewById(R.id.locationTagTextView);
