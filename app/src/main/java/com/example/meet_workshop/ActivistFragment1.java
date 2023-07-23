@@ -10,10 +10,10 @@ import android.view.ViewGroup;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link OnboardingFragment1#newInstance} factory method to
+ * Use the {@link ActivistFragment1#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class OnboardingFragment1 extends Fragment {
+public class ActivistFragment1 extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,7 +24,7 @@ public class OnboardingFragment1 extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public OnboardingFragment1() {
+    public ActivistFragment1() {
         // Required empty public constructor
     }
 
@@ -34,11 +34,11 @@ public class OnboardingFragment1 extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Onboardingfragment1.
+     * @return A new instance of fragment ActivistFragment1.
      */
     // TODO: Rename and change types and number of parameters
-    public static OnboardingFragment1 newInstance(String param1, String param2) {
-        OnboardingFragment1 fragment = new OnboardingFragment1();
+    public static ActivistFragment1 newInstance(String param1, String param2) {
+        ActivistFragment1 fragment = new ActivistFragment1();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -59,6 +59,6 @@ public class OnboardingFragment1 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_onboardingfragment1, container, false);
+        return inflater.inflate(R.layout.fragment_activist1, container, false);
     }
 }

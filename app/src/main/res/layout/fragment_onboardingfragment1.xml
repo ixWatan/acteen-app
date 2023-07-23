@@ -28,14 +28,14 @@
                 android:layout_height="189dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="30dp"
-                app:srcCompat="@drawable/img_1" />
+                app:srcCompat="@drawable/img" />
 
             <TextView
                 android:id="@+id/welcomeTV"
                 android:layout_width="wrap_content"
                 android:layout_height="79dp"
                 android:layout_marginBottom="10dp"
-                android:text="Create Posts"
+                android:text="Sign Up"
                 android:textColor="@android:color/black"
                 android:textSize="36sp"
                 android:textStyle="bold" />
@@ -47,7 +47,7 @@
                 android:layout_height="107dp"
                 android:layout_margin="20dp"
                 android:layout_marginBottom="100dp"
-                android:text="Use our post templates to upload your activism opportunity to the Acteen community for others to see and attend."
+                android:text="Sign up as a registered organization through our app’s registration form."
                 android:textColor="@android:color/darker_gray"
                 android:textSize="18sp"
                 android:textStyle="bold" />

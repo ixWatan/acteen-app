@@ -2,8 +2,6 @@
     <!-- Base application theme. -->
     <style name="Theme.Meetworkshop" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#F9DD39</item>
-        <item name="colorPrimaryVariant">#F9DD39</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>

@@ -34,7 +34,7 @@ public class OnboardingFragment3 extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment OnboardingFragment3.
+     * @return A new instance of fragment Onboardingfragment1.
      */
     // TODO: Rename and change types and number of parameters
     public static OnboardingFragment3 newInstance(String param1, String param2) {

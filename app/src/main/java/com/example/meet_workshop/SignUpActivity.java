@@ -52,7 +52,6 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText passwordEditText;
     private EditText nameEditText;
     private EditText ageEditText;
-    private EditText regionEditText;
     private EditText cityEditText;
     private EditText password;
 
@@ -97,7 +96,6 @@ public class SignUpActivity extends AppCompatActivity {
         this.passwordEditText = findViewById(R.id.signup_pass);
         this.nameEditText = findViewById(R.id.signup_name);
         this.ageEditText = findViewById(R.id.signup_age);
-        this.regionEditText = findViewById(R.id.signup_region);
         this.cityEditText = findViewById(R.id.signup_city);
         password = findViewById(R.id.signup_pass);
 

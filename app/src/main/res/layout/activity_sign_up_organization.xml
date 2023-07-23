@@ -15,10 +15,11 @@
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
+            android:layout_height="114dp"
             android:layout_marginTop="20dp"
+            android:layout_marginBottom="30dp"
             app:srcCompat="@drawable/screenshot_2023_06_25_at_18_35_1" />
+
        <!-- <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
@@ -28,6 +29,49 @@
             android:textColor="@android:color/white"
             android:textStyle="bold"
             android:layout_marginBottom="48dp"/>-->
+
+        <EditText
+            android:id="@+id/signup_orgname"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint="Organization Name"
+            android:singleLine="true"
+            android:textSize="14sp"
+            android:background="@drawable/edittext_background"
+            android:padding="12dp"
+            android:layout_marginBottom="12dp"/>
+
+        <!-- Start -->
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            xmlns:tools="http://schemas.android.com/tools"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+
+            android:layout_marginBottom="15dp"
+            tools:context=".MainActivity">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/edittext_background"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
+
+                android:hint="Organization Type"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+                <AutoCompleteTextView
+                    android:layout_height="50dp"
+                    android:id="@+id/autocomplete_Tv"
+                    android:layout_width="match_parent"
+                    android:paddingTop="7dp"
+                    android:paddingLeft="50dp"
+                    android:inputType="none"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
 
         <EditText
             android:id="@+id/signup_email"
@@ -73,16 +117,7 @@
             android:textColor="@android:color/black" />
 -->
 
-        <EditText
-            android:id="@+id/signup_orgname"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:hint="Organization Name"
-            android:singleLine="true"
-            android:textSize="14sp"
-            android:background="@drawable/edittext_background"
-            android:padding="12dp"
-            android:layout_marginBottom="12dp"/>
+
 
         <EditText
             android:id="@+id/signup_phone"
@@ -92,16 +127,16 @@
             android:inputType="phone"
             android:singleLine="true"
             android:layout_height="wrap_content"
-            android:hint="Phone Number"
+            android:hint="Contact Phone Number"
             android:background="@drawable/edittext_background"
             android:padding="12dp"
             android:layout_marginBottom="12dp"/>
 
         <EditText
-            android:id="@+id/signup_region"
+            android:id="@+id/OrgWebLink"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:hint="Region"
+            android:hint="Website Link"
             android:singleLine="true"
             android:background="@drawable/edittext_background"
             android:padding="12dp"
@@ -109,14 +144,14 @@
             android:layout_marginBottom="12dp"/>
 
         <EditText
-            android:id="@+id/signup_city"
+            android:id="@+id/DescOfOrg"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:hint="City"
+            android:hint="Description Of Organization"
+            android:singleLine="true"
             android:background="@drawable/edittext_background"
             android:padding="12dp"
             android:textSize="14sp"
-            android:singleLine="true"
             android:layout_marginBottom="12dp"/>
 
 
