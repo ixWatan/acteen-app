@@ -7,17 +7,22 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link OnboardingFragment4#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class OnboardingFragment4 extends Fragment {
+
+public class OnboardingFragment4 extends Fragment{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
+
+    Button nextBtn;
+
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
@@ -40,6 +45,8 @@ public class OnboardingFragment4 extends Fragment {
     public static OnboardingFragment4 newInstance(String param1, String param2) {
         OnboardingFragment4 fragment = new OnboardingFragment4();
         Bundle args = new Bundle();
+
+
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
@@ -49,6 +56,7 @@ public class OnboardingFragment4 extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);

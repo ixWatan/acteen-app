@@ -7,7 +7,7 @@
     tools:context=".homepage.homeactivist.SearchActivityActivist">
 
     <!-- Seach bar and profile icon -->
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:layout_height="match_parent">
@@ -64,7 +64,9 @@
         </LinearLayout>
 
 
-        <!-- Discover Acteen -->
+
+
+    <!-- Discover Acteen -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
@@ -75,7 +77,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:gravity="center_horizontal"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="75dp"
                 android:layout_marginLeft="30dp"
                 android:text="Discover Acteen"
                 android:textSize="28sp"
@@ -83,7 +85,17 @@
 
         </LinearLayout>
 
-        <!-- 2 Categories -->
+        <!-- categories -->
+    <LinearLayout
+        android:layout_marginTop="120dp"
+        android:id="@+id/all_categories"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+
+    <!-- 2 Categories -->
 
         <LinearLayout
             android:orientation="horizontal"
@@ -433,11 +445,22 @@
             </LinearLayout>
 
         </LinearLayout>
+    </LinearLayout>
+
 
 
 
         <!--  End Of 2 Categories -->
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/postRecyclerView"
+            android:layout_marginTop="150dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="center"
+            android:layout_marginBottom="70dp"/>
 
 
 
@@ -446,7 +469,6 @@
 
 
 
-    </LinearLayout>
 
 
 
@@ -457,4 +479,5 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="0dp" />
 
+</RelativeLayout>
 </RelativeLayout>
