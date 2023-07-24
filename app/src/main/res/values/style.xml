@@ -20,4 +20,8 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">10%</item>
     </style>
+    <style name="editProfileButton" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:textColorPrimary">#DBDBDB</item>
+        <item name="colorButtonNormal">#5552f1</item>
+    </style>
 </resources>

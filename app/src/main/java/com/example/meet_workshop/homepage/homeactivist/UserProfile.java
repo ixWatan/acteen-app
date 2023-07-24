@@ -38,7 +38,7 @@ public class UserProfile extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
 
-    private TextView userNameTextView;
+    private TextView userNameTextView, cityTextView;
 
     private ImageButton profileImageButton;
 
@@ -59,6 +59,7 @@ public class UserProfile extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         userNameTextView = findViewById(R.id.name_activist);
+        cityTextView = findViewById(R.id.city_activist);
         profileImageView = findViewById(R.id.profileImageView);
         profileImageButton = findViewById(R.id.nav_profileActivist);
         searchButton = findViewById(R.id.nav_searchActivist);
@@ -113,7 +114,6 @@ public class UserProfile extends AppCompatActivity {
             }
         });
 
-        TextView emailTextView = (TextView) this.findViewById(R.id.email_activist);
 
         // Retrieve user information from the Firestore database
         FirebaseUser user = mAuth.getCurrentUser();
@@ -127,6 +127,7 @@ public class UserProfile extends AppCompatActivity {
                             if (document.exists()) {
                                 String userName = document.getString("name");
                                 String email = document.getString("email");
+                                String city = document.getString("city");
                                 String profilePictureUrl = document.getString("profilePictureUrl");
 
                                 // Update the profile picture ImageView with the new URL
@@ -143,7 +144,7 @@ public class UserProfile extends AppCompatActivity {
 
                                 // Populate the views with the retrieved information
                                 userNameTextView.setText(userName);
-                                emailTextView.setText(email);
+                                cityTextView.setText(city);
                             }
                         } else {
                             Toast.makeText(UserProfile.this, "An error occurred. Please try again.", Toast.LENGTH_SHORT).show();

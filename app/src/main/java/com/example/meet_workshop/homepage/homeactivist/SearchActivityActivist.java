@@ -105,7 +105,6 @@ public class SearchActivityActivist extends AppCompatActivity {
             }
         });
 
-        TextView emailTextView = (TextView) this.findViewById(R.id.email_activist);
 
         // Retrieve user information from the Firestore database
         FirebaseUser user = mAuth.getCurrentUser();

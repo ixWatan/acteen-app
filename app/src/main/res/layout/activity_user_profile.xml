@@ -1,6 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/gradient_background">
 
 
@@ -11,67 +12,95 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="0dp" />
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:orientation="horizontal"
-        android:background="@color/colorProfileBackground"
-        android:layout_height="120dp"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center">
 
-        <ImageView
+        >
+
+
+
+
+
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/profileImageView"
-            android:layout_width="110dp"
-            android:layout_height="110dp"
-            android:layout_marginTop="70dp"
-            android:background="@drawable/profile_background_border"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentEnd="true"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
             android:src="@drawable/icon_account"
             />
 
-    </RelativeLayout>
+          <LinearLayout
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginLeft="10dp"
+              android:layout_marginTop="20dp"
+              android:orientation="vertical">
+
+
+                  <TextView
+                      android:id="@+id/name_activist"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:textColor="@color/black"
+                      android:gravity="center_horizontal"
+                      android:text="User Name"
+                      android:maxLines="1"
+                      android:textSize="18sp"
+                      android:textStyle="bold" />
+
+
+
+                  <TextView
+                      android:id="@+id/city_activist"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_marginRight="100dp"
+                      android:textColor="@color/DarkGray"
+                      android:gravity="center_horizontal"
+                      android:layout_marginTop="5dp"
+                      android:text="City"
+                      android:textSize="13sp"
+                      />
 
 
 
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
-        android:gravity="center">
-    <TextView
-        android:id="@+id/name_activist"
-        android:layout_width="wrap_content"
-        android:layout_height="150dp"
-        android:textColor="@color/black"
-        android:gravity="center_horizontal"
-        android:text="User Name"
-        android:textSize="28sp"
-        android:textStyle="bold" />
+                  <Button
+                      android:id="@+id/editprofile_button"
+                      android:textAllCaps="false"
+                      android:layout_width="80dp"
+                      android:layout_marginTop="10dp"
+                      android:theme="@style/editProfileButton"
+                      android:background="@drawable/editprofile_background"
+                      android:layout_height="wrap_content"
+                      android:minHeight="0dp"
+                      android:insetTop="1dp"
+                      android:insetBottom="1dp"
+                      android:textSize="7sp"
+                      android:textColor="@color/black"
+                      android:text="Edit Profile" />
 
 
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="250dp"
-        android:gravity="center">
-        <TextView
-            android:id="@+id/email_activist"
-            android:layout_width="wrap_content"
-            android:layout_height="150dp"
-            android:textColor="@color/gray"
-            android:gravity="center_horizontal"
-            android:text="Email"
-            android:textSize="15sp"
-            />
 
 
-    </RelativeLayout>
+          </LinearLayout>
+    </LinearLayout>
+
+
+
 
     <RelativeLayout
         android:layout_width="match_parent"
