@@ -1,7 +1,8 @@
 package com.example.meet_workshop;
 
 import androidx.appcompat.app.AppCompatActivity;
-
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -22,6 +23,9 @@ public class StartEveryThing extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_every_thing);
+
+        Intent intent = new Intent(this, OrgOrActActivity.class);
+        startActivity(intent);
 
 
         Organization = findViewById(R.id.Organization);
@@ -45,14 +49,19 @@ public class StartEveryThing extends AppCompatActivity {
     }
 
     private void openActivistFragments() {
-        Intent intent = new Intent(StartEveryThing.this, ActivistFragment1.class);
-        startActivity(intent);
-
+        ActivistFragment1 fragment = new ActivistFragment1();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     private void openOrganizationFragments() {
-        Intent intent = new Intent(StartEveryThing.this, OnboardingFragment2.class);
-        startActivity(intent);
-
+        OnboardingFragment1 fragment = new OnboardingFragment1();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
+
 }

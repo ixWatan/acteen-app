@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.target.ImageViewTargetFactory;
 import com.example.meet_workshop.MainActivity;
 import com.example.meet_workshop.R;
 import com.example.meet_workshop.ShowPostActivity;
@@ -50,6 +51,9 @@ import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import android.app.SearchManager;
+import android.widget.SearchView;
+import android.widget.SearchView.OnQueryTextListener;
 
 public class SearchActivityActivist extends AppCompatActivity implements SelectListener {
 
@@ -224,6 +228,25 @@ public class SearchActivityActivist extends AppCompatActivity implements SelectL
             }
         });
 
+        ImageView enviormentBtn = (ImageView) findViewById(R.id.enviormentBtn);
+
+        enviormentBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Handle the item click event
+
+                Intent intent = new Intent(SearchActivityActivist.this, DiscoverClickedCategoryActivist.class);
+                intent.putExtra("category_clicked", "Environment");
+
+
+
+
+
+
+                startActivity(intent);
+            }
+        });
+
 
     }
 
@@ -245,6 +268,7 @@ public class SearchActivityActivist extends AppCompatActivity implements SelectL
 
                     if(modelPost.getpTitle().toLowerCase().contains(searchQuery.toLowerCase())
                             || modelPost.getpDescription().toLowerCase().contains(searchQuery.toLowerCase())
+                            || modelPost.getpHashtags().toLowerCase().contains(searchQuery.toLowerCase())
                     ){
                         postList.add(modelPost);
                     }

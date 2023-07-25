@@ -12,7 +12,7 @@
         <item name="android:textColorHint">@color/gray</item>
 
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">#F9DD39</item>
+        <item name="android:statusBarColor">@color/Black</item>
         <item name="android:fontFamily">@font/nunito_font</item>
 
         <!-- Customize your theme here. -->
