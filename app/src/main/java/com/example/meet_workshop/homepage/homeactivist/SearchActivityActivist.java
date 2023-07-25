@@ -236,7 +236,7 @@ public class SearchActivityActivist extends AppCompatActivity implements SelectL
                 // Handle the item click event
 
                 Intent intent = new Intent(SearchActivityActivist.this, DiscoverClickedCategoryActivist.class);
-                intent.putExtra("category_clicked", "Environment");
+                intent.putExtra("category_clicked", "Environmentttttt");
 
 
 
