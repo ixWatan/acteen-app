@@ -137,6 +137,10 @@ public class SignUpActivity extends AppCompatActivity {
 
     }
 
+    public void GoMain(View view) {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
     public void OpenTermsAndGuidelines(View view) {
         String url = getString(R.string.privacy_policy);
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));

@@ -29,6 +29,9 @@
         android:theme="@style/Theme.Meetworkshop"
         tools:targetApi="31">
         <activity
+            android:name=".ThankYouActivity"
+            android:exported="false" />
+        <activity
             android:name=".SlideShowAct.SlideShowAct5"
             android:exported="false" />
         <activity

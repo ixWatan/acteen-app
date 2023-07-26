@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.meet_workshop.homepage.homeorganization.HomeOrgActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
@@ -176,6 +175,11 @@ public class SignUpOrganizationActivity extends AppCompatActivity {
         }
     }
 
+    public void GoMain(View view) {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
     public void OpenTermsAndGuidelines(View view) {
         String url = getString(R.string.privacy_policy);
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
@@ -236,7 +240,7 @@ public class SignUpOrganizationActivity extends AppCompatActivity {
 
                                             // Navigate to the interests page after successfully creating the user.
                                             Toast.makeText(this, "You're in", Toast.LENGTH_SHORT).show();
-                                            Intent intent = new Intent(SignUpOrganizationActivity.this, HomeOrgActivity.class);
+                                            Intent intent = new Intent(SignUpOrganizationActivity.this, ThankYouActivity.class);
                                             startActivity(intent);
                                             finish();
 
