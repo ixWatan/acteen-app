@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+<!--    <LinearLayout
     android:layout_marginTop="30dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -19,7 +19,7 @@
         android:gravity="center"
         android:textColor="@color/black"
         android:layout_height="wrap_content" />
-</LinearLayout>
+</LinearLayout>-->
 
 
 
@@ -28,20 +28,24 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
         android:gravity="center">
+
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="10dp"
-            app:srcCompat="@drawable/audience_analysis" />
-
-
+            app:srcCompat="@drawable/whatsapp_image_2023_07_26_at_16_12_29" />
 
 
     </RelativeLayout>
+
+    <include
+        layout="@layout/bottom_navigation_organ"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" />
 </RelativeLayout>
 
 
