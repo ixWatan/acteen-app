@@ -1,14 +1,14 @@
 package com.example.meet_workshop;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.meet_workshop.homepage.homeorganization.ChooseLocationActivity;
+import com.example.meet_workshop.SlideShowAct.SlideShowActivityAct1;
+import com.example.meet_workshop.SlideShowOrg.SlideShowActivityOrg1;
 
 
 public class StartEveryThing extends AppCompatActivity {
@@ -46,19 +46,18 @@ public class StartEveryThing extends AppCompatActivity {
     }
 
     private void openActivistFragments() {
-        ActivistFragment1 fragment = new ActivistFragment1();
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_container, fragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
+        Intent intent = new Intent(this, SlideShowActivityAct1.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
+
     }
 
     private void openOrganizationFragments() {
-        OnboardingFragment1 fragment = new OnboardingFragment1();
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_container, fragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
+        Intent intent = new Intent(this, SlideShowActivityOrg1.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
     }
 
 }

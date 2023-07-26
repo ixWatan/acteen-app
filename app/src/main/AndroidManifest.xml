@@ -29,6 +29,33 @@
         android:theme="@style/Theme.Meetworkshop"
         tools:targetApi="31">
         <activity
+            android:name=".SlideShowAct.SlideShowAct5"
+            android:exported="false" />
+        <activity
+            android:name=".SlideShowOrg.SlideShowActivityOrg1"
+            android:exported="false" />
+        <activity
+            android:name=".SlideShowAct.SlideShowActivityAct1"
+            android:exported="false" />
+        <activity
+            android:name=".SlideShowOrg.SlideShowActivityOrg2"
+            android:exported="false" />
+        <activity
+            android:name=".SlideShowAct.SlideShowActivityAct2"
+            android:exported="false" />
+        <activity
+            android:name=".SlideShowOrg.SlideShowActivityOrg3"
+            android:exported="false" />
+        <activity
+            android:name=".SlideShowAct.SlideShowActivityAct3"
+            android:exported="false" />
+        <activity
+            android:name=".SlideShowOrg.SlideShowActivityOrg4"
+            android:exported="false" />
+        <activity
+            android:name=".SlideShowAct.SlideShowActivityAct4"
+            android:exported="false" />
+        <activity
             android:name=".homepage.homeactivist.DiscoverClickedCategoryActivist"
             android:exported="false" />
         <activity
@@ -84,9 +111,6 @@
         <activity
             android:name=".homepage.homeorganization.UserProfileOrgActivity"
             android:exported="false" />
-        <activity
-            android:name=".OnboardingActivity"
-            android:exported="true"/>
         <activity
             android:name=".homepage.homeactivist.EditProfilePictureActivity"
             android:exported="false" />
