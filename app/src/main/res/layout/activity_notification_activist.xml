@@ -6,15 +6,55 @@
     android:layout_height="match_parent"
     tools:context=".homepage.homeactivist.NotificationActivityActivist">
 
-    <TextView
-        android:id="@+id/textView"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Notification Page"
-        android:textColor="@color/black"
-        android:textSize="29sp"
-        android:textStyle="bold"
-        android:layout_marginTop="0dp" />
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="40dp"
+        android:orientation="horizontal">
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/profileImageView"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/icon_account"
+                />
+
+            <TextView
+                android:id="@+id/pTitleTv"
+                android:layout_width="wrap_content"
+                android:text="Notifications"
+                android:textStyle="bold"
+                android:textSize="22sp"
+                android:textColor="@color/black"
+                android:layout_marginLeft="10dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_toLeftOf="@id/profileImageView"
+                >
+            </TextView>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleX="0.8"
+        android:scaleY="0.8"
+        android:src="@drawable/nottifications_img">
+
+    </ImageView>
+
 
     <include
         layout="@layout/bottom_navigation_activist"

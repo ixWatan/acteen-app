@@ -53,7 +53,7 @@ public class HomeOrgActivity extends AppCompatActivity {
         homePageButton = findViewById(R.id.nav_home);
         campaignManagementButton = findViewById(R.id.nav_manage);
         addEventButton = findViewById(R.id.nav_addPost);
-        searchButton = findViewById(R.id.nav_search);
+        //searchButton = findViewById(R.id.nav_search);
 
         // post recycler view properties
         recyclerView = findViewById(R.id.postRecyclerView);

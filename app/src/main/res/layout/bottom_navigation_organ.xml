@@ -16,7 +16,7 @@
         android:background="@drawable/customborder"
         android:layout_alignParentBottom="true">
 
-        <ImageButton
+        <!--<ImageButton
             android:background="@null"
             android:id="@+id/nav_home"
             android:layout_width="0dp"
@@ -42,22 +42,10 @@
         android:background="@null"
             app:tint="@color/lightGrayWatanNavIcons"
 
-            />
+            />-->
 
 
-        <ImageButton
-            android:id="@+id/nav_addPost"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="0.7"
-            android:src="@drawable/more"
-            android:scaleType="centerInside"
-            android:onClick="onNavAddPostClick"
-            android:background="@null"
-            app:tint="@color/lightGrayWatanNavIcons"
 
-            android:padding="10dp"
-            />
 
         <ImageButton
             android:id="@+id/nav_manage"
@@ -70,6 +58,20 @@
             app:tint="@color/lightGrayWatanNavIcons"
 
             android:background="@null"
+            android:padding="10dp"
+            />
+
+        <ImageButton
+            android:id="@+id/nav_addPost"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="0.7"
+            android:src="@drawable/more"
+            android:scaleType="centerInside"
+            android:onClick="onNavAddPostClick"
+            android:background="@null"
+            app:tint="@color/lightGrayWatanNavIcons"
+
             android:padding="10dp"
             />
 

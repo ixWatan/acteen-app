@@ -69,7 +69,7 @@ public class UserProfileOrgActivity extends AppCompatActivity {
         homePageButton = findViewById(R.id.nav_home);
         campaignManagementButton = findViewById(R.id.nav_manage);
         addEventButton = findViewById(R.id.nav_addPost);
-        searchButton = findViewById(R.id.nav_search);
+        //searchButton = findViewById(R.id.nav_search);
 
 
         signOutButton = findViewById(R.id.buttonHabibi); // Initialize the sign-out button
@@ -79,12 +79,12 @@ public class UserProfileOrgActivity extends AppCompatActivity {
         ImageButton NavButton = (ImageButton) this.findViewById(R.id.nav_profile);
         NavButton.setColorFilter(Color.rgb(0,0,0)); // Yellow Tint
 
-        searchButton.setOnClickListener(new View.OnClickListener() {
+        /*searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openSearch();
             }
-        });
+        });*/
         profileImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,13 +108,13 @@ public class UserProfileOrgActivity extends AppCompatActivity {
         });
 
 
-        homePageButton.setOnClickListener(new View.OnClickListener() {
+        /*homePageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Handle the videoPageButton click event
                 openHomePage();
             }
-        });
+        });*/
 
         campaignManagementButton.setOnClickListener(new View.OnClickListener() {
             @Override

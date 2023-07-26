@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.meet_workshop.homepage.homeactivist.HomeActivity;
 import com.example.meet_workshop.homepage.homeorganization.HomeOrgActivity;
+import com.example.meet_workshop.homepage.homeorganization.UserProfileOrgActivity;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.DocumentSnapshot;
 
@@ -125,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
                             if (email.equalsIgnoreCase(storedEmail)) {
                                 // User's email is in the system
                                 // Proceed to the next activity
-                                Intent intent = new Intent(MainActivity.this, HomeOrgActivity.class);
+                                Intent intent = new Intent(MainActivity.this, UserProfileOrgActivity.class);
                                 startActivity(intent);
                             } else {
                                 // User's email is not in the system

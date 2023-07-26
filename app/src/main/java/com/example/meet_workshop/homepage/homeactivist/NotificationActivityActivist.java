@@ -98,6 +98,55 @@ public class NotificationActivityActivist extends AppCompatActivity {
             }
         });
 
+        // Retrieve user information from the Firestore database
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user != null) {
+            String userId = user.getUid();
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            db.collection("teenActivists").document(userId).get()
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                String userName = document.getString("name");
+                                String email = document.getString("email");
+                                String profilePictureUrl = document.getString("profilePictureUrl");
+
+                                // Update the profile picture ImageView with the new URL
+                                if (profilePictureUrl != null && !profilePictureUrl.isEmpty()) {
+                                    Glide.with(this)
+                                            .load(profilePictureUrl + "?timestamp=" + System.currentTimeMillis())
+                                            .into(profileImageView);
+                                } else {
+                                    // Display the default profile picture
+                                    Glide.with(this)
+                                            .load(R.drawable.default_profile_picture)
+                                            .into(profileImageView);
+                                }
+
+                            }
+                        } else {
+                            Toast.makeText(this, "An error occurred. Please try again.", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        }
+
+        // Load and display the user's profile picture using a library like Glide or Picasso
+        String profilePictureUrl = getIntent().getStringExtra("profilePictureUrl");
+        if (profilePictureUrl != null && !profilePictureUrl.isEmpty()) {
+            Glide.with(this)
+                    .load(profilePictureUrl)
+                    .skipMemoryCache(true)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .into(profileImageView);
+
+        } else {
+            // Set the default profile picture
+            Glide.with(this)
+                    .load(R.drawable.default_profile_picture)
+                    .into(profileImageView);
+        }
+
 
     }
 

@@ -38,7 +38,7 @@ public class CampaignManagementOrgActivity extends AppCompatActivity {
         homePageButton = findViewById(R.id.nav_home);
         campaignManagementButton = findViewById(R.id.nav_manage);
         addEventButton = findViewById(R.id.nav_addPost);
-        searchButton = findViewById(R.id.nav_search);
+        //searchButton = findViewById(R.id.nav_search);
 
         RelativeLayout audienceAnalysis = (RelativeLayout) this.findViewById(R.id.audience_analysis);
         RelativeLayout campaignAnalysis = (RelativeLayout) this.findViewById(R.id.campaign_analysis);
@@ -64,12 +64,12 @@ public class CampaignManagementOrgActivity extends AppCompatActivity {
             }
         });
 
-        searchButton.setOnClickListener(new View.OnClickListener() {
+        /*searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openSearch();
             }
-        });
+        });*/
 
         subscriptionAnalysis.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,13 +89,13 @@ public class CampaignManagementOrgActivity extends AppCompatActivity {
         });
 
 
-        homePageButton.setOnClickListener(new View.OnClickListener() {
+        /*homePageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Handle the videoPageButton click event
                 openHomePage();
             }
-        });
+        });*/
 
         campaignManagementButton.setOnClickListener(new View.OnClickListener() {
             @Override

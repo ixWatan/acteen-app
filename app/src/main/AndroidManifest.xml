@@ -86,7 +86,7 @@
             android:exported="false" />
         <activity
             android:name=".OnboardingActivity"
-            android:exported="true"></activity>
+            android:exported="true"/>
         <activity
             android:name=".homepage.homeactivist.EditProfilePictureActivity"
             android:exported="false" />

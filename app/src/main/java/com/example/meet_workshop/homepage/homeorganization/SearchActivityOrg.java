@@ -75,11 +75,11 @@ public class SearchActivityOrg extends AppCompatActivity {
         homePageButton = findViewById(R.id.nav_home);
         campaignManagementButton = findViewById(R.id.nav_manage);
         addEventButton = findViewById(R.id.nav_addPost);
-        searchButton = findViewById(R.id.nav_search);
+        //searchButton = findViewById(R.id.nav_search);
 
-        ImageButton NavButton = (ImageButton) this.findViewById(R.id.nav_search);
+        /*ImageButton NavButton = (ImageButton) this.findViewById(R.id.nav_search);
         NavButton.setColorFilter(Color.rgb(0,0,0)); // Yellow Tint
-
+*/
         profileImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

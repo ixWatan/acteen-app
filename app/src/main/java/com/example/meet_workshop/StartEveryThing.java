@@ -24,9 +24,6 @@ public class StartEveryThing extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_every_thing);
 
-        Intent intent = new Intent(this, OrgOrActActivity.class);
-        startActivity(intent);
-
 
         Organization = findViewById(R.id.Organization);
         Organization.setOnClickListener(new View.OnClickListener() {
