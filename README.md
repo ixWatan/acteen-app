@@ -25,7 +25,7 @@
 <br />
 <div align="center">
   <a href="/">
-    <img src="https://firebasestorage.googleapis.com/v0/b/meet-workshop.appspot.com/o/WhatsApp%20Image%202023-07-11%20at%2009.41.20.jpg?alt=media&token=a700ba81-e2b6-473b-8015-0296fa59b59c" alt="Logo" width="250" height="200">
+    <img src="https://firebasestorage.googleapis.com/v0/b/meet-workshop.appspot.com/o/acteen_logo%2Flogo%20512x512.png?alt=media&token=e026bc4e-5397-4dac-8eea-7d09dbe2aac7.jpg" alt="Logo" width="250" height="200">
   </a>
 
   <h3 align="center">Acteen</h3>
