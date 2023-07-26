@@ -96,16 +96,19 @@ public class ActivityInterests extends AppCompatActivity {
     }
 
     private void handleButtonInteraction(Button button) {
-        if (button.getTag() == null || "gray".equals(button.getTag())) {
-            button.setTag("green");
+        if (button.getTag() == null || "black".equals(button.getTag())) {
+            button.setTag("yellow");
             selectedInterests.add(button.getText().toString());
-            button.setBackgroundColor(getResources().getColor(R.color.green));
+            button.setBackgroundColor(getResources().getColor(com.google.android.libraries.places.R.color.quantum_yellowA700));
+            button.setTextColor(getResources().getColor(R.color.black)); // changes the text color to black when the background is yellow
         } else {
-            button.setTag("gray");
+            button.setTag("black");
             selectedInterests.remove(button.getText().toString());
-            button.setBackgroundColor(getResources().getColor(R.color.gray));
+            button.setBackgroundColor(getResources().getColor(R.color.black));
+            button.setTextColor(getResources().getColor(R.color.white)); // changes the text color to white when the background is black
         }
     }
+
 
     public void onSubmitClick(View view) {
         if (selectedInterests.size() < 3) {

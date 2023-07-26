@@ -8,6 +8,13 @@
     android:background="@drawable/gradient_background"
     tools:context=".ActivityInterests">
 
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
@@ -25,38 +32,54 @@
             android:gravity="center"
             android:paddingBottom="120px"
             android:paddingTop="60px"
-            android:text="Interests"
+            android:text="What are you interested in?"
             android:textColor="@color/black"
-            android:textSize="29sp"
+            android:textSize="30sp"
             android:textStyle="bold" />
 
         <!-- Other LinearLayouts are the same -->
         <!-- Only the Button elements are modified -->
 
+        <TextView
+            android:id="@+id/descriptionTV"
+            android:layout_width="wrap_content"
+            android:textAlignment="center"
+            android:layout_height="107dp"
+            android:layout_margin="20dp"
+            android:layout_marginBottom="100dp"
+            android:text="Become a changemaker in your community! Choose at least three categories."
+            android:textColor="@android:color/darker_gray"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="horizontal">
 
-            <Button
+            <com.google.android.material.button.MaterialButton
+                app:cornerRadius="200dp"
                 android:id="@+id/my_button"
-                android:layout_width="120dp"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="@color/gray"
+                android:backgroundTint="@color/black"
                 android:onClick="onButtonClick"
-                android:text="Climate" />
+                android:layout_margin="10dp"
+                android:text="Environment" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
+                app:cornerRadius="200dp"
                 android:id="@+id/my_button1"
-                android:layout_width="120dp"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginLeft="150px"
-                android:backgroundTint="@color/gray"
+                android:backgroundTint="@color/black"
                 android:onClick="onButtonClick"
-                android:text="Women's Rights" />
+                android:text="Women's Rights"
+                android:layout_margin="10dp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -65,24 +88,28 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-            <Button
+            <com.google.android.material.button.MaterialButton
+                app:cornerRadius="200dp"
                 android:id="@+id/my_button2"
-                android:layout_width="120dp"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="@color/gray"
+                android:backgroundTint="@color/black"
                 android:onClick="onButtonClick"
-                android:text="Refugees" />
+                android:text="Social Justice"
+                android:layout_margin="10dp"/>
 
-            <Button
+            <com.google.android.material.button.MaterialButton
+                app:cornerRadius="200dp"
                 android:id="@+id/my_button3"
-                android:layout_width="120dp"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginLeft="150px"
-                android:backgroundTint="@color/gray"
+                android:backgroundTint="@color/black"
                 android:onClick="onButtonClick"
-                android:text="Politics" />
+                android:text="Democracy"
+                android:layout_margin="10dp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -91,24 +118,28 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-            <Button
+            <com.google.android.material.button.MaterialButton
+                app:cornerRadius="200dp"
                 android:id="@+id/my_button4"
-                android:layout_width="120dp"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="@color/gray"
+                android:backgroundTint="@color/black"
                 android:onClick="onButtonClick"
-                android:text="Pullotion" />
+                android:text="Education"
+                android:layout_margin="10dp"/>
 
-            <Button
+            <com.google.android.material.button.MaterialButton
+                app:cornerRadius="200dp"
                 android:id="@+id/my_button5"
-                android:layout_width="120dp"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginLeft="150px"
-                android:backgroundTint="@color/gray"
+                android:backgroundTint="@color/black"
                 android:onClick="onButtonClick"
-                android:text="LGBTQ+" />
+                android:text="Petitions"
+                android:layout_margin="10dp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -117,24 +148,28 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-            <Button
+            <com.google.android.material.button.MaterialButton
+                app:cornerRadius="200dp"
                 android:id="@+id/my_button6"
-                android:layout_width="120dp"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="@color/gray"
+                android:backgroundTint="@color/black"
                 android:onClick="onButtonClick"
-                android:text="Animals" />
+                android:text="Animals"
+                android:layout_margin="10dp"/>
 
-            <Button
+            <com.google.android.material.button.MaterialButton
+                app:cornerRadius="200dp"
                 android:id="@+id/my_button7"
-                android:layout_width="120dp"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginLeft="150px"
-                android:backgroundTint="@color/gray"
+                android:backgroundTint="@color/black"
                 android:onClick="onButtonClick"
-                android:text="Volunteering" />
+                android:text="LGBTQ+"
+                android:layout_margin="10dp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -143,24 +178,28 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-            <Button
+            <com.google.android.material.button.MaterialButton
+                app:cornerRadius="200dp"
                 android:id="@+id/my_button8"
-                android:layout_width="120dp"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="@color/gray"
+                android:backgroundTint="@color/black"
                 android:onClick="onButtonClick"
-                android:text="Education" />
+                android:text="Strikes"
+                android:layout_margin="10dp"/>
 
-            <Button
+            <com.google.android.material.button.MaterialButton
+                app:cornerRadius="200dp"
                 android:id="@+id/my_button9"
-                android:layout_width="120dp"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginLeft="150px"
-                android:backgroundTint="@color/gray"
+                android:backgroundTint="@color/black"
                 android:onClick="onButtonClick"
-                android:text="Racism" />
+                android:text="Volunteering"
+                android:layout_margin="10dp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -169,24 +208,28 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-            <Button
+            <com.google.android.material.button.MaterialButton
+                app:cornerRadius="200dp"
                 android:id="@+id/my_button10"
-                android:layout_width="120dp"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="@color/gray"
+                android:backgroundTint="@color/black"
                 android:onClick="onButtonClick"
-                android:text="Click me" />
+                android:text="Protests"
+                android:layout_margin="10dp"/>
 
-            <Button
+            <com.google.android.material.button.MaterialButton
+                app:cornerRadius="200dp"
                 android:id="@+id/my_button11"
-                android:layout_width="120dp"
+                android:layout_width="200dp"
+                android:layout_margin="10dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginLeft="150px"
-                android:backgroundTint="@color/gray"
+                android:backgroundTint="@color/black"
                 android:onClick="onButtonClick"
-                android:text="Click me" />
+                android:text="Human and civil rights" />
         </LinearLayout>
 
         <LinearLayout
@@ -195,24 +238,28 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-            <Button
+            <com.google.android.material.button.MaterialButton
+                app:cornerRadius="200dp"
                 android:id="@+id/my_button12"
-                android:layout_width="120dp"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="@color/gray"
+                android:backgroundTint="@color/black"
                 android:onClick="onButtonClick"
-                android:text="Click me" />
+                android:text="Isr-Pal Conflict"
+                android:layout_margin="10dp"/>
 
-            <Button
+            <com.google.android.material.button.MaterialButton
+                app:cornerRadius="200dp"
                 android:id="@+id/my_button13"
-                android:layout_width="120dp"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginLeft="150px"
-                android:backgroundTint="@color/gray"
+                android:backgroundTint="@color/black"
                 android:onClick="onButtonClick"
-                android:text="Click me" />
+                android:text="Volunteer"
+                android:layout_margin="10dp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -221,34 +268,43 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-            <Button
+            <com.google.android.material.button.MaterialButton
+                app:cornerRadius="200dp"
                 android:id="@+id/my_button14"
-                android:layout_width="120dp"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="@color/gray"
+                android:backgroundTint="@color/black"
                 android:onClick="onButtonClick"
-                android:text="Click me" />
+                android:text="Sexual Awareness"
+                android:layout_margin="10dp"/>
 
-            <Button
+            <com.google.android.material.button.MaterialButton
+                app:cornerRadius="200dp"
                 android:id="@+id/my_button15"
-                android:layout_width="120dp"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginLeft="150px"
-                android:backgroundTint="@color/gray"
+                android:backgroundTint="@color/black"
                 android:onClick="onButtonClick"
-                android:text="Click me" />
+                android:text="Combating Racism"
+                android:layout_margin="10dp"/>
         </LinearLayout>
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/submit_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Submit"
-            android:onClick="onSubmitClick" />
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:text="Let’s go"
+            android:textColor="@color/Yellow"
+            android:textSize="20sp"
+            android:backgroundTint="@color/black"
+            android:onClick="onSubmitClick"
+            android:layout_margin="10dp"/>
 
     </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
