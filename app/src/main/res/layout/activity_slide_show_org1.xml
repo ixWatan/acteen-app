@@ -40,6 +40,7 @@
                 android:layout_height="107dp"
                 android:layout_margin="20dp"
                 android:layout_marginBottom="100dp"
+                android:textAlignment="center"
                 android:text="Sign up as a registered organization through our app’s registration form."
                 android:textColor="@android:color/darker_gray"
                 android:textSize="18sp"
@@ -51,27 +52,40 @@
                 android:layout_margin="2dp"
                 android:orientation="horizontal">
 
-                <Button
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_weight="1"
                     android:id="@+id/SkipBtn"
-                    android:layout_width="10dp"
+                    android:layout_width="0dp"
+                    android:textAllCaps="false"
                     android:layout_height="wrap_content"
                     android:text="Skip"
-                    android:textAllCaps="false"
-                    android:background="@drawable/purple_frame"
-                    android:textColor="@android:color/black"
-                    android:layout_weight="1"
-                    android:layout_margin="10dp"/>
+                    android:textColor="@color/Black"
+                    android:textSize="15sp"
+                    android:layout_marginRight="20dp"
+                    android:padding="12dp"
+                    app:strokeColor="#8870BD"
+                    app:backgroundTint="@android:color/transparent"
+                    app:cornerRadius="3dp"
+                    app:rippleColor="#33AAAAAA"
+                    app:strokeWidth="2dp" />
 
-                <Button
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_weight="1"
                     android:id="@+id/NextBtn"
-                    android:layout_width="10dp"
+                    android:textAllCaps="false"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="Next"
-                    android:textAllCaps="false"
-                    android:background="@drawable/yellow_frame"
-                    android:textColor="@android:color/black"
-                    android:layout_weight="1"
-                    android:layout_margin="10dp"/>
+                    android:textColor="@color/Black"
+                    android:textSize="15sp"
+                    android:padding="12dp"
+                    app:strokeColor="#8870BD"
+                    app:backgroundTint="@android:color/transparent"
+                    app:cornerRadius="3dp"
+                    app:rippleColor="#33AAAAAA"
+                    app:strokeWidth="2dp" />
 
 
             </LinearLayout>
