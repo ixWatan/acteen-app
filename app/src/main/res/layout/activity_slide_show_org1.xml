@@ -62,17 +62,17 @@
                     android:layout_weight="1"
                     android:layout_margin="10dp"/>
 
-
                 <Button
                     android:id="@+id/NextBtn"
                     android:layout_width="10dp"
                     android:layout_height="wrap_content"
                     android:text="Next"
                     android:textAllCaps="false"
-                    android:background="@drawable/purple_frame"
+                    android:background="@drawable/yellow_frame"
                     android:textColor="@android:color/black"
                     android:layout_weight="1"
                     android:layout_margin="10dp"/>
+
 
             </LinearLayout>
         </LinearLayout>
