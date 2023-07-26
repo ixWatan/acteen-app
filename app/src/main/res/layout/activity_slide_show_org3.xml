@@ -68,6 +68,7 @@
                 app:backgroundTint="@android:color/transparent"
                 app:cornerRadius="3dp"
                 app:rippleColor="#33AAAAAA"
+                android:layout_margin="10dp"
                 app:strokeWidth="2dp" />
 
             <com.google.android.material.button.MaterialButton
@@ -84,6 +85,7 @@
                 app:strokeColor="#8870BD"
                 app:backgroundTint="@android:color/transparent"
                 app:cornerRadius="3dp"
+                android:layout_margin="10dp"
                 app:rippleColor="#33AAAAAA"
                 app:strokeWidth="2dp" />
 

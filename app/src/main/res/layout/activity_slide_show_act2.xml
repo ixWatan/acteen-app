@@ -66,6 +66,7 @@
                 app:strokeColor="#FED600"
                 app:backgroundTint="@android:color/transparent"
                 app:cornerRadius="3dp"
+                android:layout_margin="10dp"
                 app:rippleColor="#33AAAAAA"
                 app:strokeWidth="2dp" />
 
@@ -74,6 +75,7 @@
                 android:layout_weight="1"
                 android:id="@+id/NextBtn"
                 android:textAllCaps="false"
+                android:layout_margin="10dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Next"

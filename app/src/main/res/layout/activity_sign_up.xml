@@ -52,6 +52,20 @@
             android:padding="12dp"
             android:layout_marginBottom="15dp"/>
 
+        <EditText
+            android:id="@+id/signup_email"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            android:digits="abcdefghijklmnopqrstuvwxyz1234567890@."
+            android:inputType="textFilter"
+            android:textSize="14sp"
+            android:singleLine="true"
+            android:background="@drawable/edittext_background"
+            android:padding="12dp"
+            android:layout_marginBottom="15dp"/>
+
+
 
 
         <com.google.android.material.textfield.TextInputLayout
@@ -73,7 +87,17 @@
                 android:layout_marginBottom="15dp" />
         </com.google.android.material.textfield.TextInputLayout>
 
-
+        <EditText
+            android:id="@+id/signup_age"
+            android:layout_width="300dp"
+            android:singleLine="true"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:hint="Age"
+            android:inputType="number"
+            android:background="@drawable/edittext_background"
+            android:padding="12dp"
+            android:layout_marginBottom="15dp"/>
         <!-- Start -->
         <androidx.coordinatorlayout.widget.CoordinatorLayout
 
@@ -108,34 +132,6 @@
         <!-- End -->
 
 
-        <EditText
-            android:id="@+id/signup_email"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:hint="Email"
-            android:digits="abcdefghijklmnopqrstuvwxyz1234567890@."
-            android:inputType="textFilter"
-            android:textSize="14sp"
-            android:singleLine="true"
-            android:background="@drawable/edittext_background"
-            android:padding="12dp"
-            android:layout_marginBottom="15dp"/>
-
-
-
-
-
-        <EditText
-            android:id="@+id/signup_age"
-            android:layout_width="300dp"
-            android:singleLine="true"
-            android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:hint="Age"
-            android:inputType="number"
-            android:background="@drawable/edittext_background"
-            android:padding="12dp"
-            android:layout_marginBottom="15dp"/>
 <!--
         <EditText
             android:id="@+id/signup_region"

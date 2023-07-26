@@ -33,7 +33,7 @@
             android:layout_marginBottom="10dp"
             android:text="Welcome To Acteen!"
             android:textColor="@android:color/black"
-            android:textSize="32sp"
+            android:textSize="36sp"
             android:textStyle="bold" />
 
 
@@ -66,10 +66,11 @@
                 android:textSize="15sp"
                 android:layout_marginRight="20dp"
                 android:padding="12dp"
-                app:strokeColor="#FED600"
+                app:strokeColor="#FFEB3B"
                 app:backgroundTint="@android:color/transparent"
                 app:cornerRadius="3dp"
                 app:rippleColor="#33AAAAAA"
+                android:layout_margin="10dp"
                 app:strokeWidth="2dp" />
 
             <com.google.android.material.button.MaterialButton
@@ -83,7 +84,8 @@
                 android:textColor="@color/Black"
                 android:textSize="15sp"
                 android:padding="12dp"
-                app:strokeColor="#FED600"
+                android:layout_margin="10dp"
+                app:strokeColor="#FFEB3B"
                 app:backgroundTint="@android:color/transparent"
                 app:cornerRadius="3dp"
                 app:rippleColor="#33AAAAAA"
