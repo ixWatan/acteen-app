@@ -47,8 +47,8 @@ public class UserProfile extends AppCompatActivity {
     private ImageButton searchButton;
 
     private ImageButton homePageButton;
-    private ImageView profileImageView;
-    private Button signOutButton;
+    private ImageView profileImageView, settingsIcon;
+    private Button signOutButton, editProfileButton;
 
     private static final int EDIT_PROFILE_PICTURE_REQUEST_CODE = 3;
 
@@ -58,6 +58,9 @@ public class UserProfile extends AppCompatActivity {
         setContentView(R.layout.activity_user_profile);
         mAuth = FirebaseAuth.getInstance();
 
+
+        settingsIcon = findViewById(R.id.settingsIcon);
+        editProfileButton = findViewById(R.id.editprofile_button);
         userNameTextView = findViewById(R.id.name_activist);
         cityTextView = findViewById(R.id.city_activist);
         profileImageView = findViewById(R.id.profileImageView);
@@ -70,7 +73,14 @@ public class UserProfile extends AppCompatActivity {
         ImageButton NavButton = (ImageButton) this.findViewById(R.id.nav_profileActivist);
         NavButton.setColorFilter(Color.rgb(0,0,0)); // Yellow Tint
 
-        profileImageView.setOnClickListener(new View.OnClickListener() {
+        settingsIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openSettingsPageActivist();
+            }
+        });
+
+        editProfileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openEditProfilePictureActivity();
@@ -83,14 +93,6 @@ public class UserProfile extends AppCompatActivity {
                 openUserProfile();
             }
         });
-
-        signOutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signOut();
-            }
-        });
-
 
 
         homePageButton.setOnClickListener(new View.OnClickListener() {
@@ -171,6 +173,11 @@ public class UserProfile extends AppCompatActivity {
 
     }
 
+    private void openSettingsPageActivist() {
+
+        Intent intent = new Intent(UserProfile.this, SettingsPageActivist.class);
+        startActivity(intent);
+    }
 
 
     private void signOut() {

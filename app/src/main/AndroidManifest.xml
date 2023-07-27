@@ -29,6 +29,9 @@
         android:theme="@style/Theme.Meetworkshop"
         tools:targetApi="31">
         <activity
+            android:name=".homepage.homeactivist.SettingsPageActivist"
+            android:exported="false" />
+        <activity
             android:name=".ThankYouActivity"
             android:exported="false" />
         <activity

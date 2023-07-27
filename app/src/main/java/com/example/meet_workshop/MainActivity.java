@@ -10,6 +10,7 @@ import com.example.meet_workshop.homepage.homeorganization.UserProfileOrgActivit
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.DocumentSnapshot;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,6 +28,9 @@ public class MainActivity extends AppCompatActivity {
     private EditText email;
     private EditText password;
 
+    private ProgressDialog pd;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +41,9 @@ public class MainActivity extends AppCompatActivity {
 
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+
+        ProgressDialog pd;
+
 
 
 
@@ -68,10 +75,16 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void loginUser(String email, String password) {
+
+        pd = new ProgressDialog(this);
+        pd.setMessage("Signing User ...");
+        pd.show();
+
         if (email.isEmpty() || password.isEmpty()) {
             Toast.makeText(MainActivity.this, "Email and password cannot be empty.", Toast.LENGTH_SHORT).show();
             return;
         }
+
 
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
@@ -111,6 +124,8 @@ public class MainActivity extends AppCompatActivity {
                                 Toast.LENGTH_SHORT).show();
                     }
                 });
+
+        pd.dismiss();
     }
 
     private void checkForOrganizationUser(String email, String uid) {
