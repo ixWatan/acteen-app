@@ -1,5 +1,6 @@
 package com.example.meet_workshop.homepage.homeactivist;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -42,6 +43,9 @@ public class UserProfile extends AppCompatActivity {
 
     private ImageButton profileImageButton;
 
+    private ProgressDialog pd;
+
+
 
     private ImageButton notificationButton;
     private ImageButton searchButton;
@@ -69,6 +73,7 @@ public class UserProfile extends AppCompatActivity {
         notificationButton = findViewById(R.id.nav_bellActivist);
         homePageButton = findViewById(R.id.nav_homeActivist);
         signOutButton = findViewById(R.id.buttonHabibi);
+
 
         ImageButton NavButton = (ImageButton) this.findViewById(R.id.nav_profileActivist);
         NavButton.setColorFilter(Color.rgb(0,0,0)); // Yellow Tint
@@ -116,6 +121,10 @@ public class UserProfile extends AppCompatActivity {
             }
         });
 
+
+        pd = new ProgressDialog(this);
+        pd.setMessage("Loading Profile...");
+        pd.show();
 
         // Retrieve user information from the Firestore database
         FirebaseUser user = mAuth.getCurrentUser();
@@ -171,6 +180,9 @@ public class UserProfile extends AppCompatActivity {
         }
 
 
+        pd.dismiss();
+
+
     }
 
     private void openSettingsPageActivist() {
@@ -202,6 +214,8 @@ public class UserProfile extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+
 
         if (requestCode == EDIT_PROFILE_PICTURE_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
             byte[] croppedImageBytes = data.getByteArrayExtra("croppedImage");

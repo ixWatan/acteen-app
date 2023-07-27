@@ -33,7 +33,7 @@
             android:layout_marginBottom="10dp"
             android:text="Welcome To Acteen!"
             android:textColor="@android:color/black"
-            android:textSize="36sp"
+            android:textSize="32sp"
             android:textStyle="bold" />
 
 
@@ -41,8 +41,9 @@
             android:id="@+id/descriptionTV"
             android:layout_width="wrap_content"
             android:layout_height="107dp"
-            android:layout_margin="20dp"
+            android:layout_marginHorizontal="30dp"
             android:layout_marginBottom="100dp"
+            android:textAlignment="center"
             android:text="The app that connects teenagers to activism opportunities in their area, to make activism an accessible and easy to do."
             android:textColor="@android:color/darker_gray"
             android:textSize="18sp"
@@ -51,7 +52,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
+            android:layout_marginHorizontal="20dp"
             android:orientation="horizontal">
 
             <com.google.android.material.button.MaterialButton
@@ -66,7 +67,7 @@
                 android:textSize="15sp"
                 android:layout_marginRight="20dp"
                 android:padding="12dp"
-                app:strokeColor="#FFEB3B"
+                app:strokeColor="#FED600"
                 app:backgroundTint="@android:color/transparent"
                 app:cornerRadius="3dp"
                 app:rippleColor="#33AAAAAA"
@@ -85,7 +86,7 @@
                 android:textSize="15sp"
                 android:padding="12dp"
                 android:layout_margin="10dp"
-                app:strokeColor="#FFEB3B"
+                app:strokeColor="#FED600"
                 app:backgroundTint="@android:color/transparent"
                 app:cornerRadius="3dp"
                 app:rippleColor="#33AAAAAA"
