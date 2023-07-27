@@ -2,8 +2,11 @@ package com.example.meet_workshop;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 
+import java.io.Serializable;
+
 @IgnoreExtraProperties
-public class User {
+public class User implements Serializable {
+
     private String name;
     private String email;
     private String password;

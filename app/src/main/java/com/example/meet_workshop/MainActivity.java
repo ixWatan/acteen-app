@@ -105,7 +105,10 @@ public class MainActivity extends AppCompatActivity {
                                                     // User's email is in the system
                                                     // Proceed to the next activity
                                                     Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                                     startActivity(intent);
+                                                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
                                                 } else {
                                                     checkForOrganizationUser(email, user.getUid());
                                                 }
@@ -142,7 +145,10 @@ public class MainActivity extends AppCompatActivity {
                                 // User's email is in the system
                                 // Proceed to the next activity
                                 Intent intent = new Intent(MainActivity.this, UserProfileOrgActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(intent);
+                                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
                             } else {
                                 // User's email is not in the system
                                 Toast.makeText(MainActivity.this,
@@ -159,5 +165,12 @@ public class MainActivity extends AppCompatActivity {
                         Log.d(TAG, "Failed to get user document.", task1.getException());
                     }
                 });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+
     }
 }

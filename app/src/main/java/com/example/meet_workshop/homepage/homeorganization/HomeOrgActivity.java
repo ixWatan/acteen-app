@@ -50,7 +50,7 @@ public class HomeOrgActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_org);
         profileImageButton = findViewById(R.id.nav_profile);
-        homePageButton = findViewById(R.id.nav_home);
+        //homePageButton = findViewById(R.id.nav_home);
         campaignManagementButton = findViewById(R.id.nav_manage);
         addEventButton = findViewById(R.id.nav_addPost);
         //searchButton = findViewById(R.id.nav_search);
@@ -74,8 +74,8 @@ public class HomeOrgActivity extends AppCompatActivity {
         loadPosts();
 
 
-        ImageButton NavButton = (ImageButton) this.findViewById(R.id.nav_home);
-        NavButton.setColorFilter(Color.rgb(0,0,0)); // Yellow Tint
+       /* ImageButton NavButton = (ImageButton) this.findViewById(R.id.nav_home);
+        NavButton.setColorFilter(Color.rgb(0,0,0)); // Yellow Tint*/
 
 
         profileImageButton.setOnClickListener(new View.OnClickListener() {

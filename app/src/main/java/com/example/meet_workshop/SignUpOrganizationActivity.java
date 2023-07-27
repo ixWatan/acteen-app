@@ -241,8 +241,10 @@ public class SignUpOrganizationActivity extends AppCompatActivity {
                                             // Navigate to the interests page after successfully creating the user.
                                             Toast.makeText(this, "You're in", Toast.LENGTH_SHORT).show();
                                             Intent intent = new Intent(SignUpOrganizationActivity.this, ThankYouActivity.class);
+                                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                             startActivity(intent);
-                                            finish();
+                                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
 
                                         } else {
                                             Log.w(TAG, "set:failure", task1.getException());
@@ -262,6 +264,13 @@ public class SignUpOrganizationActivity extends AppCompatActivity {
                     });
         }
 
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
 
     }
 }

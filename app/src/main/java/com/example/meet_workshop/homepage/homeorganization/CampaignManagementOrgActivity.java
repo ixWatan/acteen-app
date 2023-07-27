@@ -3,8 +3,10 @@ package com.example.meet_workshop.homepage.homeorganization;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
@@ -15,10 +17,10 @@ public class CampaignManagementOrgActivity extends AppCompatActivity {
 
     private ImageButton profileImageButton;
 
-    private  ImageButton searchButton;
+    //private  ImageButton searchButton;
     private ImageButton addEventButton;
     private ImageButton campaignManagementButton;
-    private ImageButton homePageButton;
+    //private ImageButton homePageButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +37,11 @@ public class CampaignManagementOrgActivity extends AppCompatActivity {
         setContentView(R.layout.activity_campaign_management_org);
         // Navbar organization stuff 5 icons
         profileImageButton = findViewById(R.id.nav_profile);
-        homePageButton = findViewById(R.id.nav_home);
-        campaignManagementButton = findViewById(R.id.nav_manage);
+        //homePageButton = findViewById(R.id.nav_home);
         addEventButton = findViewById(R.id.nav_addPost);
         //searchButton = findViewById(R.id.nav_search);
+        campaignManagementButton= findViewById(R.id.nav_manage);
+        campaignManagementButton.setClickable(false);
 
         RelativeLayout audienceAnalysis = (RelativeLayout) this.findViewById(R.id.audience_analysis);
         RelativeLayout campaignAnalysis = (RelativeLayout) this.findViewById(R.id.campaign_analysis);
@@ -97,13 +100,13 @@ public class CampaignManagementOrgActivity extends AppCompatActivity {
             }
         });*/
 
-        campaignManagementButton.setOnClickListener(new View.OnClickListener() {
+        /*campaignManagementButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Handle the profileImageButton click event
                 openCampaignManagement();
             }
-        });
+        });*/
 
         addEventButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -135,17 +138,20 @@ public class CampaignManagementOrgActivity extends AppCompatActivity {
     private void openAddEventOrgActivity() {
         Intent intent = new Intent(this, AddEventOrgActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
     }
 
-    private void openCampaignManagement() {
+/*    private void openCampaignManagement() {
         Intent intent = new Intent(this, CampaignManagementOrgActivity.class);
         startActivity(intent);
-    }
 
-    private void openSearch() {
+    }*/
+
+   /* private void openSearch() {
         Intent intent = new Intent(this, SearchActivityOrg.class);
         startActivity(intent);
-    }
+    }*/
 
 
 
@@ -153,12 +159,33 @@ public class CampaignManagementOrgActivity extends AppCompatActivity {
         // Start the UserProfile activity
         Intent intent = new Intent(this, UserProfileOrgActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
     }
 
 
-    private void openHomePage() {
+  /*  private void openHomePage() {
         // Start the UserProfile activity
         Intent intent = new Intent(this, HomeOrgActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
+    }*/
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("lastActivity", getClass().getName());
+        editor.apply();
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
+    }
+
 }

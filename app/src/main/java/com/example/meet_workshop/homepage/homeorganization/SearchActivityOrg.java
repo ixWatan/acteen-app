@@ -51,7 +51,7 @@ public class SearchActivityOrg extends AppCompatActivity {
     private SearchView search;
     private ImageButton profileImageButton;
 
-    private ImageButton homePageButton;
+    //private ImageButton homePageButton;
     private ImageView profileImageView;
 
     private ImageButton addEventButton;
@@ -72,7 +72,7 @@ public class SearchActivityOrg extends AppCompatActivity {
 
         // Navbar organization stuff 5 icons
         profileImageButton = findViewById(R.id.nav_profile);
-        homePageButton = findViewById(R.id.nav_home);
+        //homePageButton = findViewById(R.id.nav_home);
         campaignManagementButton = findViewById(R.id.nav_manage);
         addEventButton = findViewById(R.id.nav_addPost);
         //searchButton = findViewById(R.id.nav_search);
@@ -105,12 +105,12 @@ public class SearchActivityOrg extends AppCompatActivity {
 
 
 
-        homePageButton.setOnClickListener(new View.OnClickListener() {
+        /*homePageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openHomePage();
             }
-        });
+        });*/
 
 
 

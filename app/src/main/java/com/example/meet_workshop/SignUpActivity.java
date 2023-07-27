@@ -35,13 +35,11 @@ public class SignUpActivity extends AppCompatActivity {
 
     private ProgressDialog pd;
 
-    String[] regionsList = {"Jerusalem" , "Northern District", "Haifa", "West Bank", "Central District","Tel Aviv", "Southern District"};
+    String[] regionsList = {"Jerusalem", "Northern District", "Haifa", "West Bank", "Central District", "Tel Aviv", "Southern District"};
 
     AutoCompleteTextView autoCompleteTextView;
 
     ArrayAdapter<String> adapterItems;
-
-
 
 
     private CheckBox checkBox;
@@ -55,9 +53,9 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText cityEditText;
     private EditText password;
 
-    String  selectedRegion;
+    String selectedRegion;
 
-    private User person = new User(null,null,null,null,null,null);
+    private User person = new User(null, null, null, null, null, null);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +66,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         // drop down menu for regions
         autoCompleteTextView = findViewById(R.id.autocomplete_Tv);
-        adapterItems = new ArrayAdapter<String>(this,R.layout.list_item, regionsList);
+        adapterItems = new ArrayAdapter<String>(this, R.layout.list_item, regionsList);
 
         autoCompleteTextView.setAdapter(adapterItems);
 
@@ -84,10 +82,6 @@ public class SignUpActivity extends AppCompatActivity {
 
             }
         });
-
-
-
-
 
 
         this.checkBoxText = findViewById(R.id.checkBoxText);
@@ -131,8 +125,10 @@ public class SignUpActivity extends AppCompatActivity {
                 }
             });
 
-            createUser(person);        }
+            createUser(person);
+        }
     }
+
     private void checkPostsCollectionExistence() {
 
     }
@@ -140,14 +136,67 @@ public class SignUpActivity extends AppCompatActivity {
     public void GoMain(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+
     }
+
     public void OpenTermsAndGuidelines(View view) {
         String url = getString(R.string.privacy_policy);
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         startActivity(browserIntent);
     }
+
+
     public void createUser(User person) {
-        pd = new ProgressDialog(this);
+        Intent intent = new Intent(SignUpActivity.this, ActivityInterests.class);
+        intent.putExtra("User", person);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
+//----------------------------------------------------------------------------------------
+       /*pd = new ProgressDialog(this);
+       pd.setMessage("Creating Account...");
+       pd.show();
+       mAuth.createUserWithEmailAndPassword(person.getEmail(), person.getPassword())
+               .addOnCompleteListener(this, task -> {
+                   if (task.isSuccessful()) {
+                       FirebaseUser user = mAuth.getCurrentUser();
+                       String uid = user.getUid();
+
+                       UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                               .setDisplayName(person.getName())
+                               .build();
+                       user.updateProfile(profileUpdates)
+                               .addOnCompleteListener(task2 -> {
+                                   if (task2.isSuccessful()) {
+                                       Log.d(TAG, "User profile updated.");
+                                   }
+                               });
+
+                       // Navigate to the interests page after successfully creating the user.
+                       Intent intent = new Intent(SignUpActivity.this, ActivityInterests.class);
+                       intent.putExtra("User", person);
+                       startActivity(intent);
+                       overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
+                   } else {
+                       // Check the type of exception
+                       if (task.getException() instanceof FirebaseAuthUserCollisionException) {
+                           Toast.makeText(SignUpActivity.this, "This email is already registered.", Toast.LENGTH_SHORT).show();
+                       } else {
+                           Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                           Toast.makeText(SignUpActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                       }
+                   }
+
+                   pd.dismiss();
+
+               });*/
+
+
+        //-----------------------------------------------------------------------------------------------
+
+
+        /*pd = new ProgressDialog(this);
         pd.setMessage("Creating Account...");
         pd.show();
         mAuth.createUserWithEmailAndPassword(person.getEmail(), person.getPassword())
@@ -184,7 +233,8 @@ public class SignUpActivity extends AppCompatActivity {
                                         // Navigate to the interests page after successfully creating the user.
                                         Intent intent = new Intent(SignUpActivity.this, ActivityInterests.class);
                                         startActivity(intent);
-                                        finish();
+                                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
 
                                     } else {
                                         Log.w(TAG, "set:failure", task1.getException());
@@ -204,7 +254,15 @@ public class SignUpActivity extends AppCompatActivity {
 
                     pd.dismiss();
 
-                });
+                });*/
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+
     }
 }
 

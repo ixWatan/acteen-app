@@ -4,15 +4,18 @@ import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,6 +25,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -76,6 +80,8 @@ public class AddEventOrgActivity extends AppCompatActivity {
 
     //views
     EditText titleEt, descripionEt;
+    ImageButton backButton;
+
 
     //Date, Start Time, End Time
     EditText editTextDate, editTextStart, editTextEnd;
@@ -109,19 +115,18 @@ public class AddEventOrgActivity extends AppCompatActivity {
 
     //#
 
-    String[] hashTagsList = {"#Environment" , "#Volunteering", "#Protests", "#Women's Rights", "#Human Rights","#Racism", "#LGBTQ+", "#Animals", "#Petitions", "#Education"};
+    String[] hashTagsList = {"#Environment", "#Volunteering", "#Protests", "#Women's Rights", "#Human Rights", "#Racism", "#LGBTQ+", "#Animals", "#Petitions", "#Education"};
 
     AutoCompleteTextView autoCompleteTextView;
 
     ArrayAdapter<String> adapterItems;
 
-    String  selectHashTag;
+    String selectHashTag;
 
     TextView selectedHashtagsTv;
     List<String> selectedHashtags;
 
     LinearLayout hashtagsContainer;
-
 
 
 
@@ -136,12 +141,21 @@ public class AddEventOrgActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_post);
 
+        backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
+
 
         hashtagsContainer = findViewById(R.id.hashtags_container);
 
         // drop down menu for regions
         autoCompleteTextView = findViewById(R.id.autocomplete_Tv);
-        adapterItems = new ArrayAdapter<String>(this,R.layout.list_item, hashTagsList);
+        adapterItems = new ArrayAdapter<String>(this, R.layout.list_item, hashTagsList);
 
 
         autoCompleteTextView.setAdapter(adapterItems);
@@ -178,9 +192,6 @@ public class AddEventOrgActivity extends AppCompatActivity {
                 autoCompleteTextView.setText("");
             }
         });
-
-
-
 
 
         //init views
@@ -273,7 +284,6 @@ public class AddEventOrgActivity extends AppCompatActivity {
                 picker.show();
             }
         });
-
 
 
         locationTagTextView = findViewById(R.id.locationTagTextView);
@@ -562,8 +572,6 @@ public class AddEventOrgActivity extends AppCompatActivity {
                                                 selectedHashtags.clear();
 
 
-
-
                                             }
                                         })
                                         .addOnFailureListener(new OnFailureListener() {
@@ -702,7 +710,6 @@ public class AddEventOrgActivity extends AppCompatActivity {
             });
 
 
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -718,5 +725,136 @@ public class AddEventOrgActivity extends AppCompatActivity {
         }
     }
 
+
+
+
+
+
+    /*
+    private void openAddEventOrgActivity() {
+        Intent intent = new Intent(this, AddEventOrgActivity.class);
+        startActivity(intent);
+    }
+
+    private void openCampaignManagement() {
+        Intent intent = new Intent(this, CampaignManagementOrgActivity.class);
+        startActivity(intent);
+    }
+
+    private void openUserProfile() {
+        // Start the UserProfile activity
+        Intent intent = new Intent(this, UserProfileOrgActivity.class);
+        startActivity(intent);
+    }
+
+    private void openHomePage() {
+        // Start the UserProfile activity
+        Intent intent = new Intent(this, HomeOrgActivity.class);
+        startActivity(intent);
+    }
+*/
+
+
+
+    /*private void openMapActivity() {
+        Intent intent = new Intent(AddEventOrgActivity.this, ChooseLocationActivity.class);
+        startActivityForResult(intent, MAP_ACTIVITY_REQUEST_CODE);
+    }*/
+
+
+   /* @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        // Put data into the bundle with a key to access it later
+        outState.putString("Title", titleEt.getText().toString());
+        outState.putString("Description", descripionEt.getText().toString());
+        outState.putString("Date", editTextDate.getText().toString());
+        outState.putString("StartTime", editTextStart.getText().toString());
+        outState.putString("EndTime", editTextEnd.getText().toString());
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        // Retrieve and set the data from the bundle
+        titleEt.setText(savedInstanceState.getString("Title"));
+        descripionEt.setText(savedInstanceState.getString("Description"));
+        editTextDate.setText(savedInstanceState.getString("Date"));
+        editTextStart.setText(savedInstanceState.getString("StartTime"));
+        editTextEnd.setText(savedInstanceState.getString("EndTime"));
+    }
+*/
+   /*@Override
+   protected void onPause() {
+       super.onPause();
+
+
+       SharedPreferences prefs = getSharedPreferences("myprefs", MODE_PRIVATE);
+       SharedPreferences.Editor editor = prefs.edit();
+
+       editor.putString("Title", titleEt.getText().toString());
+       editor.putString("Description", descripionEt.getText().toString());
+       editor.putString("Date", editTextDate.getText().toString());
+       editor.putString("StartTime", editTextStart.getText().toString());
+       editor.putString("EndTime", editTextEnd.getText().toString());
+
+       // Save the Uri as a String
+       if (image_uri != null) {
+           editor.putString("ImageUri", image_uri.toString());
+       }
+
+
+
+       editor.apply();
+   }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        checkUserStatus();
+
+        SharedPreferences prefs = getSharedPreferences("myprefs", MODE_PRIVATE);
+
+        titleEt.setText(prefs.getString("Title", ""));
+        descripionEt.setText(prefs.getString("Description", ""));
+        editTextDate.setText(prefs.getString("Date", ""));
+        editTextStart.setText(prefs.getString("StartTime", ""));
+        editTextEnd.setText(prefs.getString("EndTime", ""));
+
+        String imageUriString = prefs.getString("ImageUri", null);
+        if (imageUriString != null) {
+            image_uri = Uri.parse(imageUriString);
+            try {
+                InputStream inputStream = getContentResolver().openInputStream(image_uri);
+                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                imageIv.setImageBitmap(bitmap);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+    }*/
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("lastActivity", getClass().getName());
+        editor.apply();
+    }
+
+   @Override
+   public void onBackPressed() {
+       super.onBackPressed();
+       SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+       String lastActivity = prefs.getString("lastActivity", "");
+       if ("com.example.meet_workshop.homepage.homeorganization.CampaignManagementOrgActivity".equals(lastActivity)) {
+           overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+       } else if ("com.example.meet_workshop.homepage.homeorganization.UserProfileOrgActivity".equals(lastActivity)) {
+           overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+       }
+   }
 
 }

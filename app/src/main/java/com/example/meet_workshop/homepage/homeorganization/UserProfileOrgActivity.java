@@ -2,11 +2,13 @@ package com.example.meet_workshop.homepage.homeorganization;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -65,11 +67,13 @@ public class UserProfileOrgActivity extends AppCompatActivity {
         pd = new ProgressDialog(this);
 
         // Navbar organization stuff 5 icons
-        profileImageButton = findViewById(R.id.nav_profile);
-        homePageButton = findViewById(R.id.nav_home);
+        //profileImageButton = findViewById(R.id.nav_profile);
+        //homePageButton = findViewById(R.id.nav_home);
         campaignManagementButton = findViewById(R.id.nav_manage);
         addEventButton = findViewById(R.id.nav_addPost);
         //searchButton = findViewById(R.id.nav_search);
+        profileImageButton= findViewById(R.id.nav_profile);
+        profileImageButton.setClickable(false);
 
 
         signOutButton = findViewById(R.id.buttonHabibi); // Initialize the sign-out button
@@ -85,19 +89,19 @@ public class UserProfileOrgActivity extends AppCompatActivity {
                 openSearch();
             }
         });*/
-        profileImageView.setOnClickListener(new View.OnClickListener() {
+       /* profileImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openEditProfilePictureOrgActivity();
             }
-        });
+        });*/
 
-        profileImageButton.setOnClickListener(new View.OnClickListener() {
+      /*  profileImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openUserProfile();
             }
-        });
+        });*/
 
         signOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -285,13 +289,15 @@ public class UserProfileOrgActivity extends AppCompatActivity {
         // Start the MainActivity
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("profilePictureUrl", ""); // Clear the current profile picture URL
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
-        finish(); // Optionally, call finish() to prevent the user from returning to the UserProfileOrgActivity using the back button
     }
 
     private void openAddEventOrgActivity() {
         Intent intent = new Intent(this, AddEventOrgActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+
     }
 
 
@@ -300,15 +306,17 @@ public class UserProfileOrgActivity extends AppCompatActivity {
     private void openCampaignManagement() {
         Intent intent = new Intent(this, CampaignManagementOrgActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+
     }
 
-    private void openUserProfile() {
+  /*  private void openUserProfile() {
         // Start the UserProfile activity
         Intent intent = new Intent(this, UserProfileOrgActivity.class);
         startActivity(intent);
-    }
+    }*/
 
-    private void openHomePage() {
+   /* private void openHomePage() {
         // Start the UserProfile activity
         Intent intent = new Intent(this, HomeOrgActivity.class);
         startActivity(intent);
@@ -317,7 +325,25 @@ public class UserProfileOrgActivity extends AppCompatActivity {
     private void openSearch() {
         Intent intent = new Intent(this, SearchActivityOrg.class);
         startActivity(intent);
+    }*/
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("lastActivity", getClass().getName());
+        editor.apply();
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+
+    }
+
+
 
 
 

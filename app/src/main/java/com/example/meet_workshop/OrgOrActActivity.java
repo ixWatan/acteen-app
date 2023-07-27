@@ -28,4 +28,11 @@ public class OrgOrActActivity extends AppCompatActivity {
         Intent intent = new Intent(OrgOrActActivity.this, SignUpOrganizationActivity.class);
         startActivity(intent);
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+
+    }
 }
