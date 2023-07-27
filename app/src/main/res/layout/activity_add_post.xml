@@ -7,11 +7,21 @@
     android:layout_marginHorizontal="20dp"
     tools:context=".homepage.homeorganization.AddEventOrgActivity">
 
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="2dp"
         android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        android:orientation="horizontal">
+
+
 
         <ImageButton
             android:id="@+id/backButton"
@@ -23,26 +33,87 @@
 
 
 
+        <TextView
+            android:id="@+id/CreatePost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="Create a post"
+            android:textColor="@android:color/black"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:layout_marginTop="15sp"
+            android:layout_marginLeft="0sp"
+            android:textStyle="bold" />
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/welcomeTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="Share Your Event!"
+            android:textColor="@android:color/black"
+            android:textSize="32sp"
+            android:gravity="center"
+            android:layout_marginLeft="50sp"
+            android:textStyle="bold" />
+
+
         <!---EditText: input post title-->
-        <EditText
-            android:id = "@+id/pTitleEt"
-            android:layout_marginTop="60dp"
-            android:hint="Enter title"
-            android:singleLine="true"
-            android:background="@drawable/edittext_background"
-            android:padding="12dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
 
         <!---ImageView: Input post image-->
+        <EditText
+            android:id="@+id/pTitleEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:background="@drawable/edittext_background"
+            android:hint="Enter title"
+            android:inputType="textCapSentences|textMultiLine"
+            android:padding="12dp"
+            android:gravity="start"
+            android:singleLine="true" />
+
+        <!---EditText: Input post description-->
+
+        <EditText
+            android:id="@+id/pDescriptionEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:background="@drawable/edittext_background"
+            android:hint="Enter Description"
+            android:inputType="textCapSentences|textMultiLine"
+            android:padding="12dp"
+            android:gravity="start"
+            android:singleLine="true" />
+
+
+
+        <AutoCompleteTextView
+            android:id="@+id/autoCompleteTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
         <ImageView
             android:id="@+id/pImageIv"
             android:layout_width="match_parent"
             android:layout_height="408dp"
-            android:background="@color/colorPrimary"
             android:minHeight="200dp"
             android:clickable="true"
             android:focusable="true"/>
+    </LinearLayout>
 
     <!--    <LinearLayout
             android:layout_width="match_parent"
@@ -84,7 +155,6 @@
                  />
 
         </LinearLayout>-->
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -231,16 +301,7 @@
             android:layout_marginTop="10dp" />
 
 
-        <!---EditText: Input post description-->
-        <EditText
-            android:id = "@+id/pDescriptionEt"
-            android:padding="10dp"
-            android:hint="Enter Descreption"
-            android:inputType="textCapSentences|textMultiLine"
 
-            android:gravity="start"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
 
         <!---Button: publish post to firebase-->
         <Button

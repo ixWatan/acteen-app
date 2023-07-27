@@ -1,5 +1,31 @@
 package com.example.meet_workshop.homepage.homeorganization;
-
+import static android.content.ContentValues.TAG;
+import com.google.android.libraries.places.api.model.AutocompletePrediction;
+import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest;
+import com.google.android.libraries.places.api.net.FindAutocompletePredictionsResponse;
+import com.google.android.libraries.places.api.net.PlacesClient;
+import android.content.Intent;
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
+import android.widget.SearchView;
+import android.widget.Toast;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import com.example.meet_workshop.R;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.net.PlacesClient;
+import com.google.android.libraries.places.widget.Autocomplete;
+import com.google.android.libraries.places.widget.AutocompleteActivity;
+import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
+import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
+import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
+import java.util.Arrays;
+import java.util.List;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
@@ -55,7 +81,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.yalantis.ucrop.UCrop;
-
+import com.google.android.libraries.places.api.Places;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -68,9 +94,13 @@ public class AddEventOrgActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     ActionBar actionBar;
 
+    AutoCompleteTextView hashtagsAutoCompleteTextView;
+
+
     //permissions
     private static final int UCROP_REQUEST_CODE = 942;
 
+    private static final int AUTOCOMPLETE_REQUEST_CODE = 1;
 
     //picked image will be saved in this uri
     Uri image_uri = null;
@@ -141,7 +171,63 @@ public class AddEventOrgActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_post);
 
-        backButton = findViewById(R.id.backButton);
+
+        // Initialize Places.
+        Places.initialize(getApplicationContext(), "AIzaSyAEBeBv-EtGsHmSq9CNC6qfuEv6mTH0YH0");
+
+        // Initialize autocomplete for places
+        AutoCompleteTextView placesAutoCompleteTextView = findViewById(R.id.autoCompleteTextView);
+        // Create a new Places client instance.
+        PlacesClient placesClient = Places.createClient(this);
+
+        placesAutoCompleteTextView.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // Use the text entered by the user to get autocomplete predictions.
+                FindAutocompletePredictionsRequest request = FindAutocompletePredictionsRequest.builder()
+                        .setQuery(s.toString())
+                        .build();
+
+                placesClient.findAutocompletePredictions(request).addOnSuccessListener((response) -> {
+                    ArrayList<String> predictions = new ArrayList<>();
+                    for (AutocompletePrediction prediction : response.getAutocompletePredictions()) {
+                        predictions.add(prediction.getFullText(null).toString());
+                    }
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(AddEventOrgActivity.this,
+                            android.R.layout.simple_dropdown_item_1line, predictions);
+                    placesAutoCompleteTextView.setAdapter(adapter);
+                });
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
+
+        placesAutoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String location = (String) parent.getItemAtPosition(position);
+                // Save the location, e.g., to SharedPreferences
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(AddEventOrgActivity.this);
+                prefs.edit().putString("location", location).apply();
+            }
+        });
+
+        //... rest of your initialization code here
+
+        // Initialize autocomplete for hashtags
+        hashtagsAutoCompleteTextView = findViewById(R.id.autocomplete_Tv);
+        adapterItems = new ArrayAdapter<String>(this, R.layout.list_item, hashTagsList);
+
+        hashtagsAutoCompleteTextView.setAdapter(adapterItems);
+        //... rest of your hashtag code here
+
+
+
+    backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
