@@ -17,22 +17,31 @@ public class OrgOrActActivity extends AppCompatActivity {
     public void goToSignUp(View view) {
         Intent intent = new Intent(OrgOrActActivity.this, SignUpActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
     }
 
     public void goToLogin(View view) {
         Intent intent = new Intent(OrgOrActActivity.this, MainActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_up, R.anim.slide_down);
+
     }
 
     public void SignUpOrganizationActivity(View view) {
         Intent intent = new Intent(OrgOrActActivity.this, SignUpOrganizationActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        overridePendingTransition(R.anim.slide_up, R.anim.slide_down);
+
 
     }
+
+
 }

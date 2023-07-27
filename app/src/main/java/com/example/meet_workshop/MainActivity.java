@@ -12,7 +12,9 @@ import com.google.firebase.firestore.DocumentSnapshot;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -66,11 +68,14 @@ public class MainActivity extends AppCompatActivity {
     public void goToOrgOrActActivity(View view) {
         Intent intent = new Intent(this, OrgOrActActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_up, R.anim.slide_down);
     }
 
     public void goToSignUp(View view) {
         Intent intent = new Intent(this, SignUpActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_up, R.anim.slide_down);
+
     }
 
 
@@ -167,10 +172,29 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
+
+
+  /*  @Override
+    public void onPause() {
+        super.onPause();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("lastActivity", getClass().getName());
+        editor.apply();
+    }*/
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String lastActivity = prefs.getString("lastActivity", "");
 
+        if ("com.example.meet_workshop.SignUpActivity".equals(lastActivity)){
+            overridePendingTransition(R.anim.slide_up, R.anim.slide_down);
+        } else if ("com.example.meet_workshop.SignUpOrganizationActivity".equals(lastActivity)) {
+            overridePendingTransition(R.anim.slide_up, R.anim.slide_down);
+        } else {
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        }
     }
 }

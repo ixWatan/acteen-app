@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.example.meet_workshop.R;
@@ -16,10 +17,21 @@ public class AudienceAnalysisOrgActivity extends AppCompatActivity {
     private ImageButton addEventButton;
     private ImageButton campaignManagementButton;
 
+    private ImageButton backButton;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_audience_analysis_org);
+
+        backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         profileImageButton = findViewById(R.id.nav_profile);
         campaignManagementButton = findViewById(R.id.nav_manage);
@@ -74,5 +86,12 @@ public class AudienceAnalysisOrgActivity extends AppCompatActivity {
         // Start the UserProfile activity
         Intent intent = new Intent(this, UserProfileOrgActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+
     }
 }

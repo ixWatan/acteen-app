@@ -5,21 +5,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-<!--    <LinearLayout
-    android:layout_marginTop="30dp"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:gravity="center">
-    <TextView
-        android:text="Audience Analytics"
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:src="@drawable/img_9"
+        android:contentDescription="@string/back_button_description" />
+
+
+    <!--    <LinearLayout
+        android:layout_marginTop="30dp"
         android:layout_width="match_parent"
-        android:textSize="27sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:textColor="@color/black"
-        android:layout_height="wrap_content" />
-</LinearLayout>-->
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+        <TextView
+            android:text="Audience Analytics"
+            android:layout_width="match_parent"
+            android:textSize="27sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:layout_height="wrap_content" />
+    </LinearLayout>-->
 
 
 

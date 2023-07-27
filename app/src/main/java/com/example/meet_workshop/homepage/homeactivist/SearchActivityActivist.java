@@ -2,11 +2,13 @@ package com.example.meet_workshop.homepage.homeactivist;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -93,7 +95,7 @@ public class SearchActivityActivist extends AppCompatActivity implements SelectL
         searchButton = findViewById(R.id.nav_searchActivist);
         notificationButton = findViewById(R.id.nav_bellActivist);
         homePageButton = findViewById(R.id.nav_homeActivist);
-
+        searchButton.setClickable(false);
         ImageButton NavButton = (ImageButton) this.findViewById(R.id.nav_searchActivist);
         NavButton.setColorFilter(Color.rgb(0,0,0)); // Yellow Tint
 
@@ -143,12 +145,12 @@ public class SearchActivityActivist extends AppCompatActivity implements SelectL
             }
         });
 
-        searchButton.setOnClickListener(new View.OnClickListener() {
+        /*searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openSearch();
             }
-        });
+        });*/
 
         notificationButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -343,24 +345,26 @@ public class SearchActivityActivist extends AppCompatActivity implements SelectL
     private void openUserProfile(){
         Intent intent = new Intent(this, UserProfile.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 
     private void openHomePage() {
         // Start the HomeActivity
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
     private void openNotification() {
-
         Intent intent = new Intent(this, NotificationActivityActivist.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 
-    private void openSearch() {
+    /*private void openSearch() {
         Intent intent = new Intent(this, SearchActivityActivist.class);
         startActivity(intent);
-    }
+    }*/
 
     @Override
     public void onItemClicked(ModelPost modelPost) {
@@ -379,16 +383,17 @@ public class SearchActivityActivist extends AppCompatActivity implements SelectL
         intent.putExtra("post_tags", modelPost.getpHashtags());
         intent.putExtra("post_locationLink", modelPost.getpLocationLink());
         intent.putExtra("post_location", modelPost.getpLocationLinkReal());
-
-
-
-
-
-
         startActivity(intent);
     }
 
 
-
+    @Override
+    public void onPause() {
+        super.onPause();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("lastActivity", getClass().getName());
+        editor.apply();
+    }
 
 }

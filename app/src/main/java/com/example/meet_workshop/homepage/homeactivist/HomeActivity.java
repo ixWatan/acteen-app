@@ -2,8 +2,10 @@ package com.example.meet_workshop.homepage.homeactivist;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -43,7 +45,6 @@ public class HomeActivity extends AppCompatActivity implements SelectListener {
     private FirebaseAuth mAuth;
 
 
-
     RecyclerView recyclerView;
     List<ModelPost> postList;
     AdapterPosts adapterPosts;
@@ -73,6 +74,7 @@ public class HomeActivity extends AppCompatActivity implements SelectListener {
         searchButton = findViewById(R.id.nav_searchActivist);
         notificationButton = findViewById(R.id.nav_bellActivist);
         homePageButton = findViewById(R.id.nav_homeActivist);
+        homePageButton.setClickable(false);
 
         //end of navbar stuff
 
@@ -119,13 +121,13 @@ public class HomeActivity extends AppCompatActivity implements SelectListener {
         });
 
 
-        homePageButton.setOnClickListener(new View.OnClickListener() {
+        /*homePageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Handle the videoPageButton click event
                 openHomePage();
             }
-        });
+        });*/
 
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -198,11 +200,7 @@ public class HomeActivity extends AppCompatActivity implements SelectListener {
 
 
 
-    private void openUserProfile() {
-        // Start the UserProfile activity
-        Intent intent = new Intent(HomeActivity.this, UserProfile.class);
-        startActivity(intent);
-    }
+
 
 
 
@@ -267,34 +265,65 @@ public class HomeActivity extends AppCompatActivity implements SelectListener {
         intent.putExtra("post_tags", modelPost.getpHashtags());
         intent.putExtra("post_locationLink", modelPost.getpLocationLink());
         intent.putExtra("post_location", modelPost.getpLocationLinkReal());
-
-
-
-
-
-
         startActivity(intent);
     }
 
 
-    private void openHomePage() {
+    /*private void openHomePage() {
         // Start the UserProfile activity
         Intent intent = new Intent(HomeActivity.this, HomeActivity.class);
         startActivity(intent);
-    }
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+    }*/
 
     private void openNotification() {
-
         Intent intent = new Intent(this, NotificationActivityActivist.class);
+        //intent.putExtra("ActivityRec", "2"); // replace "key" with your actual key and "value" with actual value
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 
     private void openSearch() {
         Intent intent = new Intent(this, SearchActivityActivist.class);
+        //intent.putExtra("ActivityRec", "1"); // replace "key" with your actual key and "value" with actual value
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+    }
+
+    private void openUserProfile() {
+        // Start the UserProfile activity
+        Intent intent = new Intent(HomeActivity.this, UserProfile.class);
+        //intent.putExtra("ActivityRec", "3"); // replace "key" with your actual key and "value" with actual value
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
 
     }
 
+
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("lastActivity", getClass().getName());
+        editor.apply();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
+        /*SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String lastActivity = prefs.getString("lastActivity", "");
+        if ("com.example.meet_workshop.homepage.homeactivist.NotificationActivityActivist".equals(lastActivity)) {
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        } else if ("com.example.meet_workshop.homepage.homeorganization.UserProfileOrgActivity".equals(lastActivity)) {
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        }*/
+    }
 
 }
 

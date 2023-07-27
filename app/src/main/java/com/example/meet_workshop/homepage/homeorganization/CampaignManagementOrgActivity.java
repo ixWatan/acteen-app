@@ -121,17 +121,21 @@ public class CampaignManagementOrgActivity extends AppCompatActivity {
     private void openAudienceAnalysis() {
         Intent intent = new Intent(CampaignManagementOrgActivity.this, AudienceAnalysisOrgActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
     }
 
     private void openCampaignAnalysis() {
         Intent intent = new Intent(CampaignManagementOrgActivity.this, CampaignAnalyticsOrgActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
     }
 
     private void openSubscriptionAnalysis() {
         Intent intent = new Intent(CampaignManagementOrgActivity.this, SubscriptionServiceOrgActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
     }
 

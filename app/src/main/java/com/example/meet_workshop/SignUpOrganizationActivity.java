@@ -2,8 +2,10 @@ package com.example.meet_workshop;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -178,6 +180,7 @@ public class SignUpOrganizationActivity extends AppCompatActivity {
     public void GoMain(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_up, R.anim.slide_down);
     }
 
     public void OpenTermsAndGuidelines(View view) {
@@ -265,6 +268,15 @@ public class SignUpOrganizationActivity extends AppCompatActivity {
         }
 
 
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("lastActivity", getClass().getName());
+        editor.apply();
     }
 
     @Override

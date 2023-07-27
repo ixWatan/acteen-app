@@ -2,11 +2,13 @@ package com.example.meet_workshop.homepage.homeactivist;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -73,7 +75,7 @@ public class UserProfile extends AppCompatActivity {
         notificationButton = findViewById(R.id.nav_bellActivist);
         homePageButton = findViewById(R.id.nav_homeActivist);
         signOutButton = findViewById(R.id.buttonHabibi);
-
+        profileImageView.setClickable(false);
 
         ImageButton NavButton = (ImageButton) this.findViewById(R.id.nav_profileActivist);
         NavButton.setColorFilter(Color.rgb(0,0,0)); // Yellow Tint
@@ -92,12 +94,12 @@ public class UserProfile extends AppCompatActivity {
             }
         });
 
-        profileImageButton.setOnClickListener(new View.OnClickListener() {
+        /*profileImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openUserProfile();
             }
-        });
+        });*/
 
 
         homePageButton.setOnClickListener(new View.OnClickListener() {
@@ -287,29 +289,39 @@ public class UserProfile extends AppCompatActivity {
     }
 
 
-    private void openUserProfile(){
+    /*private void openUserProfile(){
         Intent intent = new Intent(UserProfile.this, UserProfile.class);
         startActivity(intent);
-    }
+    }*/
 
     private void openHomePage() {
         // Start the HomeActivity
         Intent intent = new Intent(UserProfile.this, HomeActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
     private void openNotification() {
-
         Intent intent = new Intent(UserProfile.this, NotificationActivityActivist.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
     private void openSearch() {
         Intent intent = new Intent(UserProfile.this, SearchActivityActivist.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+
     }
 
 
-
+    @Override
+    public void onPause() {
+        super.onPause();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("lastActivity", getClass().getName());
+        editor.apply();
+    }
 
 }

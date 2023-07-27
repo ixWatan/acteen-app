@@ -291,6 +291,8 @@ public class UserProfileOrgActivity extends AppCompatActivity {
         intent.putExtra("profilePictureUrl", ""); // Clear the current profile picture URL
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+
     }
 
     private void openAddEventOrgActivity() {

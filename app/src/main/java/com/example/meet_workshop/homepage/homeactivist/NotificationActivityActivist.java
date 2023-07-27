@@ -1,11 +1,13 @@
 package com.example.meet_workshop.homepage.homeactivist;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -39,6 +41,7 @@ public class NotificationActivityActivist extends AppCompatActivity {
     private FirebaseAuth mAuth;
 
 
+
     private ImageButton profileImageButton;
 
     private ImageButton notificationButton;
@@ -60,7 +63,7 @@ public class NotificationActivityActivist extends AppCompatActivity {
         searchButton = findViewById(R.id.nav_searchActivist);
         notificationButton = findViewById(R.id.nav_bellActivist);
         homePageButton = findViewById(R.id.nav_homeActivist);
-
+        notificationButton.setClickable(false);
         ImageButton NavButton = (ImageButton) this.findViewById(R.id.nav_bellActivist);
         NavButton.setColorFilter(Color.rgb(0,0,0)); // Yellow Tint
 
@@ -91,12 +94,12 @@ public class NotificationActivityActivist extends AppCompatActivity {
             }
         });
 
-        notificationButton.setOnClickListener(new View.OnClickListener() {
+        /*notificationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openNotification();
             }
-        });
+        });*/
 
         // Retrieve user information from the Firestore database
         FirebaseUser user = mAuth.getCurrentUser();
@@ -157,26 +160,53 @@ public class NotificationActivityActivist extends AppCompatActivity {
     private void openUserProfile(){
         Intent intent = new Intent(this, UserProfile.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 
     private void openHomePage() {
         // Start the HomeActivity
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
-    private void openNotification() {
-
+    /*private void openNotification() {
         Intent intent = new Intent(this, NotificationActivityActivist.class);
         startActivity(intent);
-    }
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
+    }*/
 
     private void openSearch() {
         Intent intent = new Intent(this, SearchActivityActivist.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("lastActivity", getClass().getName());
+        editor.apply();
+    }
 
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String lastActivity = prefs.getString("lastActivity", "");
+        if ("com.example.meet_workshop.homepage.homeactivist.HomeActivity".equals(lastActivity)) {
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        } else if ("com.example.meet_workshop.homepage.homeorganization.SearchActivityActivist".equals(lastActivity)) {
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        } else if ("com.example.meet_workshop.homepage.homeorganization.UserProfile".equals(lastActivity)) {
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
+        }
+    }
 
 }
