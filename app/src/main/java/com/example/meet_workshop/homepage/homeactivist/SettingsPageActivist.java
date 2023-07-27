@@ -3,8 +3,10 @@ package com.example.meet_workshop.homepage.homeactivist;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -121,6 +123,14 @@ public class SettingsPageActivist extends AppCompatActivity {
     private void openSearch() {
         Intent intent = new Intent(this, SearchActivityActivist.class);
         startActivity(intent);
+    }
+
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_up, R.anim.slide_down);
     }
 
 

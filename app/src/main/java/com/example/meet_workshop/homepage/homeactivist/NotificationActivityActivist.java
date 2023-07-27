@@ -201,11 +201,10 @@ public class NotificationActivityActivist extends AppCompatActivity {
         String lastActivity = prefs.getString("lastActivity", "");
         if ("com.example.meet_workshop.homepage.homeactivist.HomeActivity".equals(lastActivity)) {
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-        } else if ("com.example.meet_workshop.homepage.homeorganization.SearchActivityActivist".equals(lastActivity)) {
+        } else if ("com.example.meet_workshop.homepage.homeactivist.SearchActivityActivist".equals(lastActivity)) {
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-        } else if ("com.example.meet_workshop.homepage.homeorganization.UserProfile".equals(lastActivity)) {
+        } else if ("com.example.meet_workshop.homepage.homeactivist.UserProfile".equals(lastActivity)) {
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-
         }
     }
 

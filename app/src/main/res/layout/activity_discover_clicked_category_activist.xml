@@ -6,8 +6,19 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     tools:context=".homepage.homeactivist.DiscoverClickedCategoryActivist">
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:src="@drawable/img_9"
+        android:contentDescription="@string/back_button_description" />
 
+</LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -36,6 +47,7 @@
                 android:text="Category"
                 android:textStyle="bold"
                 android:textSize="22sp"
+                android:gravity="center"
                 android:textColor="@color/black"
                 android:layout_marginLeft="10dp"
                 android:layout_height="wrap_content"

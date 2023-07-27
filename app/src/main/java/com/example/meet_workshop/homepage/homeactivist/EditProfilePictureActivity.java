@@ -238,12 +238,11 @@ public class EditProfilePictureActivity extends AppCompatActivity {
     }
 
 
+
+
     @Override
-    public void onPause() {
-        super.onPause();
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putString("lastActivity", getClass().getName());
-        editor.apply();
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_up, R.anim.slide_down);
     }
 }

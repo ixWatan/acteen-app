@@ -52,6 +52,7 @@ public class DiscoverClickedCategoryActivist extends AppCompatActivity implement
 
     private ImageButton notificationButton;
     private ImageButton searchButton;
+    private ImageButton backButton;
 
     private ImageButton profileImageButton;
 
@@ -61,6 +62,14 @@ public class DiscoverClickedCategoryActivist extends AppCompatActivity implement
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_discover_clicked_category_activist);
+
+        backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         //profile pic on top init
         profileImageView = findViewById(R.id.profileImageView);
@@ -308,4 +317,12 @@ public class DiscoverClickedCategoryActivist extends AppCompatActivity implement
         editor.putString("lastActivity", getClass().getName());
         editor.apply();
     }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_up, R.anim.slide_down);
+    }
+
 }

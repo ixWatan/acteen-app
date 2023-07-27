@@ -246,6 +246,8 @@ public class SearchActivityActivist extends AppCompatActivity implements SelectL
 
 
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_up, R.anim.slide_down);
+
             }
         });
 
@@ -384,6 +386,8 @@ public class SearchActivityActivist extends AppCompatActivity implements SelectL
         intent.putExtra("post_locationLink", modelPost.getpLocationLink());
         intent.putExtra("post_location", modelPost.getpLocationLinkReal());
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_up, R.anim.slide_down);
+
     }
 
 
@@ -394,6 +398,20 @@ public class SearchActivityActivist extends AppCompatActivity implements SelectL
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString("lastActivity", getClass().getName());
         editor.apply();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String lastActivity = prefs.getString("lastActivity", "");
+        if ("com.example.meet_workshop.homepage.homeactivist.HomeActivity".equals(lastActivity)) {
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        } else if ("com.example.meet_workshop.homepage.homeactivist.UserProfile".equals(lastActivity)) {
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        } else if ("com.example.meet_workshop.homepage.homeactivist.NotificationActivityActivist".equals(lastActivity)) {
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        }
     }
 
 }

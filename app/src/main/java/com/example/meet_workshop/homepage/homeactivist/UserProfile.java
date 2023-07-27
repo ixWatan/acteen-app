@@ -191,6 +191,7 @@ public class UserProfile extends AppCompatActivity {
 
         Intent intent = new Intent(UserProfile.this, SettingsPageActivist.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_up, R.anim.slide_down);
     }
 
 
@@ -211,6 +212,7 @@ public class UserProfile extends AppCompatActivity {
     private void openEditProfilePictureActivity() {
         Intent intent = new Intent(UserProfile.this, EditProfilePictureActivity.class);
         startActivityForResult(intent, EDIT_PROFILE_PICTURE_REQUEST_CODE);
+        overridePendingTransition(R.anim.slide_up, R.anim.slide_down);
     }
 
     @Override
@@ -324,4 +326,21 @@ public class UserProfile extends AppCompatActivity {
         editor.apply();
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String lastActivity = prefs.getString("lastActivity", "");
+        if ("com.example.meet_workshop.homepage.homeactivist.HomeActivity".equals(lastActivity)) {
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        } else if ("com.example.meet_workshop.homepage.homeactivist.SearchActivityActivist".equals(lastActivity)) {
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        } else if ("com.example.meet_workshop.homepage.homeactivist.NotificationActivityActivist".equals(lastActivity)) {
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        }else if ("com.example.meet_workshop.homepage.homeactivist.SettingsPageActivist".equals(lastActivity)) {
+            overridePendingTransition(R.anim.slide_up, R.anim.slide_down);
+        }else if ("com.example.meet_workshop.homepage.homeactivist.EditProfilePictureActivity".equals(lastActivity)) {
+            overridePendingTransition(R.anim.slide_up, R.anim.slide_down);
+        }
+    }
 }

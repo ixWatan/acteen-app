@@ -188,13 +188,15 @@ public class MainActivity extends AppCompatActivity {
         super.onBackPressed();
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         String lastActivity = prefs.getString("lastActivity", "");
-
         if ("com.example.meet_workshop.SignUpActivity".equals(lastActivity)){
             overridePendingTransition(R.anim.slide_up, R.anim.slide_down);
+        } else if ("com.example.meet_workshop.SlideShowOrg.SlideShowActivityOrg4".equals(lastActivity)) {
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         } else if ("com.example.meet_workshop.SignUpOrganizationActivity".equals(lastActivity)) {
             overridePendingTransition(R.anim.slide_up, R.anim.slide_down);
-        } else {
+        } else if ("com.example.meet_workshop.SlideShowAct.SlideShowAct5".equals(lastActivity)) {
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         }
+
     }
 }
