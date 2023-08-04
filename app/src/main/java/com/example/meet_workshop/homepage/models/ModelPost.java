@@ -4,11 +4,13 @@ package com.example.meet_workshop.homepage.models;
 
 public class ModelPost {
 
-    String pId, pTitle, pDescription, pImage, pTime, uid, uEmail, uDp, uName, pStartT, pEndT, pDate, pHashtags, pLocationLink, pAddress, pLocationLinkReal;
+    String pId, pTitle, pDescription, pImage, pTime, uid, uEmail, uDp, uName, pStartT, pEndT, pDate, pHashtags, pLocationLink, pAddress, pLocationLinkReal,pComments, pLikes;
 
 
     public ModelPost() {
         this.pId = "ID";
+        this.pComments = "0";
+        this.pLikes = "0";
         this.pTitle = "Title";
         this.pDescription = "Descreption";
         this.pImage = "Image";
@@ -28,7 +30,7 @@ public class ModelPost {
 
 
     public ModelPost(String pId, String pTitle, String pDescription, String pImage, String pTime, String uid, String uEmail, String uDp,
-                     String uName,String pStartT, String pEndT, String pDate, String pHashtags, String pLocationLink, String pAddress, String pLocationLinkReal) {
+                     String uName,String pStartT, String pEndT, String pDate, String pHashtags, String pLocationLink, String pAddress, String pLocationLinkReal, String pComments, String pLikes) {
         this.pId = pId;
         this.pTitle = pTitle;
         this.pDescription = pDescription;
@@ -45,7 +47,26 @@ public class ModelPost {
         this.pLocationLink = pLocationLink;
         this.pAddress= pAddress;
         this.pLocationLinkReal = pLocationLinkReal;
+        this.pComments = pComments;
+        this.pLikes = pLikes;
 
+
+    }
+
+    public String getpComments() {
+        return pComments;
+    }
+
+    public void setpComments(String pComments) {
+        this.pComments = pComments;
+    }
+
+    public String getpLikes() {
+        return pLikes;
+    }
+
+    public void setpLikes(String pLikes) {
+        this.pLikes = pLikes;
     }
 
     public String getpLocationLinkReal() {

@@ -59,6 +59,8 @@ public class HomeActivity extends AppCompatActivity implements SelectListener {
     private ImageButton notificationButton;
     private ImageButton searchButton;
 
+    private  String profilePictureUrl;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -157,7 +159,7 @@ public class HomeActivity extends AppCompatActivity implements SelectListener {
                             if (document.exists()) {
                                 String userName = document.getString("name");
                                 String email = document.getString("email");
-                                String profilePictureUrl = document.getString("profilePictureUrl");
+                                profilePictureUrl = document.getString("profilePictureUrl");
 
                                 // Update the profile picture ImageView with the new URL
                                 if (profilePictureUrl != null && !profilePictureUrl.isEmpty()) {
@@ -265,6 +267,12 @@ public class HomeActivity extends AppCompatActivity implements SelectListener {
         intent.putExtra("post_tags", modelPost.getpHashtags());
         intent.putExtra("post_locationLink", modelPost.getpLocationLink());
         intent.putExtra("post_location", modelPost.getpLocationLinkReal());
+        intent.putExtra("post_id", modelPost.getpId());
+        intent.putExtra("post_comments", modelPost.getpComments());
+        intent.putExtra("post_likes", modelPost.getpLikes());
+        intent.putExtra("userProfilePicUrl", profilePictureUrl);
+
+
         startActivity(intent);
     }
 

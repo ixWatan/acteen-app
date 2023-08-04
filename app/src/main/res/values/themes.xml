@@ -26,4 +26,12 @@
     <style name="ImageView.Round" parent="">
         <item name="cornerSize">20%</item>
     </style>
+    <style name="DialogAnimationSlideIn" parent="@android:style/Animation.Dialog">
+        <item name="android:windowEnterAnimation">@android:anim/slide_in_left</item>
+        <item name="android:windowExitAnimation">@android:anim/slide_out_right</item>
+    </style>
+    <style name="DialogAnimationSlideOut" parent="@android:style/Animation.Dialog">
+        <item name="android:windowEnterAnimation">@android:anim/slide_in_left</item>
+        <item name="android:windowExitAnimation">@android:anim/slide_out_right</item>
+    </style>
 </resources>

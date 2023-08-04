@@ -28,4 +28,8 @@
         <item name="android:textColorPrimary">#DBDBDB</item>
         <item name="colorButtonNormal">#5552f1</item>
     </style>
+    <style name="MyTextInputLayout_overlay">
+        <item name="colorOnSurface">@color/gray</item>
+        <item name="colorPrimary">@color/gray</item>
+    </style>
 </resources>

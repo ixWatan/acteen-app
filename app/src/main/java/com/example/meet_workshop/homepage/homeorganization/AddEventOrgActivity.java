@@ -575,6 +575,10 @@ public class AddEventOrgActivity extends AppCompatActivity {
                         hashMap.put("pDate", selectedDate);
                         hashMap.put("pStartT", selectedStartTime);
                         hashMap.put("pEndT", selectedEndTime);
+                        hashMap.put("pComments", "0");
+                        hashMap.put("pLikes", "0");
+
+
 
                         // Add the link to the post data
                         hashMap.put("pLocationLinkReal", locationTagTextView.getText().toString());
