@@ -28,7 +28,7 @@
     <img src="https://firebasestorage.googleapis.com/v0/b/meet-workshop.appspot.com/o/acteen_logo%2Flogo%20512x512.png?alt=media&token=e026bc4e-5397-4dac-8eea-7d09dbe2aac7.jpg" alt="Logo" width="250" height="200">
   </a>
 
-  <h3 align="center">Acteen</h3>
+  <h3 align="center">Acteen On Top</h3>
 
   <p align="center">
     a  social media platform that is designed to connect young people with a passion for activism.
